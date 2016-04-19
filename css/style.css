@@ -85,6 +85,9 @@
 .icon-weibo:before {
   content: "\f18a";
 }
+.icon-user:before {
+  content: "\f007";
+}
 .icon-github:before {
   content: "\f113";
 }
