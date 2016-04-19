@@ -123,6 +123,152 @@
   <ul class="post-list">
   
     <li class="post-list-item">
+  <article id="post-visual-studio-remote-debugger" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/04/14/visual-studio-remote-debugger/">Visual Studio远程调试</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a></li></ul>
+</div>
+        <time datetime="2016-04-14T09:59:22.000Z" itemprop="datePublished" class="post-tiem">
+  2016-04-14
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>在开发的时候，我们有时会用远程调试工具进行debug，本文就简单的介绍一下如何使用Visual Studio自带的远程调试工具（我们以VS2012为例）。</p>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>找到Remote Debugger Folder文件夹<br><img src="http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/1.jpg" alt="图1"><br>
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/04/14/visual-studio-remote-debugger/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-sql-server-recursion" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/04/14/sql-server-recursion/">SQL Server 递归函数</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Server/">SQL Server</a></li></ul>
+</div>
+        <time datetime="2016-04-14T08:54:19.000Z" itemprop="datePublished" class="post-tiem">
+  2016-04-14
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。</p>
+</blockquote>
+<h2 id="需要补习的语法-WITH-AS"><a href="#需要补习的语法-WITH-AS" class="headerlink" title="需要补习的语法 WITH AS"></a>需要补习的语法 WITH AS</h2><p><a href="http://blog.csdn.net/shaochao14/article/details/6223052">摘自网上</a><br>WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的不同部分，作为提供数据的部分。<br>特别对于UNION ALL比较有用。因为UNION ALL的每个部分可能相同，但是如果每个部分都去执行一遍的话，则成本太高，所以可以使用WITH AS短语，则只要执行一遍即可。如果WITH AS短语所定义的表名被调用两次以上，则优化器会自动将WITH AS短语所获取的数据放入一个TEMP表里，如果只是被调用一次，则不会。而提示materialize则是强制将WITH AS短语里的数据放入一个全局临时表里。很多查询通过这种方法都可以提高速度。<br>
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/04/14/sql-server-recursion/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-css-priority" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/04/08/css-priority/">CSS优先级计算</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+</div>
+        <time datetime="2016-04-08T08:04:00.000Z" itemprop="datePublished" class="post-tiem">
+  2016-04-08
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>前端开发时，经常会遇到当前元素需要覆盖样式的需求，这篇我们来了解一下css是如何来确定当前使用哪种样式的。</p>
+</blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:center">权值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内联样式表</td>
+<td style="text-align:center">1000</td>
+</tr>
+<tr>
+<td>ID 选择器</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td>Class 类选择器</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td>HTML 标签选择器</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/04/08/css-priority/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
   <article id="post-html5-head-meta" class="article article-type-post" itemscope itemprop="blogPost">
     
       
@@ -137,105 +283,19 @@
 
 
       <div class="post-meat flex-row">
-        <div class="flex-col"></div>
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li></ul>
+</div>
         <time datetime="2016-04-07T01:04:00.000Z" itemprop="datePublished" class="post-tiem">
   2016-04-07
 </time>
       </div>
       <div class="post-content" itemprop="postContent" >
         
-          <h4 id="导语："><a href="#导语：" class="headerlink" title="导语："></a>导语：</h4><blockquote>
+          <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
 <p>移动前端开发中添加一些webkit专属的HTML5头部标签，帮助浏览器更好解析html代码，更好地将移动web前端页面表现出来。本文整理一些常用的meta标签。</p>
 </blockquote>
-<p>`<br>&lt;!DOCTYPE html&gt; <!-- 使用 HTML5 doctype，不区分大小写 --></p>
-<p><html lang="zh-cmn-Hans"> <!-- 更加标准的 lang 属性写法 http://zhi.hu/XyIa --></html></p>
-<p><head><br>    <!-- 声明文档使用的字符编码 --><br>    <meta charset="utf-8"><br>    <!-- 优先使用 IE 最新版本和 Chrome --><br>    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><br>    <!-- 页面描述 --><br>    <meta name="description" content="不超过150个字符"><br>    <!-- 页面关键词 --><br>    <meta name="keywords" content=""><br>    <!-- 网页作者 --><br>    <meta name="author" content="name, email@gmail.com"><br>    <!-- 搜索引擎抓取 --><br>    <meta name="robots" content="index,follow"><br>    <!-- 为移动设备添加 viewport --><br>    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no"><br>    <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz --></head></p>
-<pre><code>&lt;!-- iOS 设备 begin --&gt;
-&lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;标题&quot;&gt;
-&lt;!-- 添加到主屏后的标题（iOS 6 新增） --&gt;
-&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;/&gt;
-&lt;!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 --&gt;
-
-&lt;meta name=&quot;apple-itunes-app&quot; content=&quot;app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL&quot;&gt;
-&lt;!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） --&gt;
-&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot;/&gt;
-&lt;!-- 设置苹果工具栏颜色 --&gt;
-&lt;meta name=&quot;format-detection&quot; content=&quot;telphone=no, email=no&quot;/&gt;
-&lt;!-- 忽略页面中的数字识别为电话，忽略email识别 --&gt;
-&lt;!-- 启用360浏览器的极速模式(webkit) --&gt;
-&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;
-&lt;!-- 避免IE使用兼容模式 --&gt;
-&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-&lt;!-- 不让百度转码 --&gt;
-&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-siteapp&quot; /&gt;
-&lt;!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 --&gt;
-&lt;meta name=&quot;HandheldFriendly&quot; content=&quot;true&quot;&gt;
-&lt;!-- 微软的老式浏览器 --&gt;
-&lt;meta name=&quot;MobileOptimized&quot; content=&quot;320&quot;&gt;
-&lt;!-- uc强制竖屏 --&gt;
-&lt;meta name=&quot;screen-orientation&quot; content=&quot;portrait&quot;&gt;
-&lt;!-- QQ强制竖屏 --&gt;
-&lt;meta name=&quot;x5-orientation&quot; content=&quot;portrait&quot;&gt;
-&lt;!-- UC强制全屏 --&gt;
-&lt;meta name=&quot;full-screen&quot; content=&quot;yes&quot;&gt;
-&lt;!-- QQ强制全屏 --&gt;
-&lt;meta name=&quot;x5-fullscreen&quot; content=&quot;true&quot;&gt;
-&lt;!-- UC应用模式 --&gt;
-&lt;meta name=&quot;browsermode&quot; content=&quot;application&quot;&gt;
-&lt;!-- QQ应用模式 --&gt;
-&lt;meta name=&quot;x5-page-mode&quot; content=&quot;app&quot;&gt;
-&lt;!-- windows phone 点击无高光 --&gt;
-&lt;meta name=&quot;msapplication-tap-highlight&quot; content=&quot;no&quot;&gt;
-&lt;!-- iOS 图标 begin --&gt;
-&lt;link rel=&quot;apple-touch-icon-precomposed&quot; href=&quot;/apple-touch-icon-57x57-precomposed.png&quot;/&gt;
-&lt;!-- iPhone 和 iTouch，默认 57x57 像素，必须有 --&gt;
-&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;/apple-touch-icon-114x114-precomposed.png&quot;/&gt;
-&lt;!-- Retina iPhone 和 Retina iTouch，114x114 像素，可以没有，但推荐有 --&gt;
-&lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;144x144&quot; href=&quot;/apple-touch-icon-144x144-precomposed.png&quot;/&gt;
-&lt;!-- Retina iPad，144x144 像素，可以没有，但推荐有 --&gt;
-&lt;!-- iOS 图标 end --&gt;
-
-&lt;!-- iOS 启动画面 begin --&gt;
-&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;768x1004&quot; href=&quot;/splash-screen-768x1004.png&quot;/&gt;
-&lt;!-- iPad 竖屏 768 x 1004（标准分辨率） --&gt;
-&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;1536x2008&quot; href=&quot;/splash-screen-1536x2008.png&quot;/&gt;
-&lt;!-- iPad 竖屏 1536x2008（Retina） --&gt;
-&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;1024x748&quot; href=&quot;/Default-Portrait-1024x748.png&quot;/&gt;
-&lt;!-- iPad 横屏 1024x748（标准分辨率） --&gt;
-&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;2048x1496&quot; href=&quot;/splash-screen-2048x1496.png&quot;/&gt;
-&lt;!-- iPad 横屏 2048x1496（Retina） --&gt;
-
-&lt;link rel=&quot;apple-touch-startup-image&quot; href=&quot;/splash-screen-320x480.png&quot;/&gt;
-&lt;!-- iPhone/iPod Touch 竖屏 320x480 (标准分辨率) --&gt;
-&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;640x960&quot; href=&quot;/splash-screen-640x960.png&quot;/&gt;
-&lt;!-- iPhone/iPod Touch 竖屏 640x960 (Retina) --&gt;
-&lt;link rel=&quot;apple-touch-startup-image&quot; sizes=&quot;640x1136&quot; href=&quot;/splash-screen-640x1136.png&quot;/&gt;
-&lt;!-- iPhone 5/iPod Touch 5 竖屏 640x1136 (Retina) --&gt;
-&lt;!-- iOS 启动画面 end --&gt;
-
-&lt;!-- iOS 设备 end --&gt;
-&lt;meta name=&quot;msapplication-TileColor&quot; content=&quot;#000&quot;/&gt;
-&lt;!-- Windows 8 磁贴颜色 --&gt;
-&lt;meta name=&quot;msapplication-TileImage&quot; content=&quot;icon.png&quot;/&gt;
-&lt;!-- Windows 8 磁贴图标 --&gt;
-
-&lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;RSS&quot; href=&quot;/rss.xml&quot;/&gt;
-&lt;!-- 添加 RSS 订阅 --&gt;
-&lt;link rel=&quot;shortcut icon&quot; type=&quot;image/ico&quot; href=&quot;/favicon.ico&quot;/&gt;
-&lt;!-- 添加 favicon icon --&gt;
-
-&lt;!-- sns 社交标签 begin --&gt;
-&lt;!-- 参考微博API --&gt;
-&lt;meta property=&quot;og:type&quot; content=&quot;类型&quot; /&gt;
-&lt;meta property=&quot;og:url&quot; content=&quot;URL地址&quot; /&gt;
-&lt;meta property=&quot;og:title&quot; content=&quot;标题&quot; /&gt;
-&lt;meta property=&quot;og:image&quot; content=&quot;图片&quot; /&gt;
-&lt;meta property=&quot;og:description&quot; content=&quot;描述&quot; /&gt;
-&lt;!-- sns 社交标签 end --&gt;
-
-&lt;title&gt;标题&lt;/title&gt;
-</code></pre><p><br>`</p>
-
+<h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><p><code>&lt;!DOCTYPE html&gt;</code>使用 HTML5 doctype，不区分大小写<br><code>&lt;html lang=&quot;zh-cmn-Hans&quot;&gt;</code><a href="http://zhi.hu/XyIa">更加标准的 lang 属性写法</a><br>
         
       </div>
       <div class="post-footer clearfix">
@@ -263,7 +323,9 @@
 
 
       <div class="post-meat flex-row">
-        <div class="flex-col"></div>
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hello-World/">Hello World</a></li></ul>
+</div>
         <time datetime="2016-04-04T08:08:27.660Z" itemprop="datePublished" class="post-tiem">
   2016-04-04
 </time>
@@ -271,13 +333,13 @@
       <div class="post-content" itemprop="postContent" >
         
           <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
         

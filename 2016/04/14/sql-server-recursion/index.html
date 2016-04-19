@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SQL Server 递归函数 | MichaelSun&#39;s Blog | javascript,.net</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="SQL Server">
+  <meta name="description" content="导语
+有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。
+
+需要补习的语法 WITH AS摘自网上WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL Server 递归函数">
+<meta property="og:url" content="http://zhensherlock.github.io/2016/04/14/sql-server-recursion/index.html">
+<meta property="og:site_name" content="MichaelSun's Blog">
+<meta property="og:description" content="导语
+有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。
+
+需要补习的语法 WITH AS摘自网上WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的">
+<meta property="og:updated_time" content="2016-04-14T10:08:58.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL Server 递归函数">
+<meta name="twitter:description" content="导语
+有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。
+
+需要补习的语法 WITH AS摘自网上WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的">
+  
+    <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner">
+  <a href="javascript:;" class="header-icon waves-circle-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">孙臻轩</h5>
+        <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav">
+    
+        <li class="waves-block">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>
+            Home
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>
+            Archives
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/tags"  >
+            <i class="icon icon-lg icon-tags"></i>
+            Tags
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="https://github.com/zhensherlock" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>
+            Github
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>
+            Weibo
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/about"  >
+            <i class="icon icon-lg icon-user"></i>
+            About
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>MichaelSun&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-circle-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SQL Server 递归函数</div>
+        
+        <a href="javascript:;" class="header-icon waves-circle-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">SQL Server 递归函数</h1>
+    <h5 class="subtitle">2016-04-14</h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      
+  <article id="post-sql-server-recursion" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Server/">SQL Server</a></li></ul>
+</div>
+      </div>
+      <div class="post-body">
+
+        <aside class="post-widget" id="post-widget">
+
+          
+          <div class="post-share" id="post-share" data-title="SQL Server 递归函数" data-pic="/img/logo.jpg" data-summary="&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;需要补习的语法-WITH-AS&quot;&gt;&lt;a href=&quot;#需要补习的语法-WITH-AS&quot; class=&quot;headerlink&quot; title=&quot;需要补习的语法 WITH AS&quot;&gt;&lt;/a&gt;需要补习的语法 WITH AS&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/shaochao14/article/details/6223052&quot;&gt;摘自网上&lt;/a&gt;&lt;br&gt;WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的不同部分，作为提供数据的部分。&lt;br&gt;特别对于UNION ALL比较有用。因为UNION ALL的每个部分可能相同，但是如果每个部分都去执行一遍的话，则成本太高，所以可以使用WITH AS短语，则只要执行一遍即可。如果WITH AS短语所定义的表名被调用两次以上，则优化器会自动将WITH AS短语所获取的数据放入一个TEMP表里，如果只是被调用一次，则不会。而提示materialize则是强制将WITH AS短语里的数据放入一个全局临时表里。很多查询通过这种方法都可以提高速度。&lt;br&gt;" data-url="http://zhensherlock.github.io/2016/04/14/sql-server-recursion/index.html">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+          
+
+          
+          <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#导语"><span class="post-toc-text">导语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#需要补习的语法-WITH-AS"><span class="post-toc-text">需要补习的语法 WITH AS</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实例"><span class="post-toc-text">实例</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文献"><span class="post-toc-text">参考文献</span></a></li></ol>
+          </nav>
+          
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" itemprop="postContent"><h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。</p>
+</blockquote>
+<h2 id="需要补习的语法-WITH-AS"><a href="#需要补习的语法-WITH-AS" class="headerlink" title="需要补习的语法 WITH AS"></a>需要补习的语法 WITH AS</h2><p><a href="http://blog.csdn.net/shaochao14/article/details/6223052" target="_blank" rel="external">摘自网上</a><br>WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的不同部分，作为提供数据的部分。<br>特别对于UNION ALL比较有用。因为UNION ALL的每个部分可能相同，但是如果每个部分都去执行一遍的话，则成本太高，所以可以使用WITH AS短语，则只要执行一遍即可。如果WITH AS短语所定义的表名被调用两次以上，则优化器会自动将WITH AS短语所获取的数据放入一个TEMP表里，如果只是被调用一次，则不会。而提示materialize则是强制将WITH AS短语里的数据放入一个全局临时表里。很多查询通过这种方法都可以提高速度。<br><a id="more"></a></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">WITH cte</span><br><span class="line">  AS ( <span class="keyword">SELECT</span>   dept_id ,</span><br><span class="line">                dept_name</span><br><span class="line">       <span class="keyword">FROM</span>     department</span><br><span class="line">       <span class="keyword">WHERE</span>    dept_id = <span class="string">'1111'</span></span><br><span class="line">       <span class="keyword">UNION</span> ALL</span><br><span class="line">       <span class="keyword">SELECT</span>   d.dept_id ,</span><br><span class="line">                d.dept_name</span><br><span class="line">       <span class="keyword">FROM</span>     cte c</span><br><span class="line">                <span class="keyword">INNER</span> <span class="keyword">JOIN</span> department d <span class="keyword">ON</span> c.dept_id = d.parent_id</span><br><span class="line">     )</span><br><span class="line"><span class="keyword">SELECT</span>  dept_id</span><br><span class="line"><span class="keyword">FROM</span>    cte;</span><br></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.cnblogs.com/xqhppt/archive/2011/02/15/1955366.html" target="_blank" rel="external">SQL递归查询(with cte as)</a><br><a href="http://wudataoge.blog.163.com/blog/static/80073886200961652022389/" target="_blank" rel="external">SQL中使用WITH AS提高性能－使用公用表表达式（CTE）简化嵌套SQL</a></p>
+</div>
+
+            
+<nav class="post-nav flex-row">
+  <div class="flex-col waves-block prev">
+    
+      <a href="/2016/04/14/visual-studio-remote-debugger/" title="Visual Studio远程调试" id="post-prev" class="post-nav-link">
+        <i class="icon icon-chevron-left"></i>
+        <span class="article-nav-title">上一篇</span>
+      </a>
+    
+  </div>
+  <div class="flex-col waves-block next">
+    
+      <a href="/2016/04/08/css-priority/" title="CSS优先级计算" id="post-next" class="post-nav-link">
+        <span class="article-nav-title">下一篇</span>
+        <i class="icon icon-chevron-right"></i>
+      </a>
+    
+  </div>
+
+</nav>
+
+
+
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="sql-server-recursion" data-title="SQL Server 递归函数" data-url="http://zhensherlock.github.io/2016/04/14/sql-server-recursion/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hexoblog-d545245b4b68c9efa4001c1dc497e631"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    
+
+  </article>
+
+
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<div class="global-share" id="global-share" data-title="SQL Server 递归函数" data-pic="/img/logo.jpg" data-summary="&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;需要补习的语法-WITH-AS&quot;&gt;&lt;a href=&quot;#需要补习的语法-WITH-AS&quot; class=&quot;headerlink&quot; title=&quot;需要补习的语法 WITH AS&quot;&gt;&lt;/a&gt;需要补习的语法 WITH AS&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/shaochao14/article/details/6223052&quot;&gt;摘自网上&lt;/a&gt;&lt;br&gt;WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的不同部分，作为提供数据的部分。&lt;br&gt;特别对于UNION ALL比较有用。因为UNION ALL的每个部分可能相同，但是如果每个部分都去执行一遍的话，则成本太高，所以可以使用WITH AS短语，则只要执行一遍即可。如果WITH AS短语所定义的表名被调用两次以上，则优化器会自动将WITH AS短语所获取的数据放入一个TEMP表里，如果只是被调用一次，则不会。而提示materialize则是强制将WITH AS短语里的数据放入一个全局临时表里。很多查询通过这种方法都可以提高速度。&lt;br&gt;" data-url="http://zhensherlock.github.io/2016/04/14/sql-server-recursion/index.html">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/javascript">
+var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cspan id='cnzz_stat_icon_1258408054' style='display:none' %3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1258408054%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+
+
+
+</body>
+</html>
