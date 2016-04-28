@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhensherlock.github.io/2016/04/27/sql-server-identity/</loc>
+    
+    <lastmod>2016-04-28T01:21:26.552Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/</loc>
+    
+    <lastmod>2016-04-25T10:54:59.441Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2016/04/07/html5-head-meta/</loc>
+    
+    <lastmod>2016-04-21T08:57:10.456Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2016/04/19/sql-server-case-when/</loc>
+    
+    <lastmod>2016-04-21T08:56:43.902Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhensherlock.github.io/2016/04/14/visual-studio-remote-debugger/</loc>
     
     <lastmod>2016-04-18T16:01:19.806Z</lastmod>
@@ -33,13 +61,6 @@
     <loc>http://zhensherlock.github.io/about/index.html</loc>
     
     <lastmod>2016-04-08T09:53:28.980Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/2016/04/07/html5-head-meta/</loc>
-    
-    <lastmod>2016-04-08T09:37:22.834Z</lastmod>
     
   </url>
   
