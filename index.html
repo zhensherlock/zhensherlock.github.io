@@ -130,6 +130,54 @@
   <ul class="post-list">
   
     <li class="post-list-item">
+  <article id="post-openxml-generate-data-dictionary" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/04/29/openxml-generate-data-dictionary/">使用OpenXml实现生成数据字典文档</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenXml/">OpenXml</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WinForm/">WinForm</a></li></ul>
+</div>
+        <time datetime="2016-04-29T08:54:17.000Z" itemprop="datePublished" class="post-tiem">
+  2016-04-29
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复劳动力，最终决定做一个工具，方便自己生成数据字典文档。</p>
+</blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>这里只是分享一下开发的思路和经历（如果发现有问题，请及时告诉我，我会即时纠正，以免误导他人，欢迎大家多多指点）。</p>
+<ol>
+<li>投影未脱机的数据库列表（使用T-SQL）</li>
+<li>投影当前数据库的表列表（使用T-SQL）</li>
+<li>投影某表的字段信息列表（使用T-SQL）</li>
+<li>使用OpenXml新建总文档</li>
+<li>使用OpenXml开始生成单张表的数据字典，替换书签</li>
+<li>使用OpenXml添加表格，完成单张表的数据字典docx文档</li>
+<li>使用OpenXml将当前文档合并成到总文档中
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/04/29/openxml-generate-data-dictionary/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
   <article id="post-photoshop-convert-px" class="article article-type-post" itemscope itemprop="blogPost">
     
       
