@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>使用OpenXml实现生成数据字典文档 | MichaelSun&#39;s Blog | javascript,.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="C#,WinForm,OpenXml">
+    <meta name="description" content="导语
+最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复劳动力，最终决定做一个工具，方便自己生成数据字典文档。
+
+正文这里只是分享一下开发的思路和经历（如果发现有问题，请及时告诉我，我会即时纠正，以免误导他人，欢迎大家多多指点）。
+
+投影未脱机的数据库列表（使用T-SQL）
+投影当前数据库的表列表（使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用OpenXml实现生成数据字典文档">
+<meta property="og:url" content="http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/index.html">
+<meta property="og:site_name" content="MichaelSun's Blog">
+<meta property="og:description" content="导语
+最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复劳动力，最终决定做一个工具，方便自己生成数据字典文档。
+
+正文这里只是分享一下开发的思路和经历（如果发现有问题，请及时告诉我，我会即时纠正，以免误导他人，欢迎大家多多指点）。
+
+投影未脱机的数据库列表（使用T-SQL）
+投影当前数据库的表列表（使">
+<meta property="og:image" content="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/1.png">
+<meta property="og:image" content="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/2.png">
+<meta property="og:updated_time" content="2017-01-12T10:30:32.334Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用OpenXml实现生成数据字典文档">
+<meta name="twitter:description" content="导语
+最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复劳动力，最终决定做一个工具，方便自己生成数据字典文档。
+
+正文这里只是分享一下开发的思路和经历（如果发现有问题，请及时告诉我，我会即时纠正，以免误导他人，欢迎大家多多指点）。
+
+投影未脱机的数据库列表（使用T-SQL）
+投影当前数据库的表列表（使">
+<meta name="twitter:image" content="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/1.png">
+    
+        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孙臻轩</h5>
+          <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhensherlock" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.linkedin.com/in/michael-sun-13056750" target="_blank" >
+                <i class="icon icon-lg icon-linkedin"></i>
+                Linkedin
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用OpenXml实现生成数据字典文档</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用OpenXml实现生成数据字典文档</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-29T08:54:17.000Z" itemprop="datePublished" class="page-time">
+  2016-04-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#导语"><span class="post-toc-number">1.</span> <span class="post-toc-text">导语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正文"><span class="post-toc-number">2.</span> <span class="post-toc-text">正文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#投影未脱机的数据库列表（使用T-SQL）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">投影未脱机的数据库列表（使用T-SQL）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#投影当前数据库的表列表（使用T-SQL）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">投影当前数据库的表列表（使用T-SQL）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#投影某表的字段信息列表（使用T-SQL）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">投影某表的字段信息列表（使用T-SQL）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用OpenXml新建总文档"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">使用OpenXml新建总文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用OpenXml开始生成单张表的数据字典，替换书签"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">使用OpenXml开始生成单张表的数据字典，替换书签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用OpenXml添加表格，完成单张表的数据字典docx文档"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">使用OpenXml添加表格，完成单张表的数据字典docx文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用OpenXml将当前文档合并到总文档中"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">使用OpenXml将当前文档合并到总文档中</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最终效果"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">最终效果</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-openxml-generate-data-dictionary"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用OpenXml实现生成数据字典文档</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年04月29日 16:54" datetime="2016-04-29T08:54:17.000Z"  itemprop="datePublished">2016-04-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复劳动力，最终决定做一个工具，方便自己生成数据字典文档。</p>
+</blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>这里只是分享一下开发的思路和经历（如果发现有问题，请及时告诉我，我会即时纠正，以免误导他人，欢迎大家多多指点）。</p>
+<ol>
+<li>投影未脱机的数据库列表（使用T-SQL）</li>
+<li>投影当前数据库的表列表（使用T-SQL）</li>
+<li>投影某表的字段信息列表（使用T-SQL）</li>
+<li>使用OpenXml新建总文档</li>
+<li>使用OpenXml开始生成单张表的数据字典，替换书签</li>
+<li>使用OpenXml添加表格，完成单张表的数据字典docx文档</li>
+<li>使用OpenXml将当前文档合并成到总文档中<a id="more"></a>
+</li>
+</ol>
+<p>工具的界面大体如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/1.png" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure></p>
+<h3 id="投影未脱机的数据库列表（使用T-SQL）"><a href="#投影未脱机的数据库列表（使用T-SQL）" class="headerlink" title="投影未脱机的数据库列表（使用T-SQL）"></a>投影未脱机的数据库列表（使用T-SQL）</h3><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">Name</span> <span class="keyword">FROM</span> Master..SysDatabases <span class="keyword">WHERE</span> <span class="keyword">STATUS</span> = <span class="number">65536</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">Name</span></div></pre></td></tr></table></figure>
+<h3 id="投影当前数据库的表列表（使用T-SQL）"><a href="#投影当前数据库的表列表（使用T-SQL）" class="headerlink" title="投影当前数据库的表列表（使用T-SQL）"></a>投影当前数据库的表列表（使用T-SQL）</h3><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="keyword">USE</span> TestDB;<span class="keyword">SELECT</span> <span class="keyword">Name</span> <span class="keyword">FROM</span> SysObjects <span class="keyword">Where</span> XType=<span class="string">'U'</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">Name</span> <span class="keyword">DESC</span></div></pre></td></tr></table></figure>
+<h3 id="投影某表的字段信息列表（使用T-SQL）"><a href="#投影某表的字段信息列表（使用T-SQL）" class="headerlink" title="投影某表的字段信息列表（使用T-SQL）"></a>投影某表的字段信息列表（使用T-SQL）</h3><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="keyword">USE</span> TestDB;</div><div class="line"><span class="keyword">SELECT</span></div><div class="line">a.name 字段名 ,</div><div class="line">( <span class="keyword">CASE</span> <span class="keyword">WHEN</span> COLUMNPROPERTY(a.id, a.name, <span class="string">'IsIdentity'</span>) = <span class="number">1</span> <span class="keyword">THEN</span> <span class="string">'√'</span> <span class="keyword">ELSE</span> <span class="string">''</span></div><div class="line"><span class="keyword">END</span> ) 标识 ,</div><div class="line">( <span class="keyword">CASE</span> <span class="keyword">WHEN</span> ( <span class="keyword">SELECT</span>    <span class="keyword">COUNT</span>(*)</div><div class="line">            <span class="keyword">FROM</span>      sysobjects</div><div class="line">            <span class="keyword">WHERE</span>     ( <span class="keyword">name</span> <span class="keyword">IN</span> (</div><div class="line">                        <span class="keyword">SELECT</span>    <span class="keyword">name</span></div><div class="line">                        <span class="keyword">FROM</span>      sysindexes</div><div class="line">                        <span class="keyword">WHERE</span>     ( <span class="keyword">id</span> = a.id )</div><div class="line">                                <span class="keyword">AND</span> ( indid <span class="keyword">IN</span> (</div><div class="line">                                        <span class="keyword">SELECT</span>    indid</div><div class="line">                                        <span class="keyword">FROM</span>      sysindexkeys</div><div class="line">                                        <span class="keyword">WHERE</span>     ( <span class="keyword">id</span> = a.id )</div><div class="line">                                                <span class="keyword">AND</span> ( colid <span class="keyword">IN</span> (</div><div class="line">                                                    <span class="keyword">SELECT</span></div><div class="line">                                                    colid</div><div class="line">                                                    <span class="keyword">FROM</span></div><div class="line">                                                    syscolumns</div><div class="line">                                                    <span class="keyword">WHERE</span></div><div class="line">                                                    ( <span class="keyword">id</span> = a.id )</div><div class="line">                                                    <span class="keyword">AND</span> ( <span class="keyword">name</span> = a.name ) ) ) ) ) ) )</div><div class="line">                    <span class="keyword">AND</span> ( xtype = <span class="string">'PK'</span> )</div><div class="line">        ) &gt; <span class="number">0</span> <span class="keyword">THEN</span> <span class="string">'√'</span></div><div class="line">    <span class="keyword">ELSE</span> <span class="string">''</span></div><div class="line"><span class="keyword">END</span> ) 主键 ,</div><div class="line">( <span class="keyword">CASE</span> b.name</div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'varchar'</span> <span class="keyword">THEN</span> b.name + <span class="string">'('</span> + <span class="keyword">cast</span>(a.length <span class="keyword">as</span> <span class="built_in">varchar</span>(<span class="number">8</span>)) + <span class="string">')'</span></div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'nvarchar'</span> <span class="keyword">THEN</span> b.name + <span class="string">'('</span> + <span class="keyword">cast</span>(a.length <span class="keyword">as</span> <span class="built_in">varchar</span>(<span class="number">8</span>)) + <span class="string">')'</span></div><div class="line">    <span class="keyword">ELSE</span> b.name</div><div class="line"><span class="keyword">END</span> ) 类型 ,</div><div class="line">( <span class="keyword">CASE</span> <span class="keyword">WHEN</span> a.isnullable = <span class="number">1</span> <span class="keyword">THEN</span> <span class="string">'√'</span> <span class="keyword">ELSE</span> <span class="string">''</span><span class="keyword">END</span> ) 允许空 ,</div><div class="line">( <span class="keyword">CASE</span> a.name <span class="keyword">WHEN</span> <span class="string">'Id'</span> <span class="keyword">THEN</span> <span class="string">'Id'</span></div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'AddTime'</span> <span class="keyword">THEN</span> <span class="string">'添加时间'</span></div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'UpdateTime'</span> <span class="keyword">THEN</span> <span class="string">'修改时间'</span>  </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'IsValid'</span> <span class="keyword">THEN</span> <span class="string">'删除标记'</span>        </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'AddIp'</span> <span class="keyword">THEN</span> <span class="string">'添加IP地址'</span>               </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'UpdateIp'</span> <span class="keyword">THEN</span> <span class="string">'修改IP地址'</span>             </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'State'</span> <span class="keyword">THEN</span> <span class="string">'状态'</span>                </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'PicUrl'</span> <span class="keyword">THEN</span> <span class="string">'图片地址'</span>           </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Image'</span> <span class="keyword">THEN</span> <span class="string">'图片地址'</span>             </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Description'</span> <span class="keyword">THEN</span> <span class="string">'介绍'</span>             </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Title'</span> <span class="keyword">THEN</span> <span class="string">'标题'</span>             </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Note'</span> <span class="keyword">THEN</span> <span class="string">'备注'</span>            </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Type'</span> <span class="keyword">THEN</span> <span class="string">'类型'</span>         </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Content'</span> <span class="keyword">THEN</span> <span class="string">'内容'</span>  </div><div class="line"><span class="keyword">END</span> ) 字段中文名,</div><div class="line"><span class="keyword">ISNULL</span>(e.text, <span class="string">''</span>) 默认值,</div><div class="line"><span class="string">''</span> <span class="keyword">as</span> 备注</div><div class="line"><span class="keyword">FROM</span>    syscolumns a</div><div class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> systypes b <span class="keyword">ON</span> a.xtype = b.xusertype</div><div class="line">        <span class="keyword">INNER</span> <span class="keyword">JOIN</span> sysobjects d <span class="keyword">ON</span> a.id = d.id</div><div class="line">                                   <span class="keyword">AND</span> d.xtype = <span class="string">'U'</span></div><div class="line">                                   <span class="keyword">AND</span> d.name &lt;&gt; <span class="string">'dtproperties'</span></div><div class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> syscomments e <span class="keyword">ON</span> a.cdefault = e.id</div><div class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> sys.extended_properties g <span class="keyword">ON</span> a.id = g.major_id</div><div class="line">                                               <span class="keyword">AND</span> a.colid = g.minor_id</div><div class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> sys.extended_properties f <span class="keyword">ON</span> d.id = f.class</div><div class="line">                                               <span class="keyword">AND</span> f.minor_id = <span class="number">0</span></div><div class="line"><span class="keyword">WHERE</span>   b.name <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line"><span class="keyword">and</span> d.name=<span class="string">'Account'</span></div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> a.id ,</div><div class="line">        a.colorder;</div></pre></td></tr></table></figure>
+<h3 id="使用OpenXml新建总文档"><a href="#使用OpenXml新建总文档" class="headerlink" title="使用OpenXml新建总文档"></a>使用OpenXml新建总文档</h3><p>tmplFilePath是临时存放各个表数据字典的文件夹<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">string</span> path = <span class="keyword">string</span>.Format(<span class="string">@"&#123;0&#125;&#123;1&#125;.docx"</span>, tmplFilePath, DateTime.Now.Ticks.ToString());</div><div class="line"><span class="keyword">using</span> (WordprocessingDocument doc = WordprocessingDocument.Create(path, WordprocessingDocumentType.Document))</div><div class="line">&#123;</div><div class="line">    MainDocumentPart mainPart = doc.AddMainDocumentPart();</div><div class="line">    mainPart.Document = <span class="keyword">new</span> Document();</div><div class="line">    Body body = mainPart.Document.AppendChild(<span class="keyword">new</span> Body());</div><div class="line">    Paragraph p = mainPart.Document.Body.AppendChild(<span class="keyword">new</span> Paragraph());</div><div class="line">    p.AppendChild(<span class="keyword">new</span> Run(<span class="keyword">new</span> Text(<span class="string">"数据字典"</span>)));  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="使用OpenXml开始生成单张表的数据字典，替换书签"><a href="#使用OpenXml开始生成单张表的数据字典，替换书签" class="headerlink" title="使用OpenXml开始生成单张表的数据字典，替换书签"></a>使用OpenXml开始生成单张表的数据字典，替换书签</h3><p>tmplFileName是单张表的数据字典文档路径<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">using</span> (WordprocessingDocument tmplDoc = WordprocessingDocument.Open(tmplFileName, <span class="literal">true</span>))</div><div class="line">&#123;</div><div class="line">    <span class="comment">//修改文档类型 (dotx-&gt;docx)</span></div><div class="line">    tmplDoc.ChangeDocumentType(WordprocessingDocumentType.Document);</div><div class="line">    <span class="keyword">var</span> bookMarks = FindBookmarks(tmplDoc.MainDocumentPart.Document);</div><div class="line">    <span class="comment">//替换书签</span></div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> end <span class="keyword">in</span> bookMarks)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (end.Key == <span class="string">"TableName"</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> textElement = <span class="keyword">new</span> Text(tableName);</div><div class="line">            <span class="keyword">var</span> runElement = <span class="keyword">new</span> Run(textElement);</div><div class="line">            end.Value.InsertAfterSelf(runElement);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是FindBookmarks方法<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Dictionary&lt;<span class="keyword">string</span>, BookmarkEnd&gt; <span class="title">FindBookmarks</span>(<span class="params">OpenXmlElement documentPart, Dictionary&lt;<span class="keyword">string</span>, BookmarkEnd&gt; results = <span class="literal">null</span>, Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt; unmatched = <span class="literal">null</span></span>)</span></div><div class="line">&#123;</div><div class="line">    results = results ?? <span class="keyword">new</span> Dictionary&lt;<span class="keyword">string</span>, BookmarkEnd&gt;();</div><div class="line">    unmatched = unmatched ?? <span class="keyword">new</span> Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;();</div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> child <span class="keyword">in</span> documentPart.Elements())</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (child <span class="keyword">is</span> BookmarkStart)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> bStart = child <span class="keyword">as</span> BookmarkStart;</div><div class="line">            unmatched.Add(bStart.Id, bStart.Name);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (child <span class="keyword">is</span> BookmarkEnd)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> bEnd = child <span class="keyword">as</span> BookmarkEnd;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">var</span> orphanName <span class="keyword">in</span> unmatched)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (bEnd.Id == orphanName.Key)</div><div class="line">                    results.Add(orphanName.Value, bEnd);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        FindBookmarks(child, results, unmatched);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> results;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="使用OpenXml添加表格，完成单张表的数据字典docx文档"><a href="#使用OpenXml添加表格，完成单张表的数据字典docx文档" class="headerlink" title="使用OpenXml添加表格，完成单张表的数据字典docx文档"></a>使用OpenXml添加表格，完成单张表的数据字典docx文档</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">//设置表格属性</span></div><div class="line">TableProperties tblProp = <span class="keyword">new</span> TableProperties(</div><div class="line">    <span class="keyword">new</span> TableBorders(</div><div class="line">    <span class="keyword">new</span> TopBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> BottomBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> LeftBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> RightBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> InsideHorizontalBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> InsideVerticalBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;</div><div class="line">    )</div><div class="line">);</div><div class="line">Table table = <span class="keyword">new</span> Table();</div><div class="line">table.Append(tblProp);</div><div class="line"><span class="comment">//添加表头</span></div><div class="line">TableRow headerRow = <span class="keyword">new</span> TableRow();</div><div class="line"><span class="keyword">foreach</span> (DataColumn column <span class="keyword">in</span> dataBaseTable.Columns)</div><div class="line">&#123;</div><div class="line">    TableCell cell = <span class="keyword">new</span> TableCell();</div><div class="line">    cell.Append(<span class="keyword">new</span> Paragraph(<span class="keyword">new</span> Run(<span class="keyword">new</span> Text(column.ColumnName))));</div><div class="line">    headerRow.Append(cell);</div><div class="line">&#125;</div><div class="line">table.Append(headerRow);</div><div class="line"><span class="comment">//添加数据</span></div><div class="line"><span class="keyword">foreach</span> (DataRow row <span class="keyword">in</span> dataBaseTable.Rows)</div><div class="line">&#123;</div><div class="line">    TableRow tableRow = <span class="keyword">new</span> TableRow();</div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">object</span> strCell <span class="keyword">in</span> row.ItemArray)</div><div class="line">    &#123;</div><div class="line">        TableCell cell = <span class="keyword">new</span> TableCell();</div><div class="line">        cell.Append(<span class="keyword">new</span> Paragraph(<span class="keyword">new</span> Run(<span class="keyword">new</span> Text(strCell.ToString()))));</div><div class="line">        tableRow.Append(cell);</div><div class="line">    &#125;</div><div class="line">    table.Append(tableRow);</div><div class="line">&#125;</div><div class="line"><span class="comment">//添加表格</span></div><div class="line">tmplDoc.MainDocumentPart.Document.Body.Append(<span class="keyword">new</span> Paragraph(<span class="keyword">new</span> Run(table)));</div></pre></td></tr></table></figure>
+<h3 id="使用OpenXml将当前文档合并到总文档中"><a href="#使用OpenXml将当前文档合并到总文档中" class="headerlink" title="使用OpenXml将当前文档合并到总文档中"></a>使用OpenXml将当前文档合并到总文档中</h3><p>path是总文档的路径<br>tmplFileName是当前文档的路径<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">//将当前word和总文档的合并</span></div><div class="line"><span class="keyword">using</span> (WordprocessingDocument template = WordprocessingDocument.Open(path, <span class="literal">true</span>))</div><div class="line">&#123;</div><div class="line">    MainDocumentPart mainPart = template.MainDocumentPart;</div><div class="line">    <span class="keyword">string</span> altChunkId = tableName;</div><div class="line">    AlternativeFormatImportPart chunk =</div><div class="line">    mainPart.AddAlternativeFormatImportPart(</div><div class="line">    AlternativeFormatImportPartType.WordprocessingML, altChunkId);</div><div class="line">    <span class="keyword">using</span> (FileStream fileStream = File.Open(tmplFileName, FileMode.Open))</div><div class="line">        chunk.FeedData(fileStream);</div><div class="line">    AltChunk altChunk = <span class="keyword">new</span> AltChunk();</div><div class="line">    altChunk.Id = altChunkId;</div><div class="line">    mainPart.Document</div><div class="line">        .Body</div><div class="line">        .InsertAfter(altChunk, mainPart.Document.Body</div><div class="line">        .Elements&lt;Paragraph&gt;().Last());</div><div class="line">    mainPart.Document.Save();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/2.png" alt="图2" title="">
+                </div>
+                <div class="image-caption">图2</div>
+            </figure>
+<p>任务完成，<a href="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/rar/%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8.rar" target="_blank" rel="external">这里是源代码</a>，晚安！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-01-12T10:30:32.334Z" itemprop="dateUpdated">2017年1月12日 18:30</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2016/04/29/openxml-generate-data-dictionary/" target="_blank" rel="external">http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/</a>
+    </div>
+    <footer>
+        <a href="http://zhensherlock.github.io">
+            <img src="/img/avatar.jpg" alt="孙臻轩">
+            孙臻轩
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenXml/">OpenXml</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WinForm/">WinForm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/&title=《使用OpenXml实现生成数据字典文档》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/&title=《使用OpenXml实现生成数据字典文档》 — MichaelSun's Blog&source=导语
+最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用OpenXml实现生成数据字典文档》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/01/10/microsoft-office-mime-types/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Microsoft Office MIME Types</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/28/photoshop-convert-px/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Photoshop 将点转换成PX</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="openxml-generate-data-dictionary" data-title="使用OpenXml实现生成数据字典文档" data-url="http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.5');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>MichaelSun's Blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/&title=《使用OpenXml实现生成数据字典文档》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/&title=《使用OpenXml实现生成数据字典文档》 — MichaelSun's Blog&source=导语
+最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用OpenXml实现生成数据字典文档》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3aQW7DMAwEwPz/0y3QU4HW8pKUnBzGp8BxY40Okrrk6xVfXz/X389Xz/S+/X2t72++8PDw8FpDv7queOtvkwla/1U+hpspwMPDwzvG620G65eth55sCfl0XN7Hw8PDeyvvavFdH4XzJ6uTgoeHh/f5vOT59bDmR3k8PDy8z+Elr0nuT5b+nHQka8HDw8OLeZMC2Ls+P1Tfw8PDwyseaifLbvLkPCa+GSceHh7eAd46RMiHlccN+f2EGk0lHh4e3gHern/1q1FvHvjmUxll1Xh4eHhjXo7JmwnywtiGEte8AIaHh4e3iZcPrjo1vUJXL/LAw8PD28urYnpFqep2Mp9iPDw8vNO8XuZZ5VUnrvc7/9T38PDw8B7nzQOF8oI+3ooKGwMeHh5ekZcMaP3T1ag3L7NtawLDw8PD28qbLLjVhqreATqJJ26aBvDw8PAO8JIDcRKtVreBeWBxs2Hg4eHhPcKrlqD2BrJ5o0DUoICHh4d3gJdHt/PSVLSUB8FxNWjGw8PDO83L09/8MN2LGKqlu5u34+Hh4W3i3cSgQXtBHv7mg55HFXh4eHhP8nJSFZZPZb5h3DyDh4eH9whvV9tTzphMRxTd4uHh4R3j9UKBHNDbBiYNB3h4eHgneL2CfTU4yMOOarEt+hYPDw/vAC+JWfNj8XqJr5bTJsU2PDw8vHO86sG311iQDzQ/6EeTjoeHh3eMV/3nv/rKSdtB9cLDw8M7x+sVupLgNW8myKe4Gvvi4eHhneD1dpL5T+dNAMnRfMNmg4eHh1fk5YtyMrhq3DBJXKNjPR4eHt4xXq9yNH8yGe5k68LDw8P7BF41nqiWxHqNC+V2Kzw8PLxHeHn7VPWYPo888PDw8J7nTYpPJw7T1Ql99eYbDw8Pr8Urd2nFC/d6cFX8iQgDDw8Pr8j7BnHV2k/Rk/IMAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.5"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.5" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

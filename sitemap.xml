@@ -2,65 +2,128 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/</loc>
+    <loc>http://zhensherlock.github.io/2017/01/12/npm-china/</loc>
     
-    <lastmod>2016-04-29T09:52:19.939Z</lastmod>
+    <lastmod>2017-01-16T08:32:18.098Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zhensherlock.github.io/2016/04/14/sql-server-recursion/</loc>
+    <loc>http://zhensherlock.github.io/2017/01/15/mac/install-mysql/</loc>
     
-    <lastmod>2016-04-29T09:39:46.098Z</lastmod>
+    <lastmod>2017-01-16T08:03:20.858Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2017/01/12/mac/brew-update/</loc>
+    
+    <lastmod>2017-01-16T08:03:20.857Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zhensherlock.github.io/2016/04/19/sql-server-case-when/</loc>
     
-    <lastmod>2016-04-29T09:39:35.633Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/2016/04/28/photoshop-convert-px/</loc>
-    
-    <lastmod>2016-04-28T05:48:53.532Z</lastmod>
+    <lastmod>2017-01-12T10:31:13.940Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zhensherlock.github.io/2016/04/27/sql-server-identity/</loc>
     
-    <lastmod>2016-04-28T01:32:23.957Z</lastmod>
+    <lastmod>2017-01-12T10:31:11.859Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/</loc>
+    <loc>http://zhensherlock.github.io/2016/04/14/sql-server-recursion/</loc>
     
-    <lastmod>2016-04-25T10:54:59.441Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/2016/04/07/html5-head-meta/</loc>
-    
-    <lastmod>2016-04-21T08:57:10.456Z</lastmod>
+    <lastmod>2017-01-12T10:31:07.408Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zhensherlock.github.io/2016/04/14/visual-studio-remote-debugger/</loc>
     
-    <lastmod>2016-04-18T16:01:19.806Z</lastmod>
+    <lastmod>2017-01-12T10:31:01.660Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2016/04/28/photoshop-convert-px/</loc>
+    
+    <lastmod>2017-01-12T10:30:43.669Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/</loc>
+    
+    <lastmod>2017-01-12T10:30:32.334Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2017/01/10/microsoft-office-mime-types/</loc>
+    
+    <lastmod>2017-01-12T10:30:23.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/</loc>
+    
+    <lastmod>2017-01-12T10:30:17.771Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/2016/04/07/html5-head-meta/</loc>
+    
+    <lastmod>2017-01-12T10:30:09.784Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zhensherlock.github.io/2016/04/08/css-priority/</loc>
     
-    <lastmod>2016-04-14T08:58:30.485Z</lastmod>
+    <lastmod>2017-01-12T10:30:03.179Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/about/index.html</loc>
+    
+    <lastmod>2017-01-12T08:55:10.069Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-01-12T08:41:48.182Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-01-12T08:41:36.747Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/tags/index-2.html</loc>
+    
+    <lastmod>2017-01-12T08:40:32.278Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/tags/index-1.html</loc>
+    
+    <lastmod>2017-01-12T08:39:57.572Z</lastmod>
     
   </url>
   
@@ -68,20 +131,6 @@
     <loc>http://zhensherlock.github.io/2016/04/04/hello-world/</loc>
     
     <lastmod>2016-04-08T09:57:14.866Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/about/index.html</loc>
-    
-    <lastmod>2016-04-08T09:53:28.980Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/tags/index.html</loc>
-    
-    <lastmod>2016-04-04T09:30:12.998Z</lastmod>
     
   </url>
   

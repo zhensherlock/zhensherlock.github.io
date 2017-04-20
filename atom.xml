@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhensherlock.github.io/"/>
-  <updated>2016-04-29T09:52:19.939Z</updated>
+  <updated>2017-01-16T08:03:20.858Z</updated>
   <id>http://zhensherlock.github.io/</id>
   
   <author>
@@ -16,37 +16,1345 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>macOS 安装 MySQL</title>
+    <link href="http://zhensherlock.github.io/2017/01/15/mac/install-mysql/"/>
+    <id>http://zhensherlock.github.io/2017/01/15/mac/install-mysql/</id>
+    <published>2017-01-15T02:04:00.000Z</published>
+    <updated>2017-01-16T08:03:20.858Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
+<p>首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案</p>
+</blockquote>
+<h2 id="使用brew安装MySQL"><a href="#使用brew安装MySQL" class="headerlink" title="使用brew安装MySQL"></a>使用brew安装MySQL</h2><p>在命令行中输入 <code>brew install mysql</code> 安装MySQL。</p>
+<h2 id="下载dmg安装MySQL"><a href="#下载dmg安装MySQL" class="headerlink" title="下载dmg安装MySQL"></a>下载dmg安装MySQL</h2><p>访问MySQL官网<a href="http://www.mysql.com/downloads/" target="_blank" rel="external">http://www.mysql.com/downloads/</a>，点击下载MySQL Community Server，注意平台。</p>
+<h2 id="卸载MySQL"><a href="#卸载MySQL" class="headerlink" title="卸载MySQL"></a>卸载MySQL</h2><p>使用brew安装MySQL的，可以执行 <code>brew uninstall mysql</code> 或者 <code>brew remove mysql</code><br>然后再执行以下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo rm /usr/local/mysql</div><div class="line">sudo rm -rf /usr/local/mysql*</div><div class="line">sudo rm -rf /Library/StartupItems/MySQLCOM</div><div class="line">sudo rm -rf /Library/PreferencePanes/My*</div><div class="line">rm -rf ~/Library/PreferencePanes/My*</div><div class="line">sudo rm -rf /Library/Receipts/mysql*</div><div class="line">sudo rm -rf /Library/Receipts/MySQL*</div></pre></td></tr></table></figure></p>
+<p>再检查以下存储位置，如有文件，直接删除<br>/usr/local/Cellar 里的mysql文件<br>/usr/local/var 里的mysql文件<br>/tmp 里的mysql.sock, mysql.sock.lock, my.cnf文件<br>brew安装的安装包存储在/usr/local/Library/Cache/Homebrew也可以一并删除</p>
+<p>最后执行 <code>brew cleanup</code></p>
+<h2 id="MySQL-Workbench（GUI）"><a href="#MySQL-Workbench（GUI）" class="headerlink" title="MySQL Workbench（GUI）"></a>MySQL Workbench（GUI）</h2><p>MySQL官网上有 MySQL Workbench 的下载链接，访问<a href="https://downloads.mysql.com/archives/workbench/" target="_blank" rel="external">https://downloads.mysql.com/archives/workbench/</a>，<br>点击下载MySQL Workbench(GUI Tool)，如果发现安装之后，进入Workbench后，执行SQL后，一直卡死，请下载6.1.7版本。</p>
+<h2 id="MySQL问题"><a href="#MySQL问题" class="headerlink" title="MySQL问题"></a>MySQL问题</h2><p>下面是我在使用MySQL时出现的问题：</p>
+<h3 id="Access-denied-for-user-‘’-’localhost’-to-database’"><a href="#Access-denied-for-user-‘’-’localhost’-to-database’" class="headerlink" title="Access denied for user ‘’@’localhost’ to database’"></a>Access denied for user ‘’@’localhost’ to database’</h3><p>执行 <code>mysql -u root -p</code> 之后输入之前MySQL随机生成出来的密码，一直提示不正确的时候，我们就执行以下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">mysqld stop</div><div class="line">mysqld_safe --skip-grant-tables &amp;</div><div class="line">mysql -u root</div><div class="line">use mysql;</div><div class="line">update user set authentication_string=password(&apos;123456&apos;) where user=&apos;root&apos;;</div><div class="line">flush privileges;</div><div class="line">quit</div><div class="line">mysqld restart</div></pre></td></tr></table></figure></p>
+<h3 id="You-must-reset-your-password-using-ALTER-USER-statement-before-executing-this-statement"><a href="#You-must-reset-your-password-using-ALTER-USER-statement-before-executing-this-statement" class="headerlink" title="You must reset your password using ALTER USER statement before executing this statement."></a>You must reset your password using ALTER USER statement before executing this statement.</h3><p>当我们成功登录MySQL后，执行任何的命令，都提示上面的错误，我们需要执行以下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SET PASSWORD = PASSWORD(&apos;123456&apos;);</div><div class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; PASSWORD EXPIRE NEVER;</div><div class="line">flush privileges;</div></pre></td></tr></table></figure></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://www.cnblogs.com/macro-cheng/archive/2011/10/25/mysql-001.html" target="_blank" rel="external">MAC下安装与配置MySQL</a><br><a href="http://blog.neten.de/posts/2014/01/27/install-mysql-using-homebrew/" target="_blank" rel="external">在 Mac 下用 Homebrew 安装 MySQL</a><br><a href="https://www.zhihu.com/question/52274376/answer/134273090" target="_blank" rel="external">workbench 无法执行命令？</a><br><a href="http://blog.csdn.net/sarahhuangzht/article/details/51508112" target="_blank" rel="external">Mac Pro下卸载安装Mysql</a><br><a href="http://www.cnblogs.com/tsingschange/p/6260683.html" target="_blank" rel="external">mysql-community-server 5.7.16 设置密码</a><br><a href="http://www.cnblogs.com/debmzhang/p/5013540.html" target="_blank" rel="external">mac mysql error You must reset your password using ALTER USER statement before executing this statement.</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案&lt;/p&gt;
+&lt;/blockquot
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
+    
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
+    
+      <category term="MySQL" scheme="http://zhensherlock.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sierra 10.12 brew update 报错</title>
+    <link href="http://zhensherlock.github.io/2017/01/12/mac/brew-update/"/>
+    <id>http://zhensherlock.github.io/2017/01/12/mac/brew-update/</id>
+    <published>2017-01-12T08:04:00.000Z</published>
+    <updated>2017-01-16T08:03:20.857Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
+<p>当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：</p>
+</blockquote>
+<p><code>Error: /usr/local must be writable!</code></p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>上面提示说没有权限，那我们就给当前用户在 <code>/usr/local</code> 路径的权限。</p>
+<p>在命令行中执行：</p>
+<p><code>sudo chown -R whoami /usr/local</code></p>
+<p>请将<code>whoami</code>替换成当前用户名</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://github.com/Homebrew/brew/issues/385" target="_blank" rel="external">In macOS 10.12 Sierra, /usr/local is readonly</a><br><a href="https://github.com/Homebrew/brew/issues/476" target="_blank" rel="external">“Error: /usr/local must be writable!” (Sierra 10.12 Beta (16A239j) )</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：&lt;/p&gt;
+&lt;/bloc
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
+    
+    
+      <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国内NPM使用</title>
+    <link href="http://zhensherlock.github.io/2017/01/12/npm-china/"/>
+    <id>http://zhensherlock.github.io/2017/01/12/npm-china/</id>
+    <published>2017-01-12T08:04:00.000Z</published>
+    <updated>2017-01-16T08:32:18.098Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><blockquote>
+<p>NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安装underscore为例）。</p>
+</blockquote>
+<h2 id="临时修改"><a href="#临时修改" class="headerlink" title="临时修改"></a>临时修改</h2><p>在命令行中输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install underscore -g --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p>
+<h2 id="全局修改"><a href="#全局修改" class="headerlink" title="全局修改"></a>全局修改</h2><p>在命令行中输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm config set registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p>
+<p>编辑 <code>~/.npmrc</code> 或者 <code>C:\Users\Administrator\.npmrc</code> 加入下面内容<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">registry = https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p>
+<h2 id="使用CNPM"><a href="#使用CNPM" class="headerlink" title="使用CNPM"></a>使用CNPM</h2><p>我们可以使用CNPM来代替NPM，CNPM的源和包都在国内，所以速度比NPM快的多，并且CNPM还支持gzip压缩。下面是macOS和Linux的安装方法。</p>
+<h3 id="macOS安装CNPM"><a href="#macOS安装CNPM" class="headerlink" title="macOS安装CNPM"></a>macOS安装CNPM</h3><p>首先安装CNPM<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p>
+<p>接一下在<code>~/.bashrc</code>或者<code>~/.zshrc</code>定义别名<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">alias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \</div><div class="line">--cache=$HOME/.npm/.cache/cnpm \</div><div class="line">--disturl=https://npm.taobao.org/mirrors/node \</div><div class="line">--userconfig=$HOME/.cnpmrc&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="Linux安装CNPM"><a href="#Linux安装CNPM" class="headerlink" title="Linux安装CNPM"></a>Linux安装CNPM</h3><p>首先安装CNPM<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p>
+<p>接一下在<code>~/.bashrc</code>或者<code>~/.zshrc</code>定义别名</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &apos;\n#alias for cnpm\nalias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \</div><div class="line">--cache=$HOME/.npm/.cache/cnpm \</div><div class="line">--disturl=https://npm.taobao.org/dist \</div><div class="line">--userconfig=$HOME/.cnpmrc&quot;&apos; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc</div></pre></td></tr></table></figure>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>安装完成之后，我们就可以使用<code>cnpm install [packagename]</code>来安装模块了。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://cnodejs.org/topic/4f9904f9407edba21468f31e" target="_blank" rel="external">使用npm安装一些包失败了的看过来（npm国内镜像介绍）</a><br><a href="https://npm.taobao.org/" target="_blank" rel="external">淘宝 NPM 镜像</a><br><a href="http://www.uedbox.com/npm-install-slow-solution/" target="_blank" rel="external">npm install 无响应解决方案</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安
+    
+    </summary>
+    
+      <category term="前端" scheme="http://zhensherlock.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="NPM" scheme="http://zhensherlock.github.io/tags/NPM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Microsoft Office MIME Types</title>
+    <link href="http://zhensherlock.github.io/2017/01/10/microsoft-office-mime-types/"/>
+    <id>http://zhensherlock.github.io/2017/01/10/microsoft-office-mime-types/</id>
+    <published>2017-01-10T09:52:02.000Z</published>
+    <updated>2017-01-12T10:30:23.121Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>我们前端在做上传文件时，会遇到上传时要限制文件类型的需求，代码如下：<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/*"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>但是在最近高版本的标准浏览器会出现点击响应过慢的情况，后来改成下面的代码后，就没有问题了，代码如下：<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/gif,image/jpeg,image/jpg,image/png,image/svg"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>因为在使用<code>image/*</code>时，系统会为每个文件都遍历一下image下的所有类型，所以当文件较多的时候，会出现上传弹出框出现滞慢的情况。<br><code>audio/*</code> <code>video/*</code> 都会出现上述情况，建议将<code>*</code>通配符改成指定的MIME类型来实现。</p>
+<h2 id="微软办公软件MIME-Type"><a href="#微软办公软件MIME-Type" class="headerlink" title="微软办公软件MIME Type"></a>微软办公软件MIME Type</h2><p>某些软件的文件按类型比较多，特别是微软办公软件的文件类型，下面是微软办公软件的MIME Type列表。</p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th>后缀名</th>
+<th style="text-align:center">MIME Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.doc</td>
+<td style="text-align:center">application/msword</td>
+</tr>
+<tr>
+<td>.dot</td>
+<td style="text-align:center">application/msword</td>
+</tr>
+<tr>
+<td>.docx</td>
+<td style="text-align:center">application/vnd.openxmlformats-officedocument.wordprocessingml.document</td>
+</tr>
+<tr>
+<td>.dotx</td>
+<td style="text-align:center">application/vnd.openxmlformats-officedocument.wordprocessingml.template</td>
+</tr>
+<tr>
+<td>.docm</td>
+<td style="text-align:center">application/vnd.ms-word.document.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.dotm</td>
+<td style="text-align:center">application/vnd.ms-word.template.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.xls</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+</tr>
+<tr>
+<td>.xlt</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+</tr>
+<tr>
+<td>.xla</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+</tr>
+<tr>
+<td>.xlsx</td>
+<td style="text-align:center">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</td>
+</tr>
+<tr>
+<td>.xltx</td>
+<td style="text-align:center">application/vnd.openxmlformats-officedocument.spreadsheetml.template</td>
+</tr>
+<tr>
+<td>.xlsm</td>
+<td style="text-align:center">application/vnd.ms-excel.sheet.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.xltm</td>
+<td style="text-align:center">application/vnd.ms-excel.template.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.xlam</td>
+<td style="text-align:center">application/vnd.ms-excel.addin.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.xlsb</td>
+<td style="text-align:center">application/vnd.ms-excel.sheet.binary.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.ppt</td>
+<td style="text-align:center">application/vnd.ms-powerpoint</td>
+</tr>
+<tr>
+<td>.pot</td>
+<td style="text-align:center">application/vnd.ms-powerpoint</td>
+</tr>
+<tr>
+<td>.pps</td>
+<td style="text-align:center">application/vnd.ms-powerpoint</td>
+</tr>
+<tr>
+<td>.ppa</td>
+<td style="text-align:center">application/vnd.ms-powerpoint</td>
+</tr>
+<tr>
+<td>.pptx</td>
+<td style="text-align:center">application/vnd.openxmlformats-officedocument.presentationml.presentation</td>
+</tr>
+<tr>
+<td>.potx</td>
+<td style="text-align:center">application/vnd.openxmlformats-officedocument.presentationml.template</td>
+</tr>
+<tr>
+<td>.ppsx</td>
+<td style="text-align:center">application/vnd.openxmlformats-officedocument.presentationml.slideshow</td>
+</tr>
+<tr>
+<td>.ppam</td>
+<td style="text-align:center">application/vnd.ms-powerpoint.addin.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.pptm</td>
+<td style="text-align:center">application/vnd.ms-powerpoint.presentation.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.potm</td>
+<td style="text-align:center">application/vnd.ms-powerpoint.template.macroEnabled.12</td>
+</tr>
+<tr>
+<td>.ppsm</td>
+<td style="text-align:center">application/vnd.ms-powerpoint.slideshow.macroEnabled.12</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Applications-MIME-Type"><a href="#Applications-MIME-Type" class="headerlink" title="Applications MIME Type"></a>Applications MIME Type</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Application</th>
+<th style="text-align:center">MIME Type</th>
+<th style="text-align:center">File Extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Corel Envoy</td>
+<td style="text-align:center">application/envoy</td>
+<td style="text-align:center">evy</td>
+</tr>
+<tr>
+<td style="text-align:center">fractal image file</td>
+<td style="text-align:center">application/fractals</td>
+<td style="text-align:center">fif</td>
+</tr>
+<tr>
+<td style="text-align:center">Windows print spool file</td>
+<td style="text-align:center">application/futuresplash</td>
+<td style="text-align:center">spl</td>
+</tr>
+<tr>
+<td style="text-align:center">HTML application</td>
+<td style="text-align:center">application/hta</td>
+<td style="text-align:center">hta</td>
+</tr>
+<tr>
+<td style="text-align:center">Atari ST Program</td>
+<td style="text-align:center">application/internet-property-stream</td>
+<td style="text-align:center">acx</td>
+</tr>
+<tr>
+<td style="text-align:center">BinHex encoded file</td>
+<td style="text-align:center">application/mac-binhex40</td>
+<td style="text-align:center">hqx</td>
+</tr>
+<tr>
+<td style="text-align:center">Word document</td>
+<td style="text-align:center">application/msword</td>
+<td style="text-align:center">doc</td>
+</tr>
+<tr>
+<td style="text-align:center">Word document template</td>
+<td style="text-align:center">application/msword</td>
+<td style="text-align:center">dot</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">application/octet-stream</td>
+<td style="text-align:center">*</td>
+</tr>
+<tr>
+<td style="text-align:center">binary disk image</td>
+<td style="text-align:center">application/octet-stream</td>
+<td style="text-align:center">bin</td>
+</tr>
+<tr>
+<td style="text-align:center">Java class file</td>
+<td style="text-align:center">application/octet-stream</td>
+<td style="text-align:center">class</td>
+</tr>
+<tr>
+<td style="text-align:center">Disk Masher image</td>
+<td style="text-align:center">application/octet-stream</td>
+<td style="text-align:center">dms</td>
+</tr>
+<tr>
+<td style="text-align:center">executable file</td>
+<td style="text-align:center">application/octet-stream</td>
+<td style="text-align:center">exe</td>
+</tr>
+<tr>
+<td style="text-align:center">LHARC compressed archive</td>
+<td style="text-align:center">application/octet-stream</td>
+<td style="text-align:center">lha</td>
+</tr>
+<tr>
+<td style="text-align:center">LZH compressed file</td>
+<td style="text-align:center">application/octet-stream</td>
+<td style="text-align:center">lzh</td>
+</tr>
+<tr>
+<td style="text-align:center">CALS raster image</td>
+<td style="text-align:center">application/oda</td>
+<td style="text-align:center">oda</td>
+</tr>
+<tr>
+<td style="text-align:center">ActiveX script</td>
+<td style="text-align:center">application/olescript</td>
+<td style="text-align:center">axs</td>
+</tr>
+<tr>
+<td style="text-align:center">Acrobat file</td>
+<td style="text-align:center">application/pdf</td>
+<td style="text-align:center">pdf</td>
+</tr>
+<tr>
+<td style="text-align:center">Outlook profile file</td>
+<td style="text-align:center">application/pics-rules</td>
+<td style="text-align:center">prf</td>
+</tr>
+<tr>
+<td style="text-align:center">certificate request file</td>
+<td style="text-align:center">application/pkcs10</td>
+<td style="text-align:center">p10</td>
+</tr>
+<tr>
+<td style="text-align:center">certificate revocation list file</td>
+<td style="text-align:center">application/pkix-crl</td>
+<td style="text-align:center">crl</td>
+</tr>
+<tr>
+<td style="text-align:center">Adobe Illustrator file</td>
+<td style="text-align:center">application/postscript</td>
+<td style="text-align:center">ai</td>
+</tr>
+<tr>
+<td style="text-align:center">postscript file</td>
+<td style="text-align:center">application/postscript</td>
+<td style="text-align:center">eps</td>
+</tr>
+<tr>
+<td style="text-align:center">postscript file</td>
+<td style="text-align:center">application/postscript</td>
+<td style="text-align:center">ps</td>
+</tr>
+<tr>
+<td style="text-align:center">rich text format file</td>
+<td style="text-align:center">application/rtf</td>
+<td style="text-align:center">rtf</td>
+</tr>
+<tr>
+<td style="text-align:center">set payment initiation</td>
+<td style="text-align:center">application/set-payment-initiation</td>
+<td style="text-align:center">setpay</td>
+</tr>
+<tr>
+<td style="text-align:center">set registration initiation</td>
+<td style="text-align:center">application/set-registration-initiation</td>
+<td style="text-align:center">setreg</td>
+</tr>
+<tr>
+<td style="text-align:center">Excel Add-in file</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+<td style="text-align:center">xla</td>
+</tr>
+<tr>
+<td style="text-align:center">Excel chart</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+<td style="text-align:center">xlc</td>
+</tr>
+<tr>
+<td style="text-align:center">Excel macro</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+<td style="text-align:center">xlm</td>
+</tr>
+<tr>
+<td style="text-align:center">Excel spreadsheet</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+<td style="text-align:center">xls</td>
+</tr>
+<tr>
+<td style="text-align:center">Excel template</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+<td style="text-align:center">xlt</td>
+</tr>
+<tr>
+<td style="text-align:center">Excel worspace</td>
+<td style="text-align:center">application/vnd.ms-excel</td>
+<td style="text-align:center">xlw</td>
+</tr>
+<tr>
+<td style="text-align:center">Outlook mail message</td>
+<td style="text-align:center">application/vnd.ms-outlook</td>
+<td style="text-align:center">msg</td>
+</tr>
+<tr>
+<td style="text-align:center">serialized certificate store file</td>
+<td style="text-align:center">application/vnd.ms-pkicertstore</td>
+<td style="text-align:center">sst</td>
+</tr>
+<tr>
+<td style="text-align:center">Windows catalog file</td>
+<td style="text-align:center">application/vnd.ms-pkiseccat</td>
+<td style="text-align:center">cat</td>
+</tr>
+<tr>
+<td style="text-align:center">stereolithography file</td>
+<td style="text-align:center">application/vnd.ms-pkistl</td>
+<td style="text-align:center">stl</td>
+</tr>
+<tr>
+<td style="text-align:center">PowerPoint template</td>
+<td style="text-align:center">application/vnd.ms-powerpoint</td>
+<td style="text-align:center">pot</td>
+</tr>
+<tr>
+<td style="text-align:center">PowerPoint slide show</td>
+<td style="text-align:center">application/vnd.ms-powerpoint</td>
+<td style="text-align:center">pps</td>
+</tr>
+<tr>
+<td style="text-align:center">PowerPoint presentation</td>
+<td style="text-align:center">application/vnd.ms-powerpoint</td>
+<td style="text-align:center">ppt</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft Project file</td>
+<td style="text-align:center">application/vnd.ms-project</td>
+<td style="text-align:center">mpp</td>
+</tr>
+<tr>
+<td style="text-align:center">WordPerfect macro</td>
+<td style="text-align:center">application/vnd.ms-works</td>
+<td style="text-align:center">wcm</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft Works database</td>
+<td style="text-align:center">application/vnd.ms-works</td>
+<td style="text-align:center">wdb</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft Works spreadsheet</td>
+<td style="text-align:center">application/vnd.ms-works</td>
+<td style="text-align:center">wks</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft Works word processsor document</td>
+<td style="text-align:center">application/vnd.ms-works</td>
+<td style="text-align:center">wps</td>
+</tr>
+<tr>
+<td style="text-align:center">Windows help file</td>
+<td style="text-align:center">application/winhlp</td>
+<td style="text-align:center">hlp</td>
+</tr>
+<tr>
+<td style="text-align:center">binary CPIO archive</td>
+<td style="text-align:center">application/x-bcpio</td>
+<td style="text-align:center">bcpio</td>
+</tr>
+<tr>
+<td style="text-align:center">computable document format file</td>
+<td style="text-align:center">application/x-cdf</td>
+<td style="text-align:center">cdf</td>
+</tr>
+<tr>
+<td style="text-align:center">Unix compressed file</td>
+<td style="text-align:center">application/x-compress</td>
+<td style="text-align:center">z</td>
+</tr>
+<tr>
+<td style="text-align:center">gzipped tar file</td>
+<td style="text-align:center">application/x-compressed</td>
+<td style="text-align:center">tgz</td>
+</tr>
+<tr>
+<td style="text-align:center">Unix CPIO archive</td>
+<td style="text-align:center">application/x-cpio</td>
+<td style="text-align:center">cpio</td>
+</tr>
+<tr>
+<td style="text-align:center">Photoshop custom shapes file</td>
+<td style="text-align:center">application/x-csh</td>
+<td style="text-align:center">csh</td>
+</tr>
+<tr>
+<td style="text-align:center">Kodak RAW image file</td>
+<td style="text-align:center">application/x-director</td>
+<td style="text-align:center">dcr</td>
+</tr>
+<tr>
+<td style="text-align:center">Adobe Director movie</td>
+<td style="text-align:center">application/x-director</td>
+<td style="text-align:center">dir</td>
+</tr>
+<tr>
+<td style="text-align:center">Macromedia Director movie</td>
+<td style="text-align:center">application/x-director</td>
+<td style="text-align:center">dxr</td>
+</tr>
+<tr>
+<td style="text-align:center">device independent format file</td>
+<td style="text-align:center">application/x-dvi</td>
+<td style="text-align:center">dvi</td>
+</tr>
+<tr>
+<td style="text-align:center">Gnu tar archive</td>
+<td style="text-align:center">application/x-gtar</td>
+<td style="text-align:center">gtar</td>
+</tr>
+<tr>
+<td style="text-align:center">Gnu zipped archive</td>
+<td style="text-align:center">application/x-gzip</td>
+<td style="text-align:center">gz</td>
+</tr>
+<tr>
+<td style="text-align:center">hierarchical data format file</td>
+<td style="text-align:center">application/x-hdf</td>
+<td style="text-align:center">hdf</td>
+</tr>
+<tr>
+<td style="text-align:center">internet settings file</td>
+<td style="text-align:center">application/x-internet-signup</td>
+<td style="text-align:center">ins</td>
+</tr>
+<tr>
+<td style="text-align:center">IIS internet service provider settings</td>
+<td style="text-align:center">application/x-internet-signup</td>
+<td style="text-align:center">isp</td>
+</tr>
+<tr>
+<td style="text-align:center">ARC+ architectural file</td>
+<td style="text-align:center">application/x-iphone</td>
+<td style="text-align:center">iii</td>
+</tr>
+<tr>
+<td style="text-align:center">JavaScript file</td>
+<td style="text-align:center">application/x-javascript</td>
+<td style="text-align:center">js</td>
+</tr>
+<tr>
+<td style="text-align:center">LaTex document</td>
+<td style="text-align:center">application/x-latex</td>
+<td style="text-align:center">latex</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft Access database</td>
+<td style="text-align:center">application/x-msaccess</td>
+<td style="text-align:center">mdb</td>
+</tr>
+<tr>
+<td style="text-align:center">Windows CardSpace file</td>
+<td style="text-align:center">application/x-mscardfile</td>
+<td style="text-align:center">crd</td>
+</tr>
+<tr>
+<td style="text-align:center">CrazyTalk clip file</td>
+<td style="text-align:center">application/x-msclip</td>
+<td style="text-align:center">clp</td>
+</tr>
+<tr>
+<td style="text-align:center">dynamic link library</td>
+<td style="text-align:center">application/x-msdownload</td>
+<td style="text-align:center">dll</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft media viewer file</td>
+<td style="text-align:center">application/x-msmediaview</td>
+<td style="text-align:center">m13</td>
+</tr>
+<tr>
+<td style="text-align:center">Steuer2001 file</td>
+<td style="text-align:center">application/x-msmediaview</td>
+<td style="text-align:center">m14</td>
+</tr>
+<tr>
+<td style="text-align:center">multimedia viewer book source file</td>
+<td style="text-align:center">application/x-msmediaview</td>
+<td style="text-align:center">mvb</td>
+</tr>
+<tr>
+<td style="text-align:center">Windows meta file</td>
+<td style="text-align:center">application/x-msmetafile</td>
+<td style="text-align:center">wmf</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft Money file</td>
+<td style="text-align:center">application/x-msmoney</td>
+<td style="text-align:center">mny</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft Publisher file</td>
+<td style="text-align:center">application/x-mspublisher</td>
+<td style="text-align:center">pub</td>
+</tr>
+<tr>
+<td style="text-align:center">Turbo Tax tax schedule list</td>
+<td style="text-align:center">application/x-msschedule</td>
+<td style="text-align:center">scd</td>
+</tr>
+<tr>
+<td style="text-align:center">FTR media file</td>
+<td style="text-align:center">application/x-msterminal</td>
+<td style="text-align:center">trm</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft Write file</td>
+<td style="text-align:center">application/x-mswrite</td>
+<td style="text-align:center">wri</td>
+</tr>
+<tr>
+<td style="text-align:center">computable document format file</td>
+<td style="text-align:center">application/x-netcdf</td>
+<td style="text-align:center">cdf</td>
+</tr>
+<tr>
+<td style="text-align:center">Mastercam numerical control file</td>
+<td style="text-align:center">application/x-netcdf</td>
+<td style="text-align:center">nc</td>
+</tr>
+<tr>
+<td style="text-align:center">MSX computers archive format</td>
+<td style="text-align:center">application/x-perfmon</td>
+<td style="text-align:center">pma</td>
+</tr>
+<tr>
+<td style="text-align:center">performance monitor counter file</td>
+<td style="text-align:center">application/x-perfmon</td>
+<td style="text-align:center">pmc</td>
+</tr>
+<tr>
+<td style="text-align:center">process monitor log file</td>
+<td style="text-align:center">application/x-perfmon</td>
+<td style="text-align:center">pml</td>
+</tr>
+<tr>
+<td style="text-align:center">Avid persistant media record file</td>
+<td style="text-align:center">application/x-perfmon</td>
+<td style="text-align:center">pmr</td>
+</tr>
+<tr>
+<td style="text-align:center">Pegasus Mail draft stored message</td>
+<td style="text-align:center">application/x-perfmon</td>
+<td style="text-align:center">pmw</td>
+</tr>
+<tr>
+<td style="text-align:center">personal information exchange file</td>
+<td style="text-align:center">application/x-pkcs12</td>
+<td style="text-align:center">p12</td>
+</tr>
+<tr>
+<td style="text-align:center">PKCS #12 certificate file</td>
+<td style="text-align:center">application/x-pkcs12</td>
+<td style="text-align:center">pfx</td>
+</tr>
+<tr>
+<td style="text-align:center">PKCS #7 certificate file</td>
+<td style="text-align:center">application/x-pkcs7-certificates</td>
+<td style="text-align:center">p7b</td>
+</tr>
+<tr>
+<td style="text-align:center">software publisher certificate file</td>
+<td style="text-align:center">application/x-pkcs7-certificates</td>
+<td style="text-align:center">spc</td>
+</tr>
+<tr>
+<td style="text-align:center">certificate request response file</td>
+<td style="text-align:center">application/x-pkcs7-certreqresp</td>
+<td style="text-align:center">p7r</td>
+</tr>
+<tr>
+<td style="text-align:center">PKCS #7 certificate file</td>
+<td style="text-align:center">application/x-pkcs7-mime</td>
+<td style="text-align:center">p7c</td>
+</tr>
+<tr>
+<td style="text-align:center">digitally encrypted message</td>
+<td style="text-align:center">application/x-pkcs7-mime</td>
+<td style="text-align:center">p7m</td>
+</tr>
+<tr>
+<td style="text-align:center">digitally signed email message</td>
+<td style="text-align:center">application/x-pkcs7-signature</td>
+<td style="text-align:center">p7s</td>
+</tr>
+<tr>
+<td style="text-align:center">Bash shell script</td>
+<td style="text-align:center">application/x-sh</td>
+<td style="text-align:center">sh</td>
+</tr>
+<tr>
+<td style="text-align:center">Unix shar archive</td>
+<td style="text-align:center">application/x-shar</td>
+<td style="text-align:center">shar</td>
+</tr>
+<tr>
+<td style="text-align:center">Flash file</td>
+<td style="text-align:center">application/x-shockwave-flash</td>
+<td style="text-align:center">swf</td>
+</tr>
+<tr>
+<td style="text-align:center">Stuffit archive file</td>
+<td style="text-align:center">application/x-stuffit</td>
+<td style="text-align:center">sit</td>
+</tr>
+<tr>
+<td style="text-align:center">system 5 release 4 CPIO file</td>
+<td style="text-align:center">application/x-sv4cpio</td>
+<td style="text-align:center">sv4cpio</td>
+</tr>
+<tr>
+<td style="text-align:center">system 5 release 4 CPIO checksum data</td>
+<td style="text-align:center">application/x-sv4crc</td>
+<td style="text-align:center">sv4crc</td>
+</tr>
+<tr>
+<td style="text-align:center">consolidated Unix file archive</td>
+<td style="text-align:center">application/x-tar</td>
+<td style="text-align:center">tar</td>
+</tr>
+<tr>
+<td style="text-align:center">Tcl script</td>
+<td style="text-align:center">application/x-tcl</td>
+<td style="text-align:center">tcl</td>
+</tr>
+<tr>
+<td style="text-align:center">LaTeX source document</td>
+<td style="text-align:center">application/x-tex</td>
+<td style="text-align:center">tex</td>
+</tr>
+<tr>
+<td style="text-align:center">LaTeX info document</td>
+<td style="text-align:center">application/x-texinfo</td>
+<td style="text-align:center">texi</td>
+</tr>
+<tr>
+<td style="text-align:center">LaTeX info document</td>
+<td style="text-align:center">application/x-texinfo</td>
+<td style="text-align:center">texinfo</td>
+</tr>
+<tr>
+<td style="text-align:center">unformatted manual page</td>
+<td style="text-align:center">application/x-troff</td>
+<td style="text-align:center">roff</td>
+</tr>
+<tr>
+<td style="text-align:center">Turing source code file</td>
+<td style="text-align:center">application/x-troff</td>
+<td style="text-align:center">t</td>
+</tr>
+<tr>
+<td style="text-align:center">TomeRaider 2 ebook file</td>
+<td style="text-align:center">application/x-troff</td>
+<td style="text-align:center">tr</td>
+</tr>
+<tr>
+<td style="text-align:center">Unix manual</td>
+<td style="text-align:center">application/x-troff-man</td>
+<td style="text-align:center">man</td>
+</tr>
+<tr>
+<td style="text-align:center">readme text file</td>
+<td style="text-align:center">application/x-troff-me</td>
+<td style="text-align:center">me</td>
+</tr>
+<tr>
+<td style="text-align:center">3ds Max script file</td>
+<td style="text-align:center">application/x-troff-ms</td>
+<td style="text-align:center">ms</td>
+</tr>
+<tr>
+<td style="text-align:center">uniform standard tape archive format file</td>
+<td style="text-align:center">application/x-ustar</td>
+<td style="text-align:center">ustar</td>
+</tr>
+<tr>
+<td style="text-align:center">source code</td>
+<td style="text-align:center">application/x-wais-source</td>
+<td style="text-align:center">src</td>
+</tr>
+<tr>
+<td style="text-align:center">internet security certificate</td>
+<td style="text-align:center">application/x-x509-ca-cert</td>
+<td style="text-align:center">cer</td>
+</tr>
+<tr>
+<td style="text-align:center">security certificate</td>
+<td style="text-align:center">application/x-x509-ca-cert</td>
+<td style="text-align:center">crt</td>
+</tr>
+<tr>
+<td style="text-align:center">DER certificate file</td>
+<td style="text-align:center">application/x-x509-ca-cert</td>
+<td style="text-align:center">der</td>
+</tr>
+<tr>
+<td style="text-align:center">public key security object</td>
+<td style="text-align:center">application/ynd.ms-pkipko</td>
+<td style="text-align:center">pko</td>
+</tr>
+<tr>
+<td style="text-align:center">zipped file</td>
+<td style="text-align:center">application/zip</td>
+<td style="text-align:center">zip</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Sound-Files-MIME-Type"><a href="#Sound-Files-MIME-Type" class="headerlink" title="Sound Files MIME Type"></a>Sound Files MIME Type</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Application</th>
+<th style="text-align:center">MIME Type</th>
+<th style="text-align:center">File Extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">audio file</td>
+<td style="text-align:center">audio/basic</td>
+<td style="text-align:center">au</td>
+</tr>
+<tr>
+<td style="text-align:center">sound file</td>
+<td style="text-align:center">audio/basic</td>
+<td style="text-align:center">snd</td>
+</tr>
+<tr>
+<td style="text-align:center">midi file</td>
+<td style="text-align:center">audio/mid</td>
+<td style="text-align:center">mid</td>
+</tr>
+<tr>
+<td style="text-align:center">media processing server studio</td>
+<td style="text-align:center">audio/mid</td>
+<td style="text-align:center">rmi</td>
+</tr>
+<tr>
+<td style="text-align:center">MP3 file</td>
+<td style="text-align:center">audio/mpeg</td>
+<td style="text-align:center">mp3</td>
+</tr>
+<tr>
+<td style="text-align:center">audio interchange file format</td>
+<td style="text-align:center">audio/x-aiff</td>
+<td style="text-align:center">aif</td>
+</tr>
+<tr>
+<td style="text-align:center">compressed audio interchange file</td>
+<td style="text-align:center">audio/x-aiff</td>
+<td style="text-align:center">aifc</td>
+</tr>
+<tr>
+<td style="text-align:center">audio interchange file format</td>
+<td style="text-align:center">audio/x-aiff</td>
+<td style="text-align:center">aiff</td>
+</tr>
+<tr>
+<td style="text-align:center">media playlist file</td>
+<td style="text-align:center">audio/x-mpegurl</td>
+<td style="text-align:center">m3u</td>
+</tr>
+<tr>
+<td style="text-align:center">Real Audio file</td>
+<td style="text-align:center">audio/x-pn-realaudio</td>
+<td style="text-align:center">ra</td>
+</tr>
+<tr>
+<td style="text-align:center">Real Audio metadata file</td>
+<td style="text-align:center">audio/x-pn-realaudio</td>
+<td style="text-align:center">ram</td>
+</tr>
+<tr>
+<td style="text-align:center">WAVE audio file</td>
+<td style="text-align:center">audio/x-wav</td>
+<td style="text-align:center">wav</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Image-Files-MIME-Type"><a href="#Image-Files-MIME-Type" class="headerlink" title="Image Files MIME Type"></a>Image Files MIME Type</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Application</th>
+<th style="text-align:center">MIME Type</th>
+<th style="text-align:center">File Extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Bitmap</td>
+<td style="text-align:center">image/bmp</td>
+<td style="text-align:center">bmp</td>
+</tr>
+<tr>
+<td style="text-align:center">compiled source code</td>
+<td style="text-align:center">image/cis-cod</td>
+<td style="text-align:center">cod</td>
+</tr>
+<tr>
+<td style="text-align:center">graphic interchange format</td>
+<td style="text-align:center">image/gif</td>
+<td style="text-align:center">gif</td>
+</tr>
+<tr>
+<td style="text-align:center">image file</td>
+<td style="text-align:center">image/ief</td>
+<td style="text-align:center">ief</td>
+</tr>
+<tr>
+<td style="text-align:center">JPEG image</td>
+<td style="text-align:center">image/jpeg</td>
+<td style="text-align:center">jpe</td>
+</tr>
+<tr>
+<td style="text-align:center">JPEG image</td>
+<td style="text-align:center">image/jpeg</td>
+<td style="text-align:center">jpeg</td>
+</tr>
+<tr>
+<td style="text-align:center">JPEG image</td>
+<td style="text-align:center">image/jpeg</td>
+<td style="text-align:center">jpg</td>
+</tr>
+<tr>
+<td style="text-align:center">JPEG file interchange format</td>
+<td style="text-align:center">image/pipeg</td>
+<td style="text-align:center">jfif</td>
+</tr>
+<tr>
+<td style="text-align:center">scalable vector graphic</td>
+<td style="text-align:center">image/svg+xml</td>
+<td style="text-align:center">svg</td>
+</tr>
+<tr>
+<td style="text-align:center">TIF image</td>
+<td style="text-align:center">image/tiff</td>
+<td style="text-align:center">tif</td>
+</tr>
+<tr>
+<td style="text-align:center">TIF image</td>
+<td style="text-align:center">image/tiff</td>
+<td style="text-align:center">tiff</td>
+</tr>
+<tr>
+<td style="text-align:center">Sun raster graphic</td>
+<td style="text-align:center">image/x-cmu-raster</td>
+<td style="text-align:center">ras</td>
+</tr>
+<tr>
+<td style="text-align:center">Corel metafile exchange image file</td>
+<td style="text-align:center">image/x-cmx</td>
+<td style="text-align:center">cmx</td>
+</tr>
+<tr>
+<td style="text-align:center">icon</td>
+<td style="text-align:center">image/x-icon</td>
+<td style="text-align:center">ico</td>
+</tr>
+<tr>
+<td style="text-align:center">portable any map image</td>
+<td style="text-align:center">image/x-portable-anymap</td>
+<td style="text-align:center">pnm</td>
+</tr>
+<tr>
+<td style="text-align:center">portable bitmap image</td>
+<td style="text-align:center">image/x-portable-bitmap</td>
+<td style="text-align:center">pbm</td>
+</tr>
+<tr>
+<td style="text-align:center">portable graymap image</td>
+<td style="text-align:center">image/x-portable-graymap</td>
+<td style="text-align:center">pgm</td>
+</tr>
+<tr>
+<td style="text-align:center">portable pixmap image</td>
+<td style="text-align:center">image/x-portable-pixmap</td>
+<td style="text-align:center">ppm</td>
+</tr>
+<tr>
+<td style="text-align:center">RGB bitmap</td>
+<td style="text-align:center">image/x-rgb</td>
+<td style="text-align:center">rgb</td>
+</tr>
+<tr>
+<td style="text-align:center">X11 bitmap</td>
+<td style="text-align:center">image/x-xbitmap</td>
+<td style="text-align:center">xbm</td>
+</tr>
+<tr>
+<td style="text-align:center">X11 pixmap</td>
+<td style="text-align:center">image/x-xpixmap</td>
+<td style="text-align:center">xpm</td>
+</tr>
+<tr>
+<td style="text-align:center">X-Windows dump image</td>
+<td style="text-align:center">image/x-xwindowdump</td>
+<td style="text-align:center">xwd</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Mail-Message-Files-MIME-Type"><a href="#Mail-Message-Files-MIME-Type" class="headerlink" title="Mail Message Files MIME Type"></a>Mail Message Files MIME Type</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Application</th>
+<th style="text-align:center">MIME Type</th>
+<th style="text-align:center">File Extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">MHTML web archive</td>
+<td style="text-align:center">message/rfc822</td>
+<td style="text-align:center">mht</td>
+</tr>
+<tr>
+<td style="text-align:center">MIME HTML file</td>
+<td style="text-align:center">message/rfc822</td>
+<td style="text-align:center">mhtml</td>
+</tr>
+<tr>
+<td style="text-align:center">Windows Live Mail newsgroup file</td>
+<td style="text-align:center">message/rfc822</td>
+<td style="text-align:center">nws</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Text-Files-MIME-Type"><a href="#Text-Files-MIME-Type" class="headerlink" title="Text Files MIME Type"></a>Text Files MIME Type</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Application</th>
+<th style="text-align:center">MIME Type</th>
+<th style="text-align:center">File Extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Cascading Style Sheet</td>
+<td style="text-align:center">text/css</td>
+<td style="text-align:center">css</td>
+</tr>
+<tr>
+<td style="text-align:center">H.323 internet telephony file</td>
+<td style="text-align:center">text/h323</td>
+<td style="text-align:center">323</td>
+</tr>
+<tr>
+<td style="text-align:center">HTML file</td>
+<td style="text-align:center">text/html</td>
+<td style="text-align:center">htm</td>
+</tr>
+<tr>
+<td style="text-align:center">HTML file</td>
+<td style="text-align:center">text/html</td>
+<td style="text-align:center">html</td>
+</tr>
+<tr>
+<td style="text-align:center">Exchange streaming media file</td>
+<td style="text-align:center">text/html</td>
+<td style="text-align:center">stm</td>
+</tr>
+<tr>
+<td style="text-align:center">NetMeeting user location service file</td>
+<td style="text-align:center">text/iuls</td>
+<td style="text-align:center">uls</td>
+</tr>
+<tr>
+<td style="text-align:center">BASIC source code file</td>
+<td style="text-align:center">text/plain</td>
+<td style="text-align:center">bas</td>
+</tr>
+<tr>
+<td style="text-align:center">C/C++ source code file</td>
+<td style="text-align:center">text/plain</td>
+<td style="text-align:center">c</td>
+</tr>
+<tr>
+<td style="text-align:center">C/C++/Objective C header file</td>
+<td style="text-align:center">text/plain</td>
+<td style="text-align:center">h</td>
+</tr>
+<tr>
+<td style="text-align:center">text file</td>
+<td style="text-align:center">text/plain</td>
+<td style="text-align:center">txt</td>
+</tr>
+<tr>
+<td style="text-align:center">rich text file</td>
+<td style="text-align:center">text/richtext</td>
+<td style="text-align:center">rtx</td>
+</tr>
+<tr>
+<td style="text-align:center">Scitext continuous tone file</td>
+<td style="text-align:center">text/scriptlet</td>
+<td style="text-align:center">sct</td>
+</tr>
+<tr>
+<td style="text-align:center">tab separated values file</td>
+<td style="text-align:center">text/tab-separated-values</td>
+<td style="text-align:center">tsv</td>
+</tr>
+<tr>
+<td style="text-align:center">hypertext template file</td>
+<td style="text-align:center">text/webviewhtml</td>
+<td style="text-align:center">htt</td>
+</tr>
+<tr>
+<td style="text-align:center">HTML component file</td>
+<td style="text-align:center">text/x-component</td>
+<td style="text-align:center">htc</td>
+</tr>
+<tr>
+<td style="text-align:center">TeX font encoding file</td>
+<td style="text-align:center">text/x-setext</td>
+<td style="text-align:center">etx</td>
+</tr>
+<tr>
+<td style="text-align:center">vCard file</td>
+<td style="text-align:center">text/x-vcard</td>
+<td style="text-align:center">vcf</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Video-Files-MIME-Type"><a href="#Video-Files-MIME-Type" class="headerlink" title="Video Files MIME Type"></a>Video Files MIME Type</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Application</th>
+<th style="text-align:center">MIME Type</th>
+<th style="text-align:center">File Extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">MPEG-2 audio file</td>
+<td style="text-align:center">video/mpeg</td>
+<td style="text-align:center">mp2</td>
+</tr>
+<tr>
+<td style="text-align:center">MPEG-2 audio file</td>
+<td style="text-align:center">video/mpeg</td>
+<td style="text-align:center">mpa</td>
+</tr>
+<tr>
+<td style="text-align:center">MPEG movie file</td>
+<td style="text-align:center">video/mpeg</td>
+<td style="text-align:center">mpe</td>
+</tr>
+<tr>
+<td style="text-align:center">MPEG movie file</td>
+<td style="text-align:center">video/mpeg</td>
+<td style="text-align:center">mpeg</td>
+</tr>
+<tr>
+<td style="text-align:center">MPEG movie file</td>
+<td style="text-align:center">video/mpeg</td>
+<td style="text-align:center">mpg</td>
+</tr>
+<tr>
+<td style="text-align:center">MPEG-2 video stream</td>
+<td style="text-align:center">video/mpeg</td>
+<td style="text-align:center">mpv2</td>
+</tr>
+<tr>
+<td style="text-align:center">MPEG-4</td>
+<td style="text-align:center">video/mp4</td>
+<td style="text-align:center">mp4</td>
+</tr>
+<tr>
+<td style="text-align:center">Apple QuickTime movie</td>
+<td style="text-align:center">video/quicktime</td>
+<td style="text-align:center">mov</td>
+</tr>
+<tr>
+<td style="text-align:center">Apple QuickTime movie</td>
+<td style="text-align:center">video/quicktime</td>
+<td style="text-align:center">qt</td>
+</tr>
+<tr>
+<td style="text-align:center">Logos library system file</td>
+<td style="text-align:center">video/x-la-asf</td>
+<td style="text-align:center">lsf</td>
+</tr>
+<tr>
+<td style="text-align:center">streaming media shortcut</td>
+<td style="text-align:center">video/x-la-asf</td>
+<td style="text-align:center">lsx</td>
+</tr>
+<tr>
+<td style="text-align:center">advanced systems format file</td>
+<td style="text-align:center">video/x-ms-asf</td>
+<td style="text-align:center">asf</td>
+</tr>
+<tr>
+<td style="text-align:center">ActionScript remote document</td>
+<td style="text-align:center">video/x-ms-asf</td>
+<td style="text-align:center">asr</td>
+</tr>
+<tr>
+<td style="text-align:center">Microsoft ASF redirector file</td>
+<td style="text-align:center">video/x-ms-asf</td>
+<td style="text-align:center">asx</td>
+</tr>
+<tr>
+<td style="text-align:center">audio video interleave file</td>
+<td style="text-align:center">video/x-msvideo</td>
+<td style="text-align:center">avi</td>
+</tr>
+<tr>
+<td style="text-align:center">Apple QuickTime movie</td>
+<td style="text-align:center">video/x-sgi-movie</td>
+<td style="text-align:center">movie</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Virtual-World-Files-MIME-Type"><a href="#Virtual-World-Files-MIME-Type" class="headerlink" title="Virtual World Files MIME Type"></a>Virtual World Files MIME Type</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Application</th>
+<th style="text-align:center">MIME Type</th>
+<th style="text-align:center">File Extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Flare decompiled actionscript file</td>
+<td style="text-align:center">x-world/x-vrml</td>
+<td style="text-align:center">flr</td>
+</tr>
+<tr>
+<td style="text-align:center">VRML file</td>
+<td style="text-align:center">x-world/x-vrml</td>
+<td style="text-align:center">vrml</td>
+</tr>
+<tr>
+<td style="text-align:center">VRML world</td>
+<td style="text-align:center">x-world/x-vrml</td>
+<td style="text-align:center">wrl</td>
+</tr>
+<tr>
+<td style="text-align:center">compressed VRML world</td>
+<td style="text-align:center">x-world/x-vrml</td>
+<td style="text-align:center">wrz</td>
+</tr>
+<tr>
+<td style="text-align:center">3ds max XML animation file</td>
+<td style="text-align:center">x-world/x-vrml</td>
+<td style="text-align:center">xaf</td>
+</tr>
+<tr>
+<td style="text-align:center">Reality Lab 3D image file</td>
+<td style="text-align:center">x-world/x-vrml</td>
+<td style="text-align:center">xof</td>
+</tr>
+</tbody>
+</table>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://filext.com/faq/office_mime_types.php" target="_blank" rel="external">微软办公文件 MIME Types</a><br><a href="http://www.dengzhr.com/frontend/1059" target="_blank" rel="external">input[file]标签的accept=”image/*”属性响应很慢的解决办法</a><br><a href="http://webdesign.about.com/od/multimedia/a/mime-types-by-content-type.htm" target="_blank" rel="external">A List of MIME Types by Content Type</a><br><a href="http://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank" rel="external">Media Types</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;文正&quot;&gt;&lt;a href=&quot;#文正&quot; class=&quot;headerlink&quot; title=&quot;文正&quot;&gt;&lt;/a&gt;文正&lt;/h1&gt;&lt;p&gt;我们前端在做上传文件时，会遇到上传时要限制文件类型的需求，代码如下：&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;file&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;accept&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;image/*&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;但是在最近高版本的标准浏览器会出现点击响应过慢的情况，后来改成下面的代码后，就没有问题了，代码如下：&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;file&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;accept&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;image/gif,image/jpeg,image/jpg,image/png,image/svg&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;因为在使用&lt;code&gt;image/*&lt;/code&gt;时，系统会为每个文件都遍历一下image下的所有类型，所以当文件较多的时候，会出现上传弹出框出现滞慢的情况。&lt;br&gt;&lt;code&gt;audio/*&lt;/code&gt; &lt;code&gt;video/*&lt;/code&gt; 都会出现上述情况，建议将&lt;code&gt;*&lt;/code&gt;通配符改成指定的MIME类型来实现。&lt;/p&gt;
+&lt;h2 id=&quot;微软办公软件MIME-Type&quot;&gt;&lt;a href=&quot;#微软办公软件MIME-Type&quot; class=&quot;headerlink&quot; title=&quot;微软办公软件MIME Type&quot;&gt;&lt;/a&gt;微软办公软件MIME Type&lt;/h2&gt;&lt;p&gt;某些软件的文件按类型比较多，特别是微软办公软件的文件类型，下面是微软办公软件的MIME Type列表。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://zhensherlock.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="HTML5" scheme="http://zhensherlock.github.io/tags/HTML5/"/>
+    
+      <category term="MIME" scheme="http://zhensherlock.github.io/tags/MIME/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用OpenXml实现生成数据字典文档</title>
     <link href="http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/"/>
     <id>http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/</id>
     <published>2016-04-29T08:54:17.000Z</published>
-    <updated>2016-04-29T09:52:19.939Z</updated>
+    <updated>2017-01-12T10:30:32.334Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复劳动力，最终决定做一个工具，方便自己生成数据字典文档。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;p&gt;这里只是分享一下开发的思路和经历（如果发现有问题，请及时告诉我，我会即时纠正，以免误导他人，欢迎大家多多指点）。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;投影未脱机的数据库列表（使用T-SQL）&lt;/li&gt;
-&lt;li&gt;投影当前数据库的表列表（使用T-SQL）&lt;/li&gt;
-&lt;li&gt;投影某表的字段信息列表（使用T-SQL）&lt;/li&gt;
-&lt;li&gt;使用OpenXml新建总文档&lt;/li&gt;
-&lt;li&gt;使用OpenXml开始生成单张表的数据字典，替换书签&lt;/li&gt;
-&lt;li&gt;使用OpenXml添加表格，完成单张表的数据字典docx文档&lt;/li&gt;
-&lt;li&gt;使用OpenXml将当前文档合并成到总文档中&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;工具的界面大体如下：&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/1.png&quot; alt=&quot;图1&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;投影未脱机的数据库列表（使用T-SQL）&quot;&gt;&lt;a href=&quot;#投影未脱机的数据库列表（使用T-SQL）&quot; class=&quot;headerlink&quot; title=&quot;投影未脱机的数据库列表（使用T-SQL）&quot;&gt;&lt;/a&gt;投影未脱机的数据库列表（使用T-SQL）&lt;/h3&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;Master&lt;/span&gt;..SysDatabases &lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;STATUS&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;65536&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;Name&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;投影当前数据库的表列表（使用T-SQL）&quot;&gt;&lt;a href=&quot;#投影当前数据库的表列表（使用T-SQL）&quot; class=&quot;headerlink&quot; title=&quot;投影当前数据库的表列表（使用T-SQL）&quot;&gt;&lt;/a&gt;投影当前数据库的表列表（使用T-SQL）&lt;/h3&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;USE&lt;/span&gt; TestDB;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt; SysObjects &lt;span class=&quot;keyword&quot;&gt;Where&lt;/span&gt; XType=&lt;span class=&quot;string&quot;&gt;&#39;U&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;DESC&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;投影某表的字段信息列表（使用T-SQL）&quot;&gt;&lt;a href=&quot;#投影某表的字段信息列表（使用T-SQL）&quot; class=&quot;headerlink&quot; title=&quot;投影某表的字段信息列表（使用T-SQL）&quot;&gt;&lt;/a&gt;投影某表的字段信息列表（使用T-SQL）&lt;/h3&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;USE&lt;/span&gt; TestDB;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; 字段名 ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;( &lt;span class=&quot;keyword&quot;&gt;CASE&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; COLUMNPROPERTY(a.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;, a.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;IsIdentity&#39;&lt;/span&gt;) = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;√&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;END&lt;/span&gt; ) 标识 ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;( &lt;span class=&quot;keyword&quot;&gt;CASE&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; ( &lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;    &lt;span class=&quot;keyword&quot;&gt;COUNT&lt;/span&gt;(*)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt;      sysobjects&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt;     ( &lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;IN&lt;/span&gt; (&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;    &lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt;      sysindexes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt;     ( &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = a.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; )&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                &lt;span class=&quot;keyword&quot;&gt;AND&lt;/span&gt; ( indid &lt;span class=&quot;keyword&quot;&gt;IN&lt;/span&gt; (&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                        &lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;    indid&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                        &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt;      sysindexkeys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                        &lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt;     ( &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = a.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; )&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                &lt;span class=&quot;keyword&quot;&gt;AND&lt;/span&gt; ( colid &lt;span class=&quot;keyword&quot;&gt;IN&lt;/span&gt; (&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                    &lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                    colid&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                    &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                    syscolumns&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                    &lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                    ( &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = a.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; )&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                    &lt;span class=&quot;keyword&quot;&gt;AND&lt;/span&gt; ( &lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; = a.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; ) ) ) ) ) ) )&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &lt;span class=&quot;keyword&quot;&gt;AND&lt;/span&gt; ( xtype = &lt;span class=&quot;string&quot;&gt;&#39;PK&#39;&lt;/span&gt; )&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        ) &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;√&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;END&lt;/span&gt; ) 主键 ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;( &lt;span class=&quot;keyword&quot;&gt;CASE&lt;/span&gt; b.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;varchar&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; b.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; + &lt;span class=&quot;string&quot;&gt;&#39;(&#39;&lt;/span&gt; + &lt;span class=&quot;keyword&quot;&gt;cast&lt;/span&gt;(a.&lt;span class=&quot;keyword&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;varchar&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;)) + &lt;span class=&quot;string&quot;&gt;&#39;)&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;nvarchar&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; b.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; + &lt;span class=&quot;string&quot;&gt;&#39;(&#39;&lt;/span&gt; + &lt;span class=&quot;keyword&quot;&gt;cast&lt;/span&gt;(a.&lt;span class=&quot;keyword&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;varchar&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;)) + &lt;span class=&quot;string&quot;&gt;&#39;)&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;ELSE&lt;/span&gt; b.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;END&lt;/span&gt; ) 类型 ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;( &lt;span class=&quot;keyword&quot;&gt;CASE&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; a.isnullable = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;√&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;END&lt;/span&gt; ) 允许空 ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;( &lt;span class=&quot;keyword&quot;&gt;CASE&lt;/span&gt; a.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Id&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Id&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;AddTime&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;添加时间&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;UpdateTime&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;修改时间&#39;&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;IsValid&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;删除标记&#39;&lt;/span&gt;        &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;AddIp&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;添加IP地址&#39;&lt;/span&gt;               &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;UpdateIp&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;修改IP地址&#39;&lt;/span&gt;             &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;State&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;状态&#39;&lt;/span&gt;                &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;PicUrl&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;图片地址&#39;&lt;/span&gt;           &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Image&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;图片地址&#39;&lt;/span&gt;             &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Description&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;介绍&#39;&lt;/span&gt;             &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Title&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;标题&#39;&lt;/span&gt;             &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Note&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;备注&#39;&lt;/span&gt;            &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Type&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;类型&#39;&lt;/span&gt;         &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Content&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;内容&#39;&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;END&lt;/span&gt; ) 字段中文名,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;ISNULL&lt;/span&gt;(e.&lt;span class=&quot;built_in&quot;&gt;text&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;) 默认值,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; 备注&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt;    syscolumns a&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;LEFT&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;JOIN&lt;/span&gt; systypes b &lt;span class=&quot;keyword&quot;&gt;ON&lt;/span&gt; a.xtype = b.xusertype&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;JOIN&lt;/span&gt; sysobjects d &lt;span class=&quot;keyword&quot;&gt;ON&lt;/span&gt; a.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = d.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                   &lt;span class=&quot;keyword&quot;&gt;AND&lt;/span&gt; d.xtype = &lt;span class=&quot;string&quot;&gt;&#39;U&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                   &lt;span class=&quot;keyword&quot;&gt;AND&lt;/span&gt; d.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; &amp;lt;&amp;gt; &lt;span class=&quot;string&quot;&gt;&#39;dtproperties&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;LEFT&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;JOIN&lt;/span&gt; syscomments e &lt;span class=&quot;keyword&quot;&gt;ON&lt;/span&gt; a.cdefault = e.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;LEFT&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;sys&lt;/span&gt;.extended_properties g &lt;span class=&quot;keyword&quot;&gt;ON&lt;/span&gt; a.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = g.major_id&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                               &lt;span class=&quot;keyword&quot;&gt;AND&lt;/span&gt; a.colid = g.minor_id&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;LEFT&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;sys&lt;/span&gt;.extended_properties f &lt;span class=&quot;keyword&quot;&gt;ON&lt;/span&gt; d.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = f.&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                               &lt;span class=&quot;keyword&quot;&gt;AND&lt;/span&gt; f.minor_id = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt;   b.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;IS&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;NULL&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; d.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;Account&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;BY&lt;/span&gt; a.&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        a.colorder;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;使用OpenXml新建总文档&quot;&gt;&lt;a href=&quot;#使用OpenXml新建总文档&quot; class=&quot;headerlink&quot; title=&quot;使用OpenXml新建总文档&quot;&gt;&lt;/a&gt;使用OpenXml新建总文档&lt;/h3&gt;&lt;p&gt;tmplFilePath是临时存放各个表数据字典的文件夹&lt;br&gt;&lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; path = &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;.Format(&lt;span class=&quot;string&quot;&gt;@&quot;&amp;#123;0&amp;#125;&amp;#123;1&amp;#125;.docx&quot;&lt;/span&gt;, tmplFilePath, DateTime.Now.Ticks.ToString());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; (WordprocessingDocument doc = WordprocessingDocument.Create(path, WordprocessingDocumentType.Document))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    MainDocumentPart mainPart = doc.AddMainDocumentPart();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    mainPart.Document = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Document();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Body body = mainPart.Document.AppendChild(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Body());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Paragraph p = mainPart.Document.Body.AppendChild(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Paragraph());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    p.AppendChild(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Run(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Text(&lt;span class=&quot;string&quot;&gt;&quot;数据字典&quot;&lt;/span&gt;)));  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&quot;使用OpenXml开始生成单张表的数据字典，替换书签&quot;&gt;&lt;a href=&quot;#使用OpenXml开始生成单张表的数据字典，替换书签&quot; class=&quot;headerlink&quot; title=&quot;使用OpenXml开始生成单张表的数据字典，替换书签&quot;&gt;&lt;/a&gt;使用OpenXml开始生成单张表的数据字典，替换书签&lt;/h3&gt;&lt;p&gt;tmplFileName是单张表的数据字典文档路径&lt;br&gt;&lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; (WordprocessingDocument tmplDoc = WordprocessingDocument.Open(tmplFileName, &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//修改文档类型 (dotx-&amp;gt;docx)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    tmplDoc.ChangeDocumentType(WordprocessingDocumentType.Document);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; bookMarks = FindBookmarks(tmplDoc.MainDocumentPart.Document);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//替换书签&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;foreach&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; end &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; bookMarks)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (end.Key == &lt;span class=&quot;string&quot;&gt;&quot;TableName&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; textElement = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Text(tableName);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; runElement = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Run(textElement);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            end.Value.InsertAfterSelf(runElement);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;下面是FindBookmarks方法&lt;br&gt;&lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; Dictionary&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, BookmarkEnd&amp;gt; FindBookmarks(OpenXmlElement documentPart, Dictionary&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, BookmarkEnd&amp;gt; results = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;, Dictionary&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;&amp;gt; unmatched = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    results = results ?? &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Dictionary&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, BookmarkEnd&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    unmatched = unmatched ?? &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Dictionary&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;foreach&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; child &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; documentPart.Elements())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (child &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; BookmarkStart)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; bStart = child &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; BookmarkStart;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            unmatched.Add(bStart.Id, bStart.Name);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (child &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; BookmarkEnd)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; bEnd = child &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; BookmarkEnd;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;foreach&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; orphanName &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; unmatched)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (bEnd.Id == orphanName.Key)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    results.Add(orphanName.Value, bEnd);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        FindBookmarks(child, results, unmatched);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; results;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&quot;使用OpenXml添加表格，完成单张表的数据字典docx文档&quot;&gt;&lt;a href=&quot;#使用OpenXml添加表格，完成单张表的数据字典docx文档&quot; class=&quot;headerlink&quot; title=&quot;使用OpenXml添加表格，完成单张表的数据字典docx文档&quot;&gt;&lt;/a&gt;使用OpenXml添加表格，完成单张表的数据字典docx文档&lt;/h3&gt;&lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//设置表格属性&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;TableProperties tblProp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TableProperties(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TableBorders(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TopBorder() &amp;#123; Val = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; EnumValue&amp;lt;BorderValues&amp;gt;(BorderValues.Single), Size = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; BottomBorder() &amp;#123; Val = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; EnumValue&amp;lt;BorderValues&amp;gt;(BorderValues.Single), Size = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; LeftBorder() &amp;#123; Val = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; EnumValue&amp;lt;BorderValues&amp;gt;(BorderValues.Single), Size = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; RightBorder() &amp;#123; Val = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; EnumValue&amp;lt;BorderValues&amp;gt;(BorderValues.Single), Size = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; InsideHorizontalBorder() &amp;#123; Val = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; EnumValue&amp;lt;BorderValues&amp;gt;(BorderValues.Single), Size = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; InsideVerticalBorder() &amp;#123; Val = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; EnumValue&amp;lt;BorderValues&amp;gt;(BorderValues.Single), Size = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    )&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Table table = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Table();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;table.Append(tblProp);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//添加表头&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;TableRow headerRow = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TableRow();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;foreach&lt;/span&gt; (DataColumn column &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; dataBaseTable.Columns)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TableCell cell = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TableCell();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cell.Append(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Paragraph(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Run(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Text(column.ColumnName))));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    headerRow.Append(cell);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;table.Append(headerRow);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//添加数据&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;foreach&lt;/span&gt; (DataRow row &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; dataBaseTable.Rows)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TableRow tableRow = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TableRow();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;foreach&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;object&lt;/span&gt; strCell &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; row.ItemArray)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        TableCell cell = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TableCell();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        cell.Append(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Paragraph(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Run(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Text(strCell.ToString()))));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        tableRow.Append(cell);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    table.Append(tableRow);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//添加表格&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tmplDoc.MainDocumentPart.Document.Body.Append(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Paragraph(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Run(table)));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;使用OpenXml将当前文档合并到总文档中&quot;&gt;&lt;a href=&quot;#使用OpenXml将当前文档合并到总文档中&quot; class=&quot;headerlink&quot; title=&quot;使用OpenXml将当前文档合并到总文档中&quot;&gt;&lt;/a&gt;使用OpenXml将当前文档合并到总文档中&lt;/h3&gt;&lt;p&gt;path是总文档的路径&lt;br&gt;tmplFileName是当前文档的路径&lt;br&gt;&lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//将当前word和总文档的合并&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; (WordprocessingDocument template = WordprocessingDocument.Open(path, &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    MainDocumentPart mainPart = template.MainDocumentPart;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; altChunkId = tableName;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    AlternativeFormatImportPart chunk =&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    mainPart.AddAlternativeFormatImportPart(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    AlternativeFormatImportPartType.WordprocessingML, altChunkId);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; (FileStream fileStream = File.Open(tmplFileName, FileMode.Open))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        chunk.FeedData(fileStream);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    AltChunk altChunk = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; AltChunk();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    altChunk.Id = altChunkId;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    mainPart.Document&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        .Body&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        .InsertAfter(altChunk, mainPart.Document.Body&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        .Elements&amp;lt;Paragraph&amp;gt;().Last());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    mainPart.Document.Save();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&quot;最终效果&quot;&gt;&lt;a href=&quot;#最终效果&quot; class=&quot;headerlink&quot; title=&quot;最终效果&quot;&gt;&lt;/a&gt;最终效果&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/2.png&quot; alt=&quot;图2&quot;&gt;&lt;br&gt;任务完成，&lt;a href=&quot;http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/rar/%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8.rar&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里是源代码&lt;/a&gt;，晚安！&lt;/p&gt;
-</content>
+    <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复劳动力，最终决定做一个工具，方便自己生成数据字典文档。</p>
+</blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>这里只是分享一下开发的思路和经历（如果发现有问题，请及时告诉我，我会即时纠正，以免误导他人，欢迎大家多多指点）。</p>
+<ol>
+<li>投影未脱机的数据库列表（使用T-SQL）</li>
+<li>投影当前数据库的表列表（使用T-SQL）</li>
+<li>投影某表的字段信息列表（使用T-SQL）</li>
+<li>使用OpenXml新建总文档</li>
+<li>使用OpenXml开始生成单张表的数据字典，替换书签</li>
+<li>使用OpenXml添加表格，完成单张表的数据字典docx文档</li>
+<li>使用OpenXml将当前文档合并成到总文档中<a id="more"></a>
+</li>
+</ol>
+<p>工具的界面大体如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/1.png" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure></p>
+<h3 id="投影未脱机的数据库列表（使用T-SQL）"><a href="#投影未脱机的数据库列表（使用T-SQL）" class="headerlink" title="投影未脱机的数据库列表（使用T-SQL）"></a>投影未脱机的数据库列表（使用T-SQL）</h3><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">Name</span> <span class="keyword">FROM</span> Master..SysDatabases <span class="keyword">WHERE</span> <span class="keyword">STATUS</span> = <span class="number">65536</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">Name</span></div></pre></td></tr></table></figure>
+<h3 id="投影当前数据库的表列表（使用T-SQL）"><a href="#投影当前数据库的表列表（使用T-SQL）" class="headerlink" title="投影当前数据库的表列表（使用T-SQL）"></a>投影当前数据库的表列表（使用T-SQL）</h3><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="keyword">USE</span> TestDB;<span class="keyword">SELECT</span> <span class="keyword">Name</span> <span class="keyword">FROM</span> SysObjects <span class="keyword">Where</span> XType=<span class="string">'U'</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">Name</span> <span class="keyword">DESC</span></div></pre></td></tr></table></figure>
+<h3 id="投影某表的字段信息列表（使用T-SQL）"><a href="#投影某表的字段信息列表（使用T-SQL）" class="headerlink" title="投影某表的字段信息列表（使用T-SQL）"></a>投影某表的字段信息列表（使用T-SQL）</h3><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="keyword">USE</span> TestDB;</div><div class="line"><span class="keyword">SELECT</span></div><div class="line">a.name 字段名 ,</div><div class="line">( <span class="keyword">CASE</span> <span class="keyword">WHEN</span> COLUMNPROPERTY(a.id, a.name, <span class="string">'IsIdentity'</span>) = <span class="number">1</span> <span class="keyword">THEN</span> <span class="string">'√'</span> <span class="keyword">ELSE</span> <span class="string">''</span></div><div class="line"><span class="keyword">END</span> ) 标识 ,</div><div class="line">( <span class="keyword">CASE</span> <span class="keyword">WHEN</span> ( <span class="keyword">SELECT</span>    <span class="keyword">COUNT</span>(*)</div><div class="line">            <span class="keyword">FROM</span>      sysobjects</div><div class="line">            <span class="keyword">WHERE</span>     ( <span class="keyword">name</span> <span class="keyword">IN</span> (</div><div class="line">                        <span class="keyword">SELECT</span>    <span class="keyword">name</span></div><div class="line">                        <span class="keyword">FROM</span>      sysindexes</div><div class="line">                        <span class="keyword">WHERE</span>     ( <span class="keyword">id</span> = a.id )</div><div class="line">                                <span class="keyword">AND</span> ( indid <span class="keyword">IN</span> (</div><div class="line">                                        <span class="keyword">SELECT</span>    indid</div><div class="line">                                        <span class="keyword">FROM</span>      sysindexkeys</div><div class="line">                                        <span class="keyword">WHERE</span>     ( <span class="keyword">id</span> = a.id )</div><div class="line">                                                <span class="keyword">AND</span> ( colid <span class="keyword">IN</span> (</div><div class="line">                                                    <span class="keyword">SELECT</span></div><div class="line">                                                    colid</div><div class="line">                                                    <span class="keyword">FROM</span></div><div class="line">                                                    syscolumns</div><div class="line">                                                    <span class="keyword">WHERE</span></div><div class="line">                                                    ( <span class="keyword">id</span> = a.id )</div><div class="line">                                                    <span class="keyword">AND</span> ( <span class="keyword">name</span> = a.name ) ) ) ) ) ) )</div><div class="line">                    <span class="keyword">AND</span> ( xtype = <span class="string">'PK'</span> )</div><div class="line">        ) &gt; <span class="number">0</span> <span class="keyword">THEN</span> <span class="string">'√'</span></div><div class="line">    <span class="keyword">ELSE</span> <span class="string">''</span></div><div class="line"><span class="keyword">END</span> ) 主键 ,</div><div class="line">( <span class="keyword">CASE</span> b.name</div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'varchar'</span> <span class="keyword">THEN</span> b.name + <span class="string">'('</span> + <span class="keyword">cast</span>(a.length <span class="keyword">as</span> <span class="built_in">varchar</span>(<span class="number">8</span>)) + <span class="string">')'</span></div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'nvarchar'</span> <span class="keyword">THEN</span> b.name + <span class="string">'('</span> + <span class="keyword">cast</span>(a.length <span class="keyword">as</span> <span class="built_in">varchar</span>(<span class="number">8</span>)) + <span class="string">')'</span></div><div class="line">    <span class="keyword">ELSE</span> b.name</div><div class="line"><span class="keyword">END</span> ) 类型 ,</div><div class="line">( <span class="keyword">CASE</span> <span class="keyword">WHEN</span> a.isnullable = <span class="number">1</span> <span class="keyword">THEN</span> <span class="string">'√'</span> <span class="keyword">ELSE</span> <span class="string">''</span><span class="keyword">END</span> ) 允许空 ,</div><div class="line">( <span class="keyword">CASE</span> a.name <span class="keyword">WHEN</span> <span class="string">'Id'</span> <span class="keyword">THEN</span> <span class="string">'Id'</span></div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'AddTime'</span> <span class="keyword">THEN</span> <span class="string">'添加时间'</span></div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'UpdateTime'</span> <span class="keyword">THEN</span> <span class="string">'修改时间'</span>  </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'IsValid'</span> <span class="keyword">THEN</span> <span class="string">'删除标记'</span>        </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'AddIp'</span> <span class="keyword">THEN</span> <span class="string">'添加IP地址'</span>               </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'UpdateIp'</span> <span class="keyword">THEN</span> <span class="string">'修改IP地址'</span>             </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'State'</span> <span class="keyword">THEN</span> <span class="string">'状态'</span>                </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'PicUrl'</span> <span class="keyword">THEN</span> <span class="string">'图片地址'</span>           </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Image'</span> <span class="keyword">THEN</span> <span class="string">'图片地址'</span>             </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Description'</span> <span class="keyword">THEN</span> <span class="string">'介绍'</span>             </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Title'</span> <span class="keyword">THEN</span> <span class="string">'标题'</span>             </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Note'</span> <span class="keyword">THEN</span> <span class="string">'备注'</span>            </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Type'</span> <span class="keyword">THEN</span> <span class="string">'类型'</span>         </div><div class="line">    <span class="keyword">WHEN</span> <span class="string">'Content'</span> <span class="keyword">THEN</span> <span class="string">'内容'</span>  </div><div class="line"><span class="keyword">END</span> ) 字段中文名,</div><div class="line"><span class="keyword">ISNULL</span>(e.text, <span class="string">''</span>) 默认值,</div><div class="line"><span class="string">''</span> <span class="keyword">as</span> 备注</div><div class="line"><span class="keyword">FROM</span>    syscolumns a</div><div class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> systypes b <span class="keyword">ON</span> a.xtype = b.xusertype</div><div class="line">        <span class="keyword">INNER</span> <span class="keyword">JOIN</span> sysobjects d <span class="keyword">ON</span> a.id = d.id</div><div class="line">                                   <span class="keyword">AND</span> d.xtype = <span class="string">'U'</span></div><div class="line">                                   <span class="keyword">AND</span> d.name &lt;&gt; <span class="string">'dtproperties'</span></div><div class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> syscomments e <span class="keyword">ON</span> a.cdefault = e.id</div><div class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> sys.extended_properties g <span class="keyword">ON</span> a.id = g.major_id</div><div class="line">                                               <span class="keyword">AND</span> a.colid = g.minor_id</div><div class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> sys.extended_properties f <span class="keyword">ON</span> d.id = f.class</div><div class="line">                                               <span class="keyword">AND</span> f.minor_id = <span class="number">0</span></div><div class="line"><span class="keyword">WHERE</span>   b.name <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line"><span class="keyword">and</span> d.name=<span class="string">'Account'</span></div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> a.id ,</div><div class="line">        a.colorder;</div></pre></td></tr></table></figure>
+<h3 id="使用OpenXml新建总文档"><a href="#使用OpenXml新建总文档" class="headerlink" title="使用OpenXml新建总文档"></a>使用OpenXml新建总文档</h3><p>tmplFilePath是临时存放各个表数据字典的文件夹<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">string</span> path = <span class="keyword">string</span>.Format(<span class="string">@"&#123;0&#125;&#123;1&#125;.docx"</span>, tmplFilePath, DateTime.Now.Ticks.ToString());</div><div class="line"><span class="keyword">using</span> (WordprocessingDocument doc = WordprocessingDocument.Create(path, WordprocessingDocumentType.Document))</div><div class="line">&#123;</div><div class="line">    MainDocumentPart mainPart = doc.AddMainDocumentPart();</div><div class="line">    mainPart.Document = <span class="keyword">new</span> Document();</div><div class="line">    Body body = mainPart.Document.AppendChild(<span class="keyword">new</span> Body());</div><div class="line">    Paragraph p = mainPart.Document.Body.AppendChild(<span class="keyword">new</span> Paragraph());</div><div class="line">    p.AppendChild(<span class="keyword">new</span> Run(<span class="keyword">new</span> Text(<span class="string">"数据字典"</span>)));  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="使用OpenXml开始生成单张表的数据字典，替换书签"><a href="#使用OpenXml开始生成单张表的数据字典，替换书签" class="headerlink" title="使用OpenXml开始生成单张表的数据字典，替换书签"></a>使用OpenXml开始生成单张表的数据字典，替换书签</h3><p>tmplFileName是单张表的数据字典文档路径<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">using</span> (WordprocessingDocument tmplDoc = WordprocessingDocument.Open(tmplFileName, <span class="literal">true</span>))</div><div class="line">&#123;</div><div class="line">    <span class="comment">//修改文档类型 (dotx-&gt;docx)</span></div><div class="line">    tmplDoc.ChangeDocumentType(WordprocessingDocumentType.Document);</div><div class="line">    <span class="keyword">var</span> bookMarks = FindBookmarks(tmplDoc.MainDocumentPart.Document);</div><div class="line">    <span class="comment">//替换书签</span></div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> end <span class="keyword">in</span> bookMarks)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (end.Key == <span class="string">"TableName"</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> textElement = <span class="keyword">new</span> Text(tableName);</div><div class="line">            <span class="keyword">var</span> runElement = <span class="keyword">new</span> Run(textElement);</div><div class="line">            end.Value.InsertAfterSelf(runElement);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是FindBookmarks方法<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Dictionary&lt;<span class="keyword">string</span>, BookmarkEnd&gt; <span class="title">FindBookmarks</span>(<span class="params">OpenXmlElement documentPart, Dictionary&lt;<span class="keyword">string</span>, BookmarkEnd&gt; results = <span class="literal">null</span>, Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt; unmatched = <span class="literal">null</span></span>)</span></div><div class="line">&#123;</div><div class="line">    results = results ?? <span class="keyword">new</span> Dictionary&lt;<span class="keyword">string</span>, BookmarkEnd&gt;();</div><div class="line">    unmatched = unmatched ?? <span class="keyword">new</span> Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;();</div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> child <span class="keyword">in</span> documentPart.Elements())</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (child <span class="keyword">is</span> BookmarkStart)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> bStart = child <span class="keyword">as</span> BookmarkStart;</div><div class="line">            unmatched.Add(bStart.Id, bStart.Name);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (child <span class="keyword">is</span> BookmarkEnd)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> bEnd = child <span class="keyword">as</span> BookmarkEnd;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">var</span> orphanName <span class="keyword">in</span> unmatched)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (bEnd.Id == orphanName.Key)</div><div class="line">                    results.Add(orphanName.Value, bEnd);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        FindBookmarks(child, results, unmatched);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> results;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="使用OpenXml添加表格，完成单张表的数据字典docx文档"><a href="#使用OpenXml添加表格，完成单张表的数据字典docx文档" class="headerlink" title="使用OpenXml添加表格，完成单张表的数据字典docx文档"></a>使用OpenXml添加表格，完成单张表的数据字典docx文档</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">//设置表格属性</span></div><div class="line">TableProperties tblProp = <span class="keyword">new</span> TableProperties(</div><div class="line">    <span class="keyword">new</span> TableBorders(</div><div class="line">    <span class="keyword">new</span> TopBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> BottomBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> LeftBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> RightBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> InsideHorizontalBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;,</div><div class="line">    <span class="keyword">new</span> InsideVerticalBorder() &#123; Val = <span class="keyword">new</span> EnumValue&lt;BorderValues&gt;(BorderValues.Single), Size = <span class="number">1</span> &#125;</div><div class="line">    )</div><div class="line">);</div><div class="line">Table table = <span class="keyword">new</span> Table();</div><div class="line">table.Append(tblProp);</div><div class="line"><span class="comment">//添加表头</span></div><div class="line">TableRow headerRow = <span class="keyword">new</span> TableRow();</div><div class="line"><span class="keyword">foreach</span> (DataColumn column <span class="keyword">in</span> dataBaseTable.Columns)</div><div class="line">&#123;</div><div class="line">    TableCell cell = <span class="keyword">new</span> TableCell();</div><div class="line">    cell.Append(<span class="keyword">new</span> Paragraph(<span class="keyword">new</span> Run(<span class="keyword">new</span> Text(column.ColumnName))));</div><div class="line">    headerRow.Append(cell);</div><div class="line">&#125;</div><div class="line">table.Append(headerRow);</div><div class="line"><span class="comment">//添加数据</span></div><div class="line"><span class="keyword">foreach</span> (DataRow row <span class="keyword">in</span> dataBaseTable.Rows)</div><div class="line">&#123;</div><div class="line">    TableRow tableRow = <span class="keyword">new</span> TableRow();</div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">object</span> strCell <span class="keyword">in</span> row.ItemArray)</div><div class="line">    &#123;</div><div class="line">        TableCell cell = <span class="keyword">new</span> TableCell();</div><div class="line">        cell.Append(<span class="keyword">new</span> Paragraph(<span class="keyword">new</span> Run(<span class="keyword">new</span> Text(strCell.ToString()))));</div><div class="line">        tableRow.Append(cell);</div><div class="line">    &#125;</div><div class="line">    table.Append(tableRow);</div><div class="line">&#125;</div><div class="line"><span class="comment">//添加表格</span></div><div class="line">tmplDoc.MainDocumentPart.Document.Body.Append(<span class="keyword">new</span> Paragraph(<span class="keyword">new</span> Run(table)));</div></pre></td></tr></table></figure>
+<h3 id="使用OpenXml将当前文档合并到总文档中"><a href="#使用OpenXml将当前文档合并到总文档中" class="headerlink" title="使用OpenXml将当前文档合并到总文档中"></a>使用OpenXml将当前文档合并到总文档中</h3><p>path是总文档的路径<br>tmplFileName是当前文档的路径<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">//将当前word和总文档的合并</span></div><div class="line"><span class="keyword">using</span> (WordprocessingDocument template = WordprocessingDocument.Open(path, <span class="literal">true</span>))</div><div class="line">&#123;</div><div class="line">    MainDocumentPart mainPart = template.MainDocumentPart;</div><div class="line">    <span class="keyword">string</span> altChunkId = tableName;</div><div class="line">    AlternativeFormatImportPart chunk =</div><div class="line">    mainPart.AddAlternativeFormatImportPart(</div><div class="line">    AlternativeFormatImportPartType.WordprocessingML, altChunkId);</div><div class="line">    <span class="keyword">using</span> (FileStream fileStream = File.Open(tmplFileName, FileMode.Open))</div><div class="line">        chunk.FeedData(fileStream);</div><div class="line">    AltChunk altChunk = <span class="keyword">new</span> AltChunk();</div><div class="line">    altChunk.Id = altChunkId;</div><div class="line">    mainPart.Document</div><div class="line">        .Body</div><div class="line">        .InsertAfter(altChunk, mainPart.Document.Body</div><div class="line">        .Elements&lt;Paragraph&gt;().Last());</div><div class="line">    mainPart.Document.Save();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/png/2.png" alt="图2" title="">
+                </div>
+                <div class="image-caption">图2</div>
+            </figure>
+<p>任务完成，<a href="http://7xszf2.com2.z0.glb.clouddn.com/openxml-generate-data-dictionary/rar/%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8.rar" target="_blank" rel="external">这里是源代码</a>，晚安！</p>
+]]></content>
     
     <summary type="html">
     
@@ -65,6 +1373,8 @@
     
     </summary>
     
+      <category term="后端" scheme="http://zhensherlock.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
     
       <category term="C#" scheme="http://zhensherlock.github.io/tags/C/"/>
     
@@ -79,17 +1389,32 @@
     <link href="http://zhensherlock.github.io/2016/04/28/photoshop-convert-px/"/>
     <id>http://zhensherlock.github.io/2016/04/28/photoshop-convert-px/</id>
     <published>2016-04-28T01:35:31.000Z</published>
-    <updated>2016-04-28T05:48:53.532Z</updated>
+    <updated>2017-01-12T10:30:43.669Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;p&gt;打开Photoshop首选项——编辑，选择单“位与标尺”，如下界面：&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/photoshop-convert-px/jpg/1.jpg&quot; alt=&quot;图1&quot;&gt;&lt;/p&gt;
-&lt;p&gt;选择后出现如下界面，选择像素即可&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/photoshop-convert-px/jpg/2.jpg&quot; alt=&quot;图2&quot;&gt;&lt;/p&gt;
-</content>
+    <content type="html"><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>打开Photoshop首选项——编辑，选择单“位与标尺”，如下界面：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/photoshop-convert-px/jpg/1.jpg" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure></p>
+<p>选择后出现如下界面，选择像素即可<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/photoshop-convert-px/jpg/2.jpg" alt="图2" title="">
+                </div>
+                <div class="image-caption">图2</div>
+            </figure></p>
+]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;p&gt;打开Photoshop首选项——编辑，选择单“位与标尺”，如下界面：&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.
+      &lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;p&gt;打开Photoshop首选项——编辑，选择单“位与标尺”，如下界面：&lt;br&gt;&lt;figure class=&quot;image-bubble&quot;&gt;
+  
     
     </summary>
+    
+      <category term="UI" scheme="http://zhensherlock.github.io/categories/UI/"/>
     
     
       <category term="Photoshop" scheme="http://zhensherlock.github.io/tags/Photoshop/"/>
@@ -101,25 +1426,25 @@
     <link href="http://zhensherlock.github.io/2016/04/27/sql-server-identity/"/>
     <id>http://zhensherlock.github.io/2016/04/27/sql-server-identity/</id>
     <published>2016-04-27T01:07:40.000Z</published>
-    <updated>2016-04-28T01:32:23.957Z</updated>
+    <updated>2017-01-12T10:31:11.859Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;p&gt;如果我们要获取自增的ID，最简单的方法就是在INSERT语句之后&lt;code&gt;select @@indentity&lt;/code&gt;，但是如果插入的表有INSERT触发器，那使用&lt;code&gt;select @@indentity&lt;/code&gt;就会不对。&lt;br&gt;例如，有两个表 T1 和 T2（T1 和 T2 都有 IDENTITY 列），在 T1 上定义了一个 INSERT 触发器。当 T1 插入数据时，T1 的INSERT触发器被触发，并在 T2 中插入一行，这时 @@IDENTITY 返回插入到当前会话中任何作用域内的最后一个 IDENTITY 列值，所以该值是插入 T2 中的ID。&lt;br&gt;在SQL Server 中还有其他两个函数可以获取插入到 IDENTITY 列中的值，分别是：&lt;code&gt;SCOPE_IDENTITY&lt;/code&gt;、&lt;code&gt;IDENT_CURRENT&lt;/code&gt;，接一下我们来分别了解一下各自的语法。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;@@IDENTITY 返回为&lt;strong&gt;当前会话的所有作用域中的任何表&lt;/strong&gt;最后生成的标识值。&lt;/li&gt;
-&lt;li&gt;SCOPE_IDENTITY 返回为&lt;strong&gt;当前会话和当前作用域中的任何表&lt;/strong&gt;最后生成的标识值。&lt;/li&gt;
-&lt;li&gt;IDENT_CURRENT 返回为&lt;strong&gt;任何会话和任何作用域中的特定表&lt;/strong&gt;最后生成的标识值，它不受作用域和会话的限制，而受限于所指定的表。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;按照其语法的来看，我们可以推断出各个函数应用到上面例子中的结果分别是：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;@@IDENTITY 返回插入到当前会话中任何作用域内的最后一个 IDENTITY 列值，该值是插入 T2 中的值。&lt;/li&gt;
-&lt;li&gt;SCOPE_IDENTITY 返回插入 T1 中的 IDENTITY 值，该值是发生在相同作用域中的最后一个 INSERT。如果在作用域中发生插入语句到标识列之前唤醒调用 SCOPE_IDENTITY() 函数，则该函数将返回 NULL 值。&lt;/li&gt;
-&lt;li&gt;而IDENT_CURRENT(‘T1’) 和 IDENT_CURRENT(‘T2’) 返回的值分别是这两个表最后自增的值。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.jb51.net/article/39029.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用SQL Server 获取插入记录后的ID(自动编号)&lt;/a&gt;&lt;/p&gt;
-</content>
+    <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。</p>
+</blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>如果我们要获取自增的ID，最简单的方法就是在INSERT语句之后<code>select @@indentity</code>，但是如果插入的表有INSERT触发器，那使用<code>select @@indentity</code>就会不对。<br>例如，有两个表 T1 和 T2（T1 和 T2 都有 IDENTITY 列），在 T1 上定义了一个 INSERT 触发器。当 T1 插入数据时，T1 的INSERT触发器被触发，并在 T2 中插入一行，这时 @@IDENTITY 返回插入到当前会话中任何作用域内的最后一个 IDENTITY 列值，所以该值是插入 T2 中的ID。<br>在SQL Server 中还有其他两个函数可以获取插入到 IDENTITY 列中的值，分别是：<code>SCOPE_IDENTITY</code>、<code>IDENT_CURRENT</code>，接一下我们来分别了解一下各自的语法。<br><a id="more"></a></p>
+<ul>
+<li>@@IDENTITY 返回为<strong>当前会话的所有作用域中的任何表</strong>最后生成的标识值。</li>
+<li>SCOPE_IDENTITY 返回为<strong>当前会话和当前作用域中的任何表</strong>最后生成的标识值。</li>
+<li>IDENT_CURRENT 返回为<strong>任何会话和任何作用域中的特定表</strong>最后生成的标识值，它不受作用域和会话的限制，而受限于所指定的表。</li>
+</ul>
+<p>按照其语法的来看，我们可以推断出各个函数应用到上面例子中的结果分别是：</p>
+<ul>
+<li>@@IDENTITY 返回插入到当前会话中任何作用域内的最后一个 IDENTITY 列值，该值是插入 T2 中的值。</li>
+<li>SCOPE_IDENTITY 返回插入 T1 中的 IDENTITY 值，该值是发生在相同作用域中的最后一个 INSERT。如果在作用域中发生插入语句到标识列之前唤醒调用 SCOPE_IDENTITY() 函数，则该函数将返回 NULL 值。</li>
+<li>而IDENT_CURRENT(‘T1’) 和 IDENT_CURRENT(‘T2’) 返回的值分别是这两个表最后自增的值。</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.jb51.net/article/39029.htm" target="_blank" rel="external">使用SQL Server 获取插入记录后的ID(自动编号)</a></p>
+]]></content>
     
     <summary type="html">
     
@@ -129,6 +1454,8 @@
 &lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;p&gt;如果我们要获取自增的ID，最简单的方法就是在INSERT语句之后&lt;code&gt;select @@indentity&lt;/code&gt;，但是如果插入的表有INSERT触发器，那使用&lt;code&gt;select @@indentity&lt;/code&gt;就会不对。&lt;br&gt;例如，有两个表 T1 和 T2（T1 和 T2 都有 IDENTITY 列），在 T1 上定义了一个 INSERT 触发器。当 T1 插入数据时，T1 的INSERT触发器被触发，并在 T2 中插入一行，这时 @@IDENTITY 返回插入到当前会话中任何作用域内的最后一个 IDENTITY 列值，所以该值是插入 T2 中的ID。&lt;br&gt;在SQL Server 中还有其他两个函数可以获取插入到 IDENTITY 列中的值，分别是：&lt;code&gt;SCOPE_IDENTITY&lt;/code&gt;、&lt;code&gt;IDENT_CURRENT&lt;/code&gt;，接一下我们来分别了解一下各自的语法。&lt;br&gt;
     
     </summary>
+    
+      <category term="数据库" scheme="http://zhensherlock.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
       <category term="SQL Server" scheme="http://zhensherlock.github.io/tags/SQL-Server/"/>
@@ -140,13 +1467,13 @@
     <link href="http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/"/>
     <id>http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/</id>
     <published>2016-04-21T08:44:37.000Z</published>
-    <updated>2016-04-25T10:54:59.441Z</updated>
+    <updated>2017-01-12T10:30:17.771Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;文正&quot;&gt;&lt;a href=&quot;#文正&quot; class=&quot;headerlink&quot; title=&quot;文正&quot;&gt;&lt;/a&gt;文正&lt;/h1&gt;&lt;p&gt;使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：&lt;code&gt;Missing radix parameter&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。&lt;/p&gt;
-&lt;p&gt;parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；&lt;br&gt;默认是:十进制；&lt;br&gt;在转换时可以忽略第二个参数，这样js照样可以运行，但是在你进行语法校验时，JSLint却会报错，这是因为压缩工具对语法的严谨性要求比较高，建议大家在用parseInt语法进行转换时，最好加个第二个参数。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://my.oschina.net/zhangskills/blog/150203&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;javascript报错：Missing radix parameter&lt;/a&gt;&lt;/p&gt;
-</content>
+    <content type="html"><![CDATA[<h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：<code>Missing radix parameter</code>。</p>
+<p>这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。</p>
+<p>parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；<br>默认是:十进制；<br>在转换时可以忽略第二个参数，这样js照样可以运行，但是在你进行语法校验时，JSLint却会报错，这是因为压缩工具对语法的严谨性要求比较高，建议大家在用parseInt语法进行转换时，最好加个第二个参数。<br><a id="more"></a></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://my.oschina.net/zhangskills/blog/150203" target="_blank" rel="external">javascript报错：Missing radix parameter</a></p>
+]]></content>
     
     <summary type="html">
     
@@ -155,6 +1482,8 @@
 &lt;p&gt;parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；&lt;br&gt;默认是:十进制；&lt;br&gt;在转换时可以忽略第二个参数，这样js照样可以运行，但是在你进行语法校验时，JSLint却会报错，这是因为压缩工具对语法的严谨性要求比较高，建议大家在用parseInt语法进行转换时，最好加个第二个参数。&lt;br&gt;
     
     </summary>
+    
+      <category term="前端" scheme="http://zhensherlock.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
       <category term="JSLint" scheme="http://zhensherlock.github.io/tags/JSLint/"/>
@@ -168,13 +1497,13 @@
     <link href="http://zhensherlock.github.io/2016/04/19/sql-server-case-when/"/>
     <id>http://zhensherlock.github.io/2016/04/19/sql-server-case-when/</id>
     <published>2016-04-19T00:41:52.000Z</published>
-    <updated>2016-04-29T09:39:35.633Z</updated>
+    <updated>2017-01-12T10:31:13.940Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;文正&quot;&gt;&lt;a href=&quot;#文正&quot; class=&quot;headerlink&quot; title=&quot;文正&quot;&gt;&lt;/a&gt;文正&lt;/h1&gt;&lt;p&gt;Case When有两种用法。分别是：简单Case函数和Case搜索函数。&lt;/p&gt;
-&lt;h2 id=&quot;简单Case函数&quot;&gt;&lt;a href=&quot;#简单Case函数&quot; class=&quot;headerlink&quot; title=&quot;简单Case函数&quot;&gt;&lt;/a&gt;简单Case函数&lt;/h2&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;CASE sex&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         WHEN &#39;1&#39; THEN &#39;男&#39;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         WHEN &#39;2&#39; THEN &#39;女&#39;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ELSE &#39;其他&#39; &lt;span class=&quot;keyword&quot;&gt;END&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;Case搜索函数&quot;&gt;&lt;a href=&quot;#Case搜索函数&quot; class=&quot;headerlink&quot; title=&quot;Case搜索函数&quot;&gt;&lt;/a&gt;Case搜索函数&lt;/h2&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;CASE WHEN sex = &#39;1&#39; THEN &#39;男&#39;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         WHEN sex = &#39;2&#39; THEN &#39;女&#39;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ELSE &#39;其他&#39; &lt;span class=&quot;keyword&quot;&gt;END&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h1 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_61fbf8d10100lian.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SqlServer Case When用法&lt;/a&gt;&lt;/p&gt;
-</content>
+    <content type="html"><![CDATA[<h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>Case When有两种用法。分别是：简单Case函数和Case搜索函数。</p>
+<h2 id="简单Case函数"><a href="#简单Case函数" class="headerlink" title="简单Case函数"></a>简单Case函数</h2><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">CASE sex</div><div class="line">         WHEN '1' THEN '男'</div><div class="line">         WHEN '2' THEN '女'</div><div class="line">ELSE '其他' <span class="keyword">END</span></div></pre></td></tr></table></figure>
+<h2 id="Case搜索函数"><a href="#Case搜索函数" class="headerlink" title="Case搜索函数"></a>Case搜索函数</h2><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">CASE WHEN sex = '1' THEN '男'</div><div class="line">         WHEN sex = '2' THEN '女'</div><div class="line">ELSE '其他' <span class="keyword">END</span></div></pre></td></tr></table></figure>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.sina.com.cn/s/blog_61fbf8d10100lian.html" target="_blank" rel="external">SqlServer Case When用法</a></p>
+]]></content>
     
     <summary type="html">
     
@@ -182,6 +1511,8 @@
 &lt;h2 id=&quot;简单Case函数&quot;&gt;&lt;a href=&quot;#
     
     </summary>
+    
+      <category term="数据库" scheme="http://zhensherlock.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
       <category term="SQL Server" scheme="http://zhensherlock.github.io/tags/SQL-Server/"/>
@@ -193,23 +1524,61 @@
     <link href="http://zhensherlock.github.io/2016/04/14/visual-studio-remote-debugger/"/>
     <id>http://zhensherlock.github.io/2016/04/14/visual-studio-remote-debugger/</id>
     <published>2016-04-14T09:59:22.000Z</published>
-    <updated>2016-04-18T16:01:19.806Z</updated>
+    <updated>2017-01-12T10:31:01.660Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;在开发的时候，我们有时会用远程调试工具进行debug，本文就简单的介绍一下如何使用Visual Studio自带的远程调试工具（我们以VS2012为例）。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot; title=&quot;步骤&quot;&gt;&lt;/a&gt;步骤&lt;/h2&gt;&lt;p&gt;找到Remote Debugger Folder文件夹&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/1.jpg&quot; alt=&quot;图1&quot;&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/2.jpg&quot; alt=&quot;图2&quot;&gt;&lt;br&gt;接一下我们使用“无身份验证”并勾选“允许任何用户进行调试”；将最长空闲时间设置多点。&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/3.jpg&quot; alt=&quot;图3&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/4.jpg&quot; alt=&quot;图4&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/5.jpg&quot; alt=&quot;图5&quot;&gt;&lt;br&gt;但是在调试网站的时候，有好几个网站，我们无法确定是哪个w3wap.exe；我们可以使用命令查看PID&lt;br&gt;1）对于IIS6,可以“开始”-》运行，输入 “iisapp -a ”来显示应用程序池w3wp.exe进程对应的pid和进程池名称。&lt;br&gt;iisapp.vbs它是一个脚本程序,在安装2003时需要SP1才有。&lt;br&gt;2）IIS7可以直接用它的外壳命令&lt;br&gt;假定C盘是系统盘&lt;br&gt;1：cd C:/Windows/System32/inetsrv&lt;br&gt;2：appcmd.exe list wp&lt;/p&gt;
-&lt;h2 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/fantong/archive/2012/09/17/2688342.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;远程调试步骤&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/whyapi/p/3620592.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;查看PID&lt;/a&gt;&lt;/p&gt;
-</content>
+    <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>在开发的时候，我们有时会用远程调试工具进行debug，本文就简单的介绍一下如何使用Visual Studio自带的远程调试工具（我们以VS2012为例）。</p>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>找到Remote Debugger Folder文件夹<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/1.jpg" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure><br><a id="more"></a><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/2.jpg" alt="图2" title="">
+                </div>
+                <div class="image-caption">图2</div>
+            </figure><br>接一下我们使用“无身份验证”并勾选“允许任何用户进行调试”；将最长空闲时间设置多点。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/3.jpg" alt="图3" title="">
+                </div>
+                <div class="image-caption">图3</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/4.jpg" alt="图4" title="">
+                </div>
+                <div class="image-caption">图4</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/5.jpg" alt="图5" title="">
+                </div>
+                <div class="image-caption">图5</div>
+            </figure><br>但是在调试网站的时候，有好几个网站，我们无法确定是哪个w3wap.exe；我们可以使用命令查看PID<br>1）对于IIS6,可以“开始”-》运行，输入 “iisapp -a ”来显示应用程序池w3wp.exe进程对应的pid和进程池名称。<br>iisapp.vbs它是一个脚本程序,在安装2003时需要SP1才有。<br>2）IIS7可以直接用它的外壳命令<br>假定C盘是系统盘<br>1：cd C:/Windows/System32/inetsrv<br>2：appcmd.exe list wp</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.cnblogs.com/fantong/archive/2012/09/17/2688342.html" target="_blank" rel="external">远程调试步骤</a><br><a href="http://www.cnblogs.com/whyapi/p/3620592.html" target="_blank" rel="external">查看PID</a></p>
+]]></content>
     
     <summary type="html">
     
       &lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;在开发的时候，我们有时会用远程调试工具进行debug，本文就简单的介绍一下如何使用Visual Studio自带的远程调试工具（我们以VS2012为例）。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot; title=&quot;步骤&quot;&gt;&lt;/a&gt;步骤&lt;/h2&gt;&lt;p&gt;找到Remote Debugger Folder文件夹&lt;br&gt;&lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/1.jpg&quot; alt=&quot;图1&quot;&gt;&lt;br&gt;
+&lt;h2 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot; title=&quot;步骤&quot;&gt;&lt;/a&gt;步骤&lt;/h2&gt;&lt;p&gt;找到Remote Debugger Folder文件夹&lt;br&gt;&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;http://7xszf2.com2.z0.glb.clouddn.com/visual-studio-remote-debugger/jpg/1.jpg&quot; alt=&quot;图1&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;图1&lt;/div&gt;
+            &lt;/figure&gt;&lt;br&gt;
     
     </summary>
+    
+      <category term="IDE" scheme="http://zhensherlock.github.io/categories/IDE/"/>
     
     
       <category term="Visual Studio" scheme="http://zhensherlock.github.io/tags/Visual-Studio/"/>
@@ -221,15 +1590,15 @@
     <link href="http://zhensherlock.github.io/2016/04/14/sql-server-recursion/"/>
     <id>http://zhensherlock.github.io/2016/04/14/sql-server-recursion/</id>
     <published>2016-04-14T08:54:19.000Z</published>
-    <updated>2016-04-29T09:39:46.098Z</updated>
+    <updated>2017-01-12T10:31:07.408Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;需要补习的语法-WITH-AS&quot;&gt;&lt;a href=&quot;#需要补习的语法-WITH-AS&quot; class=&quot;headerlink&quot; title=&quot;需要补习的语法 WITH AS&quot;&gt;&lt;/a&gt;需要补习的语法 WITH AS&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/shaochao14/article/details/6223052&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;摘自网上&lt;/a&gt;&lt;br&gt;WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的不同部分，作为提供数据的部分。&lt;br&gt;特别对于UNION ALL比较有用。因为UNION ALL的每个部分可能相同，但是如果每个部分都去执行一遍的话，则成本太高，所以可以使用WITH AS短语，则只要执行一遍即可。如果WITH AS短语所定义的表名被调用两次以上，则优化器会自动将WITH AS短语所获取的数据放入一个TEMP表里，如果只是被调用一次，则不会。而提示materialize则是强制将WITH AS短语里的数据放入一个全局临时表里。很多查询通过这种方法都可以提高速度。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;实例&quot;&gt;&lt;a href=&quot;#实例&quot; class=&quot;headerlink&quot; title=&quot;实例&quot;&gt;&lt;/a&gt;实例&lt;/h2&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;WITH cte&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  AS ( &lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;   dept_id ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dept_name&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt;     department&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt;    dept_id = &lt;span class=&quot;string&quot;&gt;&#39;1111&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;UNION&lt;/span&gt; ALL&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;   d.dept_id ,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                d.dept_name&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt;     cte c&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;JOIN&lt;/span&gt; department d &lt;span class=&quot;keyword&quot;&gt;ON&lt;/span&gt; c.dept_id = d.parent_id&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     )&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;  dept_id&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt;    cte;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/xqhppt/archive/2011/02/15/1955366.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SQL递归查询(with cte as)&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://wudataoge.blog.163.com/blog/static/80073886200961652022389/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SQL中使用WITH AS提高性能－使用公用表表达式（CTE）简化嵌套SQL&lt;/a&gt;&lt;/p&gt;
-</content>
+    <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。</p>
+</blockquote>
+<h2 id="需要补习的语法-WITH-AS"><a href="#需要补习的语法-WITH-AS" class="headerlink" title="需要补习的语法 WITH AS"></a>需要补习的语法 WITH AS</h2><p><a href="http://blog.csdn.net/shaochao14/article/details/6223052" target="_blank" rel="external">摘自网上</a><br>WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的不同部分，作为提供数据的部分。<br>特别对于UNION ALL比较有用。因为UNION ALL的每个部分可能相同，但是如果每个部分都去执行一遍的话，则成本太高，所以可以使用WITH AS短语，则只要执行一遍即可。如果WITH AS短语所定义的表名被调用两次以上，则优化器会自动将WITH AS短语所获取的数据放入一个TEMP表里，如果只是被调用一次，则不会。而提示materialize则是强制将WITH AS短语里的数据放入一个全局临时表里。很多查询通过这种方法都可以提高速度。<br><a id="more"></a></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">WITH cte</div><div class="line">  AS ( <span class="keyword">SELECT</span>   dept_id ,</div><div class="line">                dept_name</div><div class="line">       <span class="keyword">FROM</span>     department</div><div class="line">       <span class="keyword">WHERE</span>    dept_id = <span class="string">'1111'</span></div><div class="line">       <span class="keyword">UNION</span> ALL</div><div class="line">       <span class="keyword">SELECT</span>   d.dept_id ,</div><div class="line">                d.dept_name</div><div class="line">       <span class="keyword">FROM</span>     cte c</div><div class="line">                <span class="keyword">INNER</span> <span class="keyword">JOIN</span> department d <span class="keyword">ON</span> c.dept_id = d.parent_id</div><div class="line">     )</div><div class="line"><span class="keyword">SELECT</span>  dept_id</div><div class="line"><span class="keyword">FROM</span>    cte;</div></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.cnblogs.com/xqhppt/archive/2011/02/15/1955366.html" target="_blank" rel="external">SQL递归查询(with cte as)</a><br><a href="http://wudataoge.blog.163.com/blog/static/80073886200961652022389/" target="_blank" rel="external">SQL中使用WITH AS提高性能－使用公用表表达式（CTE）简化嵌套SQL</a></p>
+]]></content>
     
     <summary type="html">
     
@@ -239,6 +1608,8 @@
 &lt;h2 id=&quot;需要补习的语法-WITH-AS&quot;&gt;&lt;a href=&quot;#需要补习的语法-WITH-AS&quot; class=&quot;headerlink&quot; title=&quot;需要补习的语法 WITH AS&quot;&gt;&lt;/a&gt;需要补习的语法 WITH AS&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/shaochao14/article/details/6223052&quot;&gt;摘自网上&lt;/a&gt;&lt;br&gt;WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的不同部分，作为提供数据的部分。&lt;br&gt;特别对于UNION ALL比较有用。因为UNION ALL的每个部分可能相同，但是如果每个部分都去执行一遍的话，则成本太高，所以可以使用WITH AS短语，则只要执行一遍即可。如果WITH AS短语所定义的表名被调用两次以上，则优化器会自动将WITH AS短语所获取的数据放入一个TEMP表里，如果只是被调用一次，则不会。而提示materialize则是强制将WITH AS短语里的数据放入一个全局临时表里。很多查询通过这种方法都可以提高速度。&lt;br&gt;
     
     </summary>
+    
+      <category term="数据库" scheme="http://zhensherlock.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
       <category term="SQL Server" scheme="http://zhensherlock.github.io/tags/SQL-Server/"/>
@@ -250,38 +1621,38 @@
     <link href="http://zhensherlock.github.io/2016/04/08/css-priority/"/>
     <id>http://zhensherlock.github.io/2016/04/08/css-priority/</id>
     <published>2016-04-08T08:04:00.000Z</published>
-    <updated>2016-04-14T08:58:30.485Z</updated>
+    <updated>2017-01-12T10:30:03.179Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;前端开发时，经常会遇到当前元素需要覆盖样式的需求，这篇我们来了解一下css是如何来确定当前使用哪种样式的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;类型&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;权值&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;内联样式表&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;1000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ID 选择器&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;100&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Class 类选择器&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;HTML 标签选择器&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-</content>
+    <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>前端开发时，经常会遇到当前元素需要覆盖样式的需求，这篇我们来了解一下css是如何来确定当前使用哪种样式的。</p>
+</blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:center">权值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内联样式表</td>
+<td style="text-align:center">1000</td>
+</tr>
+<tr>
+<td>ID 选择器</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td>Class 类选择器</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td>HTML 标签选择器</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+]]></content>
     
     <summary type="html">
     
@@ -289,6 +1660,8 @@
 &lt;p&gt;前端开发时，经常会遇到当前元素需要覆盖样式的需求，这篇我们来了解一下css是如何来确定当前使用哪种样式的。&lt;/p&gt;
     
     </summary>
+    
+      <category term="前端" scheme="http://zhensherlock.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
       <category term="CSS" scheme="http://zhensherlock.github.io/tags/CSS/"/>
@@ -300,14 +1673,14 @@
     <link href="http://zhensherlock.github.io/2016/04/07/html5-head-meta/"/>
     <id>http://zhensherlock.github.io/2016/04/07/html5-head-meta/</id>
     <published>2016-04-07T01:04:00.000Z</published>
-    <updated>2016-04-21T08:57:10.456Z</updated>
+    <updated>2017-01-12T10:30:09.784Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;移动前端开发中添加一些webkit专属的HTML5头部标签，帮助浏览器更好解析html代码，更好地将移动web前端页面表现出来。本文整理一些常用的meta标签。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;基本设置&quot;&gt;&lt;a href=&quot;#基本设置&quot; class=&quot;headerlink&quot; title=&quot;基本设置&quot;&gt;&lt;/a&gt;基本设置&lt;/h2&gt;&lt;p&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/code&gt;使用 HTML5 doctype，不区分大小写&lt;br&gt;&lt;code&gt;&amp;lt;html lang=&amp;quot;zh-cmn-Hans&amp;quot;&amp;gt;&lt;/code&gt;&lt;a href=&quot;http://zhi.hu/XyIa&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;更加标准的 lang 属性写法&lt;/a&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;重点&quot;&gt;&lt;a href=&quot;#重点&quot; class=&quot;headerlink&quot; title=&quot;重点&quot;&gt;&lt;/a&gt;重点&lt;/h2&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 声明文档使用的字符编码 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;charset&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;utf-8&#39;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 优先使用 IE 最新版本和 Chrome --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;http-equiv&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;X-UA-Compatible&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;IE=edge,chrome=1&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 页面描述 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;description&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;不超过150个字符&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 页面关键词 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;keywords&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 网页作者 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;author&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;name, email@gmail.com&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 搜索引擎抓取 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;robots&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;index,follow&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 为移动设备添加 viewport --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iOS 设备 begin --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-mobile-web-app-title&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;标题&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 添加到主屏后的标题（iOS 6 新增） --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-mobile-web-app-capable&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;yes&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-itunes-app&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-mobile-web-app-status-bar-style&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;black&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 设置苹果工具栏颜色 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;format-detection&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;telphone=no, email=no&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 忽略页面中的数字识别为电话，忽略email识别 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 启用360浏览器的极速模式(webkit) --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;renderer&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;webkit&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 避免IE使用兼容模式 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;http-equiv&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;X-UA-Compatible&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;IE=edge&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 不让百度转码 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;http-equiv&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;Cache-Control&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;no-siteapp&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;HandheldFriendly&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;true&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 微软的老式浏览器 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;MobileOptimized&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;320&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- uc强制竖屏 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;screen-orientation&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;portrait&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- QQ强制竖屏 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;x5-orientation&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;portrait&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- UC强制全屏 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;full-screen&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;yes&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- QQ强制全屏 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;x5-fullscreen&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;true&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- UC应用模式 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;browsermode&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;application&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- QQ应用模式 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;x5-page-mode&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;app&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- windows phone 点击无高光 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;msapplication-tap-highlight&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;no&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iOS 图标 begin --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-icon-precomposed&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/apple-touch-icon-57x57-precomposed.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iPhone 和 iTouch，默认 57x57 像素，必须有 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-icon-precomposed&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;sizes&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;114x114&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/apple-touch-icon-114x114-precomposed.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Retina iPhone 和 Retina iTouch，114x114 像素，可以没有，但推荐有 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-icon-precomposed&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;sizes&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;144x144&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/apple-touch-icon-144x144-precomposed.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Retina iPad，144x144 像素，可以没有，但推荐有 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iOS 图标 end --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iOS 启动画面 begin --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-startup-image&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;sizes&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;768x1004&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/splash-screen-768x1004.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iPad 竖屏 768 x 1004（标准分辨率） --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-startup-image&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;sizes&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;1536x2008&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/splash-screen-1536x2008.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iPad 竖屏 1536x2008（Retina） --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-startup-image&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;sizes&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;1024x748&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/Default-Portrait-1024x748.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iPad 横屏 1024x748（标准分辨率） --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-startup-image&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;sizes&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;2048x1496&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/splash-screen-2048x1496.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iPad 横屏 2048x1496（Retina） --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-startup-image&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/splash-screen-320x480.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iPhone/iPod Touch 竖屏 320x480 (标准分辨率) --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-startup-image&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;sizes&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;640x960&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/splash-screen-640x960.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iPhone/iPod Touch 竖屏 640x960 (Retina) --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;apple-touch-startup-image&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;sizes&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;640x1136&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/splash-screen-640x1136.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iPhone 5/iPod Touch 5 竖屏 640x1136 (Retina) --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iOS 启动画面 end --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- iOS 设备 end --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;msapplication-TileColor&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;#000&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Windows 8 磁贴颜色 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;msapplication-TileImage&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;icon.png&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Windows 8 磁贴图标 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;alternate&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;application/rss+xml&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;title&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;RSS&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/rss.xml&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 添加 RSS 订阅 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;shortcut icon&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;image/ico&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/favicon.ico&quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 添加 favicon icon --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- sns 社交标签 begin --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 参考微博API --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;property&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;og:type&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;类型&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;property&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;og:url&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;URL地址&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;property&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;og:title&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;标题&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;property&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;og:image&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;图片&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;property&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;og:description&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;描述&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- sns 社交标签 end --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
+    <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>移动前端开发中添加一些webkit专属的HTML5头部标签，帮助浏览器更好解析html代码，更好地将移动web前端页面表现出来。本文整理一些常用的meta标签。</p>
+</blockquote>
+<h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><p><code>&lt;!DOCTYPE html&gt;</code>使用 HTML5 doctype，不区分大小写<br><code>&lt;html lang=&quot;zh-cmn-Hans&quot;&gt;</code><a href="http://zhi.hu/XyIa" target="_blank" rel="external">更加标准的 lang 属性写法</a><br><a id="more"></a></p>
+<h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 声明文档使用的字符编码 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">'utf-8'</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 优先使用 IE 最新版本和 Chrome --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 页面描述 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"不超过150个字符"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 页面关键词 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">""</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 网页作者 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"author"</span> <span class="attr">content</span>=<span class="string">"name, email@gmail.com"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 搜索引擎抓取 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span> <span class="attr">content</span>=<span class="string">"index,follow"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 为移动设备添加 viewport --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz --&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- iOS 设备 begin --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span> <span class="attr">content</span>=<span class="string">"标题"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 添加到主屏后的标题（iOS 6 新增） --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> <span class="attr">content</span>=<span class="string">"yes"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 --&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-itunes-app"</span> <span class="attr">content</span>=<span class="string">"app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="attr">content</span>=<span class="string">"black"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 设置苹果工具栏颜色 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"telphone=no, email=no"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 忽略页面中的数字识别为电话，忽略email识别 --&gt;</span></div><div class="line"><span class="comment">&lt;!-- 启用360浏览器的极速模式(webkit) --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span> <span class="attr">content</span>=<span class="string">"webkit"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 避免IE使用兼容模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 不让百度转码 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-siteapp"</span> /&gt;</span></div><div class="line"><span class="comment">&lt;!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"HandheldFriendly"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 微软的老式浏览器 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"MobileOptimized"</span> <span class="attr">content</span>=<span class="string">"320"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- uc强制竖屏 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"screen-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- QQ强制竖屏 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- UC强制全屏 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"full-screen"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- QQ强制全屏 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-fullscreen"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- UC应用模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"browsermode"</span> <span class="attr">content</span>=<span class="string">"application"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- QQ应用模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-page-mode"</span> <span class="attr">content</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- windows phone 点击无高光 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-tap-highlight"</span> <span class="attr">content</span>=<span class="string">"no"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- iOS 图标 begin --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon-precomposed"</span> <span class="attr">href</span>=<span class="string">"/apple-touch-icon-57x57-precomposed.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- iPhone 和 iTouch，默认 57x57 像素，必须有 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon-precomposed"</span> <span class="attr">sizes</span>=<span class="string">"114x114"</span> <span class="attr">href</span>=<span class="string">"/apple-touch-icon-114x114-precomposed.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- Retina iPhone 和 Retina iTouch，114x114 像素，可以没有，但推荐有 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon-precomposed"</span> <span class="attr">sizes</span>=<span class="string">"144x144"</span> <span class="attr">href</span>=<span class="string">"/apple-touch-icon-144x144-precomposed.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- Retina iPad，144x144 像素，可以没有，但推荐有 --&gt;</span></div><div class="line"><span class="comment">&lt;!-- iOS 图标 end --&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- iOS 启动画面 begin --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span> <span class="attr">sizes</span>=<span class="string">"768x1004"</span> <span class="attr">href</span>=<span class="string">"/splash-screen-768x1004.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- iPad 竖屏 768 x 1004（标准分辨率） --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span> <span class="attr">sizes</span>=<span class="string">"1536x2008"</span> <span class="attr">href</span>=<span class="string">"/splash-screen-1536x2008.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- iPad 竖屏 1536x2008（Retina） --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span> <span class="attr">sizes</span>=<span class="string">"1024x748"</span> <span class="attr">href</span>=<span class="string">"/Default-Portrait-1024x748.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- iPad 横屏 1024x748（标准分辨率） --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span> <span class="attr">sizes</span>=<span class="string">"2048x1496"</span> <span class="attr">href</span>=<span class="string">"/splash-screen-2048x1496.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- iPad 横屏 2048x1496（Retina） --&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span> <span class="attr">href</span>=<span class="string">"/splash-screen-320x480.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- iPhone/iPod Touch 竖屏 320x480 (标准分辨率) --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span> <span class="attr">sizes</span>=<span class="string">"640x960"</span> <span class="attr">href</span>=<span class="string">"/splash-screen-640x960.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- iPhone/iPod Touch 竖屏 640x960 (Retina) --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span> <span class="attr">sizes</span>=<span class="string">"640x1136"</span> <span class="attr">href</span>=<span class="string">"/splash-screen-640x1136.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- iPhone 5/iPod Touch 5 竖屏 640x1136 (Retina) --&gt;</span></div><div class="line"><span class="comment">&lt;!-- iOS 启动画面 end --&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- iOS 设备 end --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-TileColor"</span> <span class="attr">content</span>=<span class="string">"#000"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- Windows 8 磁贴颜色 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-TileImage"</span> <span class="attr">content</span>=<span class="string">"icon.png"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- Windows 8 磁贴图标 --&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"alternate"</span> <span class="attr">type</span>=<span class="string">"application/rss+xml"</span> <span class="attr">title</span>=<span class="string">"RSS"</span> <span class="attr">href</span>=<span class="string">"/rss.xml"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 添加 RSS 订阅 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">type</span>=<span class="string">"image/ico"</span> <span class="attr">href</span>=<span class="string">"/favicon.ico"</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!-- 添加 favicon icon --&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- sns 社交标签 begin --&gt;</span></div><div class="line"><span class="comment">&lt;!-- 参考微博API --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:type"</span> <span class="attr">content</span>=<span class="string">"类型"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:url"</span> <span class="attr">content</span>=<span class="string">"URL地址"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:title"</span> <span class="attr">content</span>=<span class="string">"标题"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:image"</span> <span class="attr">content</span>=<span class="string">"图片"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:description"</span> <span class="attr">content</span>=<span class="string">"描述"</span> /&gt;</span></div><div class="line"><span class="comment">&lt;!-- sns 社交标签 end --&gt;</span></div></pre></td></tr></table></figure>
+]]></content>
     
     <summary type="html">
     
@@ -317,6 +1690,8 @@
 &lt;h2 id=&quot;基本设置&quot;&gt;&lt;a href=&quot;#基本设置&quot; class=&quot;headerlink&quot; title=&quot;基本设置&quot;&gt;&lt;/a&gt;基本设置&lt;/h2&gt;&lt;p&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/code&gt;使用 HTML5 doctype，不区分大小写&lt;br&gt;&lt;code&gt;&amp;lt;html lang=&amp;quot;zh-cmn-Hans&amp;quot;&amp;gt;&lt;/code&gt;&lt;a href=&quot;http://zhi.hu/XyIa&quot;&gt;更加标准的 lang 属性写法&lt;/a&gt;&lt;br&gt;
     
     </summary>
+    
+      <category term="前端" scheme="http://zhensherlock.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
       <category term="HTML5" scheme="http://zhensherlock.github.io/tags/HTML5/"/>
@@ -332,16 +1707,16 @@
     <published>2016-04-04T08:08:27.660Z</published>
     <updated>2016-04-08T09:57:14.866Z</updated>
     
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-</content>
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
     
     <summary type="html">
     
