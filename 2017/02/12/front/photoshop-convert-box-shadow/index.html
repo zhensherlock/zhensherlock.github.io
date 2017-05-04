@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Photoshop投影转换成CSS3中box-shadow | MichaelSun&#39;s Blog | javascript,.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="CSS,Photoshop">
+    <meta name="description" content="正文
+随着CSS3的兴起，前端可以自己做出阴影、圆角等效果，但是前端不是专业的设计师，所以还是需要UI来帮我们设计效果，那么问题来了，UI设计出的效果图，我们前端怎么去正确的实现呢？下面来看一下Photoshop投影各个参数如何转换成CSS3中的box-shadow。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Photoshop投影转换成CSS3中box-shadow">
+<meta property="og:url" content="http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/index.html">
+<meta property="og:site_name" content="MichaelSun's Blog">
+<meta property="og:description" content="正文
+随着CSS3的兴起，前端可以自己做出阴影、圆角等效果，但是前端不是专业的设计师，所以还是需要UI来帮我们设计效果，那么问题来了，UI设计出的效果图，我们前端怎么去正确的实现呢？下面来看一下Photoshop投影各个参数如何转换成CSS3中的box-shadow。">
+<meta property="og:image" content="http://7xszf2.com2.z0.glb.clouddn.com/photoshop-convert-box-shadow/jpg/1.jpg">
+<meta property="og:updated_time" content="2017-04-21T03:23:38.651Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Photoshop投影转换成CSS3中box-shadow">
+<meta name="twitter:description" content="正文
+随着CSS3的兴起，前端可以自己做出阴影、圆角等效果，但是前端不是专业的设计师，所以还是需要UI来帮我们设计效果，那么问题来了，UI设计出的效果图，我们前端怎么去正确的实现呢？下面来看一下Photoshop投影各个参数如何转换成CSS3中的box-shadow。">
+<meta name="twitter:image" content="http://7xszf2.com2.z0.glb.clouddn.com/photoshop-convert-box-shadow/jpg/1.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孙臻轩</h5>
+          <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhensherlock" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.linkedin.com/in/3056750" target="_blank" >
+                <i class="icon icon-lg icon-linkedin"></i>
+                Linkedin
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Photoshop投影转换成CSS3中box-shadow</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Photoshop投影转换成CSS3中box-shadow</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-12T08:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-02-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#box-shadow"><span class="post-toc-number">2.</span> <span class="post-toc-text">box-shadow</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Photoshop"><span class="post-toc-number">3.</span> <span class="post-toc-text">Photoshop</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#text-shadow"><span class="post-toc-number">4.</span> <span class="post-toc-text">text-shadow</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-front/photoshop-convert-box-shadow"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Photoshop投影转换成CSS3中box-shadow</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月12日 16:00" datetime="2017-02-12T08:00:00.000Z"  itemprop="datePublished">2017-02-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
+<p>随着CSS3的兴起，前端可以自己做出阴影、圆角等效果，但是前端不是专业的设计师，<br>所以还是需要UI来帮我们设计效果，那么问题来了，UI设计出的效果图，我们前端怎么去正确的实现呢？<br>下面来看一下Photoshop投影各个参数如何转换成CSS3中的box-shadow。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="box-shadow"><a href="#box-shadow" class="headerlink" title="box-shadow"></a>box-shadow</h1><p>基本语法如下：</p>
+<p><code>{box-shadow:[inset] x-offset y-offset blur-radius spread-radiuscolor}</code></p>
+<h1 id="Photoshop"><a href="#Photoshop" class="headerlink" title="Photoshop"></a>Photoshop</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com2.z0.glb.clouddn.com/photoshop-convert-box-shadow/jpg/1.jpg" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>混合模式</td>
+<td>Photoshop有很多混合模式，<strong>但是CSS3阴影只支持正常模式</strong></td>
+</tr>
+<tr>
+<td>颜色(color)</td>
+<td>阴影颜色。对应于CSS3阴影中的 color 值</td>
+</tr>
+<tr>
+<td>不透明度(opacity)</td>
+<td>阴影的不透明度。对应于CSS3阴影的颜色 rgba() 中的 a 值</td>
+</tr>
+<tr>
+<td>角度(Angle)</td>
+<td>投影的角度</td>
+</tr>
+<tr>
+<td>距离(Distance)</td>
+<td>阴影的距离。根据角度和距离可以换算出CSS3阴影中的x-offset和y-offet。 x-offset = Distance * cos(180 -Angle) ， y-offset = Distance * sin(180 - Angle)</td>
+</tr>
+<tr>
+<td>扩展(Spread)</td>
+<td>阴影的扩展大小。控制阴影实体颜色和虚化颜色的多少。 Spread * Size = 阴影中实体颜色的大小 。剩下的就是虚化的颜色。CSS3阴影 spread-radius = Spread * Size</td>
+</tr>
+<tr>
+<td>大小(Size)</td>
+<td>阴影的大小。在CSS3中 blur-radius + spread-radius = Size 即 blur-radius = Size - spread-radius</td>
+</tr>
+</tbody>
+</table>
+<h1 id="text-shadow"><a href="#text-shadow" class="headerlink" title="text-shadow"></a>text-shadow</h1><p>text-shadow 没有 spread-radius 所以不能完全实现PS中的效果。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://www.th7.cn/web/html-css/201511/137180.shtml" target="_blank" rel="external">Photoshop投影与CSS中box-shadow的转换</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-21T03:23:38.651Z" itemprop="dateUpdated">2017年4月21日 11:23</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2017/02/12/front/photoshop-convert-box-shadow/" target="_blank" rel="external">http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/</a>
+    </div>
+    <footer>
+        <a href="http://zhensherlock.github.io">
+            <img src="/img/avatar.jpg" alt="孙臻轩">
+            孙臻轩
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Photoshop/">Photoshop</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/&title=《Photoshop投影转换成CSS3中box-shadow》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/&title=《Photoshop投影转换成CSS3中box-shadow》 — MichaelSun's Blog&source=正文
+随着CSS3的兴起，前端可以自己做出阴影、圆角等效果，但是前端不是专业的设计师，所以还是需要UI来帮我们设计效果，那么问题来了，UI设计出的效果图，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Photoshop投影转换成CSS3中box-shadow》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/12/front/html5-indexeddb/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">HTML5 IndexedDB 入门</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/01/15/mac/install-mysql/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">macOS 安装 MySQL</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="front/photoshop-convert-box-shadow" data-title="Photoshop投影转换成CSS3中box-shadow" data-url="http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.5');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>MichaelSun's Blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/&title=《Photoshop投影转换成CSS3中box-shadow》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/&title=《Photoshop投影转换成CSS3中box-shadow》 — MichaelSun's Blog&source=正文
+随着CSS3的兴起，前端可以自己做出阴影、圆角等效果，但是前端不是专业的设计师，所以还是需要UI来帮我们设计效果，那么问题来了，UI设计出的效果图，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Photoshop投影转换成CSS3中box-shadow》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACu0lEQVR42u3aS27jQAwFQN//0hlgVhkklt8j1RMjKK0E/8TqAM0Oyccjvj7+Xp/vP7/y9TPPXnn2y1+vZ+8+Tlx4eHh4o9CTx2wCul6g/JU8Zjw8PLzTvCQZXCeA2ebeLkEeMx4eHt478BLYXQuHh4eH9zt4+yTRfhIPDw/vnXntsTh5WF6eyMvHB2steHh4eDFv1gD72fvj/T08PDy8UVc9v2Zt/vYwXUeFh4eHd4B3XaJNwpoBkiJF/vQXkeDh4eHdystbXG3xtC00JL+fL8o/eQ8PDw/vAC/ZavOhgbwlNksPxbfw8PDwDvDyU+isMJGngXz0qk0/eHh4ePfy8s03L9q2SaXtWyWfxMPDwzvNS8qmLWnf6Jr9ztP+Hh4eHt5/5M1CbEvDeWop/kvAw8PDO8DbHGc3v5Y/azba9WKYAA8PD+8Arz0oR6WBOLg2weSHcjw8PLw9L99kZ8fifGBrFskLMB4eHt4B3myYqS1J5KWNe2PAw8PDO8drD8ezBlhSgMiLDkXRBA8PD+8YLy/Ltpv45iCeRPJiOfDw8PCO8dpRp+Q+CSgvfAzHtvDw8PBu5eVb86xhvzmat0sW/d3w8PDw1rx9o6stRswKDe3TiwYYHh4eXslrC7KzNlWLzEu0w/o0Hh4e3oKXt5TakalN86wti9RDV3h4eHiHeXmSaANtG2PJIEKdGPDw8PBGvPbL+/tNOqkXFA8PD+8YL08D7QY9zFRlcWQ4GYGHh4dX8mbb9P7KhwzyRPXNu3h4eHgHeLOA8kGBvBixKUm06Q0PDw9vz8s35U3Lf/aUzagBHh4e3mneXckg3+7vPb5HDTA8PDy8H+W1Dar2qL1JEnh4eHjvw7tucW0O07N0UhQj8PDw8A7w9mNPbQljVlwYNrfw8PDwbuVtmv1t6HlCSr57vbh4eHh4B3h/ADzOQQV+24OqAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.5"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.5" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>SQL Server 获取插入记录后的自增ID | MichaelSun&#39;s Blog | javascript,.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SQL Server">
+    <meta name="description" content="导语
+有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。
+
+正文如果我们要获取自增的ID，最简单的方法就是在INSERT语句之后select @@indentity，但是如果插入的表有INSERT触发器，那使用select @@indentity就会不对。例如，有两个表 T1 和 T2（T1 和 T2 都有 IDENTITY 列），在 T1 上定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL Server 获取插入记录后的自增ID">
+<meta property="og:url" content="http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/index.html">
+<meta property="og:site_name" content="MichaelSun's Blog">
+<meta property="og:description" content="导语
+有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。
+
+正文如果我们要获取自增的ID，最简单的方法就是在INSERT语句之后select @@indentity，但是如果插入的表有INSERT触发器，那使用select @@indentity就会不对。例如，有两个表 T1 和 T2（T1 和 T2 都有 IDENTITY 列），在 T1 上定">
+<meta property="og:updated_time" content="2017-01-12T10:31:11.859Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL Server 获取插入记录后的自增ID">
+<meta name="twitter:description" content="导语
+有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。
+
+正文如果我们要获取自增的ID，最简单的方法就是在INSERT语句之后select @@indentity，但是如果插入的表有INSERT触发器，那使用select @@indentity就会不对。例如，有两个表 T1 和 T2（T1 和 T2 都有 IDENTITY 列），在 T1 上定">
+    
+        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孙臻轩</h5>
+          <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhensherlock" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.linkedin.com/in/3056750" target="_blank" >
+                <i class="icon icon-lg icon-linkedin"></i>
+                Linkedin
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SQL Server 获取插入记录后的自增ID</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">SQL Server 获取插入记录后的自增ID</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-27T01:07:40.000Z" itemprop="datePublished" class="page-time">
+  2016-04-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#导语"><span class="post-toc-number">1.</span> <span class="post-toc-text">导语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正文"><span class="post-toc-number">2.</span> <span class="post-toc-text">正文</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-database/sql-server-identity"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">SQL Server 获取插入记录后的自增ID</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年04月27日 9:07" datetime="2016-04-27T01:07:40.000Z"  itemprop="datePublished">2016-04-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。</p>
+</blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>如果我们要获取自增的ID，最简单的方法就是在INSERT语句之后<code>select @@indentity</code>，但是如果插入的表有INSERT触发器，那使用<code>select @@indentity</code>就会不对。<br>例如，有两个表 T1 和 T2（T1 和 T2 都有 IDENTITY 列），在 T1 上定义了一个 INSERT 触发器。当 T1 插入数据时，T1 的INSERT触发器被触发，并在 T2 中插入一行，这时 @@IDENTITY 返回插入到当前会话中任何作用域内的最后一个 IDENTITY 列值，所以该值是插入 T2 中的ID。<br>在SQL Server 中还有其他两个函数可以获取插入到 IDENTITY 列中的值，分别是：<code>SCOPE_IDENTITY</code>、<code>IDENT_CURRENT</code>，接一下我们来分别了解一下各自的语法。<br><a id="more"></a></p>
+<ul>
+<li>@@IDENTITY 返回为<strong>当前会话的所有作用域中的任何表</strong>最后生成的标识值。</li>
+<li>SCOPE_IDENTITY 返回为<strong>当前会话和当前作用域中的任何表</strong>最后生成的标识值。</li>
+<li>IDENT_CURRENT 返回为<strong>任何会话和任何作用域中的特定表</strong>最后生成的标识值，它不受作用域和会话的限制，而受限于所指定的表。</li>
+</ul>
+<p>按照其语法的来看，我们可以推断出各个函数应用到上面例子中的结果分别是：</p>
+<ul>
+<li>@@IDENTITY 返回插入到当前会话中任何作用域内的最后一个 IDENTITY 列值，该值是插入 T2 中的值。</li>
+<li>SCOPE_IDENTITY 返回插入 T1 中的 IDENTITY 值，该值是发生在相同作用域中的最后一个 INSERT。如果在作用域中发生插入语句到标识列之前唤醒调用 SCOPE_IDENTITY() 函数，则该函数将返回 NULL 值。</li>
+<li>而IDENT_CURRENT(‘T1’) 和 IDENT_CURRENT(‘T2’) 返回的值分别是这两个表最后自增的值。</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.jb51.net/article/39029.htm" target="_blank" rel="external">使用SQL Server 获取插入记录后的ID(自动编号)</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-01-12T10:31:11.859Z" itemprop="dateUpdated">2017年1月12日 18:31</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2016/04/27/database/sql-server-identity/" target="_blank" rel="external">http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/</a>
+    </div>
+    <footer>
+        <a href="http://zhensherlock.github.io">
+            <img src="/img/avatar.jpg" alt="孙臻轩">
+            孙臻轩
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Server/">SQL Server</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/&title=《SQL Server 获取插入记录后的自增ID》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/&title=《SQL Server 获取插入记录后的自增ID》 — MichaelSun's Blog&source=导语
+有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。
+
+正文如果我们要获取自增的ID，最简单的方法..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SQL Server 获取插入记录后的自增ID》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/04/28/front/photoshop-convert-px/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Photoshop 将点转换成PX</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/21/front/jslint-missing-radix-parameter/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JSLint Missing Radix Parameter</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="database/sql-server-identity" data-title="SQL Server 获取插入记录后的自增ID" data-url="http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.5');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>MichaelSun's Blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/&title=《SQL Server 获取插入记录后的自增ID》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/&title=《SQL Server 获取插入记录后的自增ID》 — MichaelSun's Blog&source=导语
+有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。
+
+正文如果我们要获取自增的ID，最简单的方法..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SQL Server 获取插入记录后的自增ID》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3a0W7bMAwF0Pz/T3fAnjp0ce4lrWQDjp8C15V5FEBSSD4e8fX1+/r++fud6/s/R3j2Xz9HeHb/5gsPDw9vFHrymjagfIISWPLXv0wBHh4e3jFeshkky/311My2mWTMp/fx8PDwPsq7DnSPT7YKPDw8vP+Ll4TeJhHaozweHh7ev8Ob/fjPF/FN2iJPiODh4eG9hzcrgH328/H6Hh4eHt6oqp4su5vlOBl5FSceHh7eAd4sxM2LW1ib3n0xi3h4eHhr3izQZGqu06ybpG0xHXh4eHgHeEma9Xo5zl/WHsc3ydzo5I6Hh4c34iWlozZlMFy+y8N99CQeHh7eYd71/bb8v2nG2jQZRAlcPDw8vAVvhskD3Wwts3Gi7xAPDw/vJl7+s3/WHLAvcc0aFPDw8PBO8PLNIOpEKMtd+TObwhseHh7eOV6eZm0DbVsH8gjrBiw8PDy8Ba9tusqX/jzB0bKLwzceHh7eAV5+RJ4x9ondnPGiAIaHh4d3jDfbHmYJgrzAtmkvwMPDw7uXlwyRhNg2E+wLXVGiBA8PD+8wb18Aa5Ow+TOzIzgeHh7eOV6+rOcH601TQp4CLhK4eHh4eDfxkhA3DU95uas9ym+ex8PDw7uXlwQUNTyVL54lNdr0Bx4eHt69vH3Bvm2x2he9rot2eHh4eKd57WF636qVh5g0NzySCw8PD+8m3rkGgnya2ikoLHh4eHjHeO1aer1wz9K7s+vFF4CHh4d3K++rvNqXvT+n+sf4eHh4eAd4+8V3NmjbhrVpaMDDw8M7wUs2g7bwPxv53mZWPDw8vNO8c5tBu6DP9q6oXQAPDw/vo7y2WJWXr9rkRZ2lxsPDw3sjL28j2KeG8wnFw8PD+xQvGWLWZDB7S5FuaHPGeHh4eGve5qd+vj3s/zdvLMDDw8M7xvsFImZzqJRoaWgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.5"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.5" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

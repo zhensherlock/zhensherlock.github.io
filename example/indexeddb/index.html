@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>IndexedDB</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">IndexedDB Manage</a>
+        </div>
+        <!--<div id="navbar" class="navbar-collapse collapse">-->
+        <!--<ul class="nav navbar-nav navbar-right">-->
+        <!--<li><a href="#">Dashboard</a></li>-->
+        <!--<li><a href="#">Settings</a></li>-->
+        <!--<li><a href="#">Profile</a></li>-->
+        <!--<li><a href="#">Help</a></li>-->
+        <!--</ul>-->
+        <!--<form class="navbar-form navbar-right">-->
+        <!--<input type="text" class="form-control" placeholder="Search...">-->
+        <!--</form>-->
+        <!--</div>-->
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" id="nav-sidebar">
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Dashboard</h1>
+
+            <div class="row placeholders">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+            </div>
+
+            <h2 class="sub-header">Section title</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1,001</td>
+                        <td>Lorem</td>
+                        <td>ipsum</td>
+                        <td>dolor</td>
+                        <td>sit</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="container"></div>
+<script src="https://cdn.bootcss.com/react/15.5.4/react.min.js"></script>
+<script src="https://cdn.bootcss.com/react/15.5.4/react-dom.min.js"></script>
+<script src="https://cdn.bootcss.com/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
+<script>
+    var Modal = ReactBootstrap.Modal;
+    var Button = ReactBootstrap.Button;
+    var FormGroup = ReactBootstrap.FormGroup;
+    var ControlLabel = ReactBootstrap.ControlLabel;
+    var FormControl = ReactBootstrap.FormControl;
+    var HelpBlock = ReactBootstrap.HelpBlock;
+
+</script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.24.0/babel.min.js"></script>
+<script type="text/babel">
+    class FormDatabaseInfo extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                value: ''
+            };
+            this.handleChange = this.handleChange.bind(this);
+        }
+
+        getValidationState() {
+            const length = this.state.value.length;
+            if (length > 10) return 'success';
+            else if (length > 5) return 'warning';
+            else if (length > 0) return 'error';
+        }
+
+        handleChange(e) {
+            this.setState({ value: e.target.value });
+        }
+
+        render() {
+            return (
+                <FormGroup controlId="formBasicText" validationState={this.getValidationState()}>
+                    <ControlLabel>New Database Name</ControlLabel>
+                    <FormControl
+                        type="text"
+                        value={this.state.value}
+                        placeholder="Enter text"
+                        onChange={this.handleChange} />
+                    <FormControl.Feedback />
+                </FormGroup>
+            );
+        }
+    }
+
+    class NavSidebar extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                showNewModal: false
+            };
+            this.openNewModal = this.openNewModal.bind(this);
+            this.closeNewModal = this.closeNewModal.bind(this);
+        }
+
+        openNewModal() {
+            this.setState({ showNewModal: true });
+        }
+
+        closeNewModal() {
+            this.setState({ showNewModal: false });
+        }
+
+        saveDatabase() {
+
+        }
+
+        render() {
+            return (
+                <div>
+                    <ul className="nav nav-sidebar">
+                        <li><a href="javascript:;" onClick={this.openNewModal}>New Database</a></li>
+                        <li><a href="javascript:;">Analytics</a></li>
+                        <li><a href="javascript:;">Export</a></li>
+                    </ul>
+                    <Modal show={this.state.showNewModal} onHide={this.closeNewModal}>
+                        <Modal.Header>
+                            <Modal.Title>New Database</Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body>
+                            <FormDatabaseInfo></FormDatabaseInfo>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button onClick={this.closeNewModal}>Close</Button>
+                            <Button onClick={this.saveDatabase} bsStyle="primary">Save Database</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+            <NavSidebar />,
+        document.getElementById('nav-sidebar')
+    );
+</script>
+</body>
+</html>

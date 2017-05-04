@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>HTML5 IndexedDB 入门 | MichaelSun&#39;s Blog | javascript,.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="HTML5,indexedDB">
+    <meta name="description" content="导语
+在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML5 IndexedDB 入门">
+<meta property="og:url" content="http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/index.html">
+<meta property="og:site_name" content="MichaelSun's Blog">
+<meta property="og:description" content="导语
+在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。">
+<meta property="og:updated_time" content="2017-04-24T06:41:11.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML5 IndexedDB 入门">
+<meta name="twitter:description" content="导语
+在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。">
+    
+        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孙臻轩</h5>
+          <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhensherlock" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.linkedin.com/in/3056750" target="_blank" >
+                <i class="icon icon-lg icon-linkedin"></i>
+                Linkedin
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">HTML5 IndexedDB 入门</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">HTML5 IndexedDB 入门</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-12T04:04:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#导语"><span class="post-toc-number">1.</span> <span class="post-toc-text">导语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IndexedDB"><span class="post-toc-number">2.</span> <span class="post-toc-text">IndexedDB</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非关系型数据库"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">非关系型数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务模式"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">事务模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#异步同步"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">异步同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#同源（same-origin）策略"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">同源（same-origin）策略</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库的CURD"><span class="post-toc-number">3.</span> <span class="post-toc-text">数据库的CURD</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#打开数据库"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">打开数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作数据库结构"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">操作数据库结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新增和修改数据"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">新增和修改数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除数据"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">删除数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#读取数据"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">读取数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-front/html5-indexeddb"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">HTML5 IndexedDB 入门</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月12日 12:04" datetime="2017-03-12T04:04:00.000Z"  itemprop="datePublished">2017-03-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。<br>近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="IndexedDB"><a href="#IndexedDB" class="headerlink" title="IndexedDB"></a>IndexedDB</h2><p>IndexedDB是一种可以让开发者将数据保存在客户端中，保存的数据可以被查询，并且可以离线使用。IndexedDB对于那些需要存储大量数据，或者是需要离线使用的程序是非常有效的解决方法。<br>下面是IndexedDB数据库的特点：</p>
+<h3 id="非关系型数据库"><a href="#非关系型数据库" class="headerlink" title="非关系型数据库"></a>非关系型数据库</h3><p>作为WebSQL数据库的取代品，IndexedDB和WebSQL的不同点在于WebSQL是关系型数据库（比如：SQL Server，MySQL）IndexedDB是非关系型数据库（比如：mongodb）。<br>IndexedDB不使用SQL来操作数据库。 它属于noSQL数据库。<br>IndexedDB数据库使用key-value键值对储存数据，values数据可以是各式各样的结构体，也可以是文件、blobs等数据类型。</p>
+<h3 id="事务模式"><a href="#事务模式" class="headerlink" title="事务模式"></a>事务模式</h3><p>IndexedDB的任何数据库操作行为都必须要发生在事务中，如果在事务外执行数据库操作，都会提示报错。IndexedDB事务是自动提交，而非手动提交。<br>事务主要用在高并发系统中，当用户在不同的标签页同时打开多个实例时，这时如果没有事务功能，这些实例就会互相影响，导致数据错乱。</p>
+<h3 id="异步同步"><a href="#异步同步" class="headerlink" title="异步同步"></a>异步同步</h3><p>IndexedDB分别提供了同步和异步访问的API，同步API目前还没有被任何浏览器所实现，并且同步API只能在Web Workers中使用。<strong>异步API在Web Workers内部和外部都可以使用</strong>。<br>异步API方法调用完后会继续向后执行，而不会阻塞调用线程，如果想要返回数据需要开发者提供一个回调函数来接受数据，当操作完成时，数据库会以DOM事件的方式通知你，同时事件的类型会告诉你这个操作是否成功完成。<br>这个和XMLHttpRequest请求是类似的。</p>
+<h3 id="同源（same-origin）策略"><a href="#同源（same-origin）策略" class="headerlink" title="同源（same-origin）策略"></a>同源（same-origin）策略</h3><p>IndexedDB遵循同源（same-origin）策略，同源下，数据共享。所以你只能访问同源中存储的数据，而不能访问其他源的。<strong>域名、应用层协议和端口只要有一个不同，就是不同源</strong>。</p>
+<h2 id="数据库的CURD"><a href="#数据库的CURD" class="headerlink" title="数据库的CURD"></a>数据库的CURD</h2><p>下面来看一下IndexedDB操作示例，以下示例使用了部分es6语法：</p>
+<h3 id="打开数据库"><a href="#打开数据库" class="headerlink" title="打开数据库"></a>打开数据库</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 打开数据库，第一个参数是数据库名称，第二个参数是数据库版本号，主要用于变更数据库结构</span></div><div class="line"><span class="keyword">var</span> request = <span class="built_in">window</span>.indexedDB.open(<span class="string">'library'</span>, <span class="number">1</span>);</div><div class="line"><span class="keyword">var</span> dbObject = &#123;&#125;;</div><div class="line"><span class="comment">// 打开数据库失败的回调函数</span></div><div class="line">request.onerror = <span class="function"><span class="params">event</span> =&gt;</span> &#123;</div><div class="line">    alert(<span class="string">"不能打开数据库,错误代码: "</span> + event.target.errorCode);</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 打开数据库成功的回调函数</span></div><div class="line">request.onsuccess = <span class="function"><span class="params">event</span> =&gt;</span> &#123;</div><div class="line">    dbObject.db = event.target.result;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 请求数据库版本改变的回调函数，用于操作数据库结构</span></div><div class="line">request.onupgradeneeded = <span class="function"><span class="params">event</span> =&gt;</span> &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="操作数据库结构"><a href="#操作数据库结构" class="headerlink" title="操作数据库结构"></a>操作数据库结构</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 请求数据库版本改变的回调函数，用于操作数据库结构</span></div><div class="line">request.onupgradeneeded = <span class="function"><span class="params">event</span> =&gt;</span> &#123;</div><div class="line">    dbObject.db = event.target.result;</div><div class="line">    <span class="comment">// 如不存在books表结构，就创建books表</span></div><div class="line">    <span class="keyword">if</span>(!dbObject.db.objectStoreNames.contains(<span class="string">'books'</span>)) &#123;</div><div class="line">        <span class="comment">// 创建books表，使用isbn字段作为主键</span></div><div class="line">        <span class="keyword">var</span> store = dbObject.db.createObjectStore(<span class="string">"books"</span>, &#123;<span class="attr">keyPath</span>: <span class="string">"isbn"</span>&#125;);</div><div class="line">        <span class="comment">// 创建索引，设置title字段唯一性，第一个参数是索引的名称，第二个参数是索引涉及到的字段列表，第三个参数是设置是否具有唯一性</span></div><div class="line">        store.createIndex(<span class="string">"by_title"</span>, <span class="string">"title"</span>, &#123;<span class="attr">unique</span>: <span class="literal">true</span>&#125;);</div><div class="line">        store.createIndex(<span class="string">"by_author"</span>, <span class="string">"author"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 如不存在user表结构，就创建user表</span></div><div class="line">    <span class="keyword">if</span>(!dbObject.db.objectStoreNames.contains(<span class="string">'user'</span>)) &#123;</div><div class="line">        <span class="comment">// 创建books表，使用使用自增字段，系统自动创建key字段</span></div><div class="line">        <span class="keyword">var</span> userStore = dbObject.db.createObjectStore(<span class="string">"user"</span>, &#123; <span class="attr">autoIncrement</span>:<span class="literal">true</span> &#125;);</div><div class="line">        <span class="comment">// 创建索引，设置name字段唯一性</span></div><div class="line">        userStore.createIndex(<span class="string">"by_name"</span>, <span class="string">"name"</span>, &#123;<span class="attr">unique</span>: <span class="literal">true</span>&#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="新增和修改数据"><a href="#新增和修改数据" class="headerlink" title="新增和修改数据"></a>新增和修改数据</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 创建一个事务，第一个参数是该事务所涉及到的表结构，第二个参数是该事务的权限，当前是可读可写，其他两个是readonly（只读取数据时使用）、versionchange（基本不用）</span></div><div class="line"><span class="keyword">let</span> transaction = dbObject.db.transaction([<span class="string">'books'</span>], <span class="string">"readwrite"</span>);</div><div class="line"><span class="comment">// 获取books表实例</span></div><div class="line"><span class="keyword">let</span> store = transaction.objectStore(<span class="string">'books'</span>);</div><div class="line"><span class="comment">// 根据isbn主键进行搜索，如果没有相同主键的数据，就添加，否则就根据当前主键数值进行修改。</span></div><div class="line"><span class="keyword">let</span> request = store.put(&#123;<span class="attr">title</span>: title, <span class="attr">author</span>: author, <span class="attr">isbn</span>: isbn&#125;);</div><div class="line"><span class="comment">// 操作成功的回调函数</span></div><div class="line">request.onsuccess = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'put complete'</span>);</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 操作失败的回调函数</span></div><div class="line">request.onerror = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(event.target.errorCode);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>如果只想添加可以使用add方法，当主键值相冲突时，会执行操作失败的回调函数。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> request = store.add(&#123;<span class="attr">title</span>: title, <span class="attr">author</span>: author, <span class="attr">isbn</span>: isbn&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 根据isbn主键值删除所对应的数据</span></div><div class="line">dbObject.db.transaction(<span class="string">'books'</span>, <span class="string">'readwrite'</span>).objectStore(<span class="string">'books'</span>).delete(isbn);</div><div class="line"></div><div class="line"><span class="comment">// 清除表中所有的数据</span></div><div class="line">dbObject.db.transaction(<span class="string">'books'</span>, <span class="string">'readwrite'</span>).objectStore(<span class="string">'books'</span>).clear();</div></pre></td></tr></table></figure>
+<p>以上方法执行的结果都必须使用onsuccess和onerror中获取。</p>
+<h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><p>使用索引来查询数据的前提是你只需要一条数据，如果有多条数据满足情况，你总是得到键值最小的那个。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> store = dbObject.db.transaction(<span class="string">'books'</span>).objectStore(<span class="string">'books'</span>);</div><div class="line"><span class="comment">// by_title是索引名称，在onupgradeneeded函数中创建的。</span></div><div class="line">store.index(<span class="string">'by_title'</span>).get(title).onsuccess = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(event.target.result);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>当我们筛选数据时需要返回多条数据的时候，我们就需要使用游标来实现。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> store = dbObject.db.transaction(<span class="string">'books'</span>).objectStore(<span class="string">'books'</span>);</div><div class="line"><span class="comment">// 根据by_author索引来使用游标。</span></div><div class="line">store.index(<span class="string">'by_author'</span>).openCursor(IDBKeyRange.only(author)).onsuccess = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">let</span> cursor = event.target.result;</div><div class="line">    <span class="keyword">if</span>(cursor)&#123;</div><div class="line">        <span class="keyword">let</span> obj = cursor.value;</div><div class="line">        <span class="built_in">console</span>.log(obj);</div><div class="line">        <span class="comment">// 将标识标记到下一行。</span></div><div class="line">        cursor.continue();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>上面用到的IDBKeyRange是用于添加查询条件的，相当于sql中的where从句，IDBKeyRange有以下几个方法：</p>
+<p>1、只匹配条件为 “michael” 值<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">IDBKeyRange.only(<span class="string">'michael'</span>)</div></pre></td></tr></table></figure></p>
+<p>2、缩小匹配范围，从 “michael” 到底部，包括 “michael”<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">IDBKeyRange.lowerBound(<span class="string">'michael'</span>);</div></pre></td></tr></table></figure></p>
+<p>3、缩小匹配范围，从 “michael” 到底部，不包括 “michael”<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">IDBKeyRange.lowerBound(<span class="string">'michael'</span>, <span class="literal">true</span>);</div></pre></td></tr></table></figure></p>
+<p>4、缩小匹配范围，从头到 “michael” ，包括 “michael”<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">IDBKeyRange.upperBound(<span class="string">'michael'</span>);</div></pre></td></tr></table></figure></p>
+<p>5、缩小匹配范围，从头到 “michael” ，不包括 “michael”<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">IDBKeyRange.upperBound(<span class="string">'michael'</span>, <span class="literal">true</span>);</div></pre></td></tr></table></figure></p>
+<p>6、缩小匹配范围，从头到 “michael” ，不包括 “michael”<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">IDBKeyRange.upperBound(<span class="string">'michael'</span>, <span class="literal">true</span>);</div></pre></td></tr></table></figure></p>
+<p>7、缩小匹配范围，从 “michael” 到 “john” ，第三个参数是否不包括 “michael” ，第四个参数是否不包括 “john”<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">IDBKeyRange.bound(<span class="string">'michael'</span>, <span class="string">'john'</span>, <span class="literal">true</span>, <span class="literal">true</span>);</div></pre></td></tr></table></figure></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API" target="_blank" rel="external">IndexedDB</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Basic_Concepts_Behind_IndexedDB" target="_blank" rel="external">基本概念</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB" target="_blank" rel="external">使用 IndexedDB</a><br><a href="https://w3c.github.io/IndexedDB/" target="_blank" rel="external">Indexed Database API 2.0</a><br><a href="http://www.cnblogs.com/dolphinX/p/3415761.html" target="_blank" rel="external">HTML5本地存储——IndexedDB（一：基本使用）</a><br><a href="http://www.cnblogs.com/dolphinX/p/3416889.html" target="_blank" rel="external">HTML5本地存储——IndexedDB（二：索引）</a><br><a href="http://www.jianshu.com/p/4c74cbe60d83" target="_blank" rel="external">HTML5本地存储IndexedDB基础介绍（一）-数据库的简单增删改查</a><br><a href="http://www.jianshu.com/p/15a02e54160d" target="_blank" rel="external">HTML5本地存储IndexedDB基础介绍（二）- 游标和索引</a><br><a href="https://www.zhihu.com/question/36101326" target="_blank" rel="external">indexedDB如何实现满足多重条件查询？</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-24T06:41:11.569Z" itemprop="dateUpdated">2017年4月24日 14:41</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2017/03/12/front/html5-indexeddb/" target="_blank" rel="external">http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/</a>
+    </div>
+    <footer>
+        <a href="http://zhensherlock.github.io">
+            <img src="/img/avatar.jpg" alt="孙臻轩">
+            孙臻轩
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/indexedDB/">indexedDB</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/&title=《HTML5 IndexedDB 入门》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/&title=《HTML5 IndexedDB 入门》 — MichaelSun's Blog&source=导语
+在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cook..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTML5 IndexedDB 入门》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/12/front/photoshop-convert-box-shadow/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Photoshop投影转换成CSS3中box-shadow</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="front/html5-indexeddb" data-title="HTML5 IndexedDB 入门" data-url="http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.5');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>MichaelSun's Blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/&title=《HTML5 IndexedDB 入门》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/&title=《HTML5 IndexedDB 入门》 — MichaelSun's Blog&source=导语
+在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cook..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTML5 IndexedDB 入门》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqElEQVR42u3aQW7DMAwEwP7/0+21RRB7SYqBC4xPQetEHAeQmJW+vuLrO7he7/z9l9fXr5//bsTr9x648PDw8I6W/m6wpMR3/73G5NTrmvHw8PC2eXlB+UR/M/DlWPlic2PBw8PDewBv8q6cdL1g4OHh4f1HXrUhzotOSHh4eHhP4OUfnTfNeYn5WItZCx4eHl7My3eRnvN6ZX8PDw8P79CBgDwmqDbKeevcu/Dw8PA2ePmEW2VvnAur1omHh4e3wetN08n0nUe91WNehUeMh4eHt8A7daCqyrgGVBenAzkKHh4eXms/KNl2ijr0OFDIj15NHjceHh7eWV4+yVYL6kUV8w25+teKh4eHd5I3CWqTd/WWkMLRKzw8PLyP8yYbUb0Yt7rRdVMVHh4e3hrv1AZVNQKeRLRRJXh4eHgLvF5om2B6jXL+UPLR8fDw8M7ykpuqA/fKmixFhXUPDw8P7xAvCV4nEUYSEE8a9GbWgoeHh9fiVYODaojQO7Y1j4nx8PDwPsNLFob8eEFSaP4gqptzf+7Hw8PDW+AlE30vqJ1sqvXabjw8PLxtXt7I5pFuHjrkz74aTFSyCjw8PLwpb7ThFC8tkwWg8AXg4eHhLfDyQLYKPhXRVpeK8m8FPDw8vBZv0sJW7+wFFpO/4OHh4e3xksGqv/F7m2r5iMnRBDw8PLw9Xm8Sn2yPVRebXjiCh4eHt81LZtdTm2T5llvv6CoeHh7eBm8y9U+OjebtcvXx4eHh4W3zeuUmRVe3sqoHCHoLBh4eHt4pXjXGbXbug0pGywYeHh7eGu9U4zsPZw+vbHh4eHiP4VUZ1c+ct+94eHh4z+FN2uXrB5FXUvgEPDw8vDVeNQjIj171mu98qbgZBQ8PD2+BNw9kzzLyxvpYbIGHh4eX1vYDr8sNAZp4Ty8AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.5"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.5" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

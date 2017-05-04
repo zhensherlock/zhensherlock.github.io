@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" manifest="example.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Cache</title>
+    <link href="css/app.css" rel="stylesheet">
+</head>
+<body>
+    <button id="btnUpdateAppche">update appche</button>
+    <script src="js/app.js"></script>
+<script>
+    applicationCache.addEventListener('updateready', function(e) {
+        if (applicationCache.status == applicationCache.UPDATEREADY) {
+
+            applicationCache.swapCache(); //使用新版本资源
+            window.location.reload(); //刷新页面
+        }
+    }, false);
+    document.querySelector('#btnUpdateAppche').addEventListener('click', function (e) {
+        applicationCache.update();
+    });
+</script>
+</body>
+</html>

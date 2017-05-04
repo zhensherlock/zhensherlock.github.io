@@ -1,0 +1,12 @@
+CACHE MANIFEST
+#v1.0.0
+
+CACHE:
+js/app.js
+css/app.css
+
+NETWORK:
+
+
+FALLBACK:
+404.html

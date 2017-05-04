@@ -13,29 +13,29 @@
     
     
     
-    <title>JSLint Missing Radix Parameter | MichaelSun&#39;s Blog | javascript,.net</title>
+    <title>SQL Server Case When 用法 | MichaelSun&#39;s Blog | javascript,.net</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="JSLint,JavaScript">
-    <meta name="description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。
-parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
+    <meta name="keywords" content="SQL Server">
+    <meta name="description" content="文正Case When有两种用法。分别是：简单Case函数和Case搜索函数。
+简单Case函数CASE sex         WHEN &apos;1&apos; THEN &apos;男&apos;         WHEN &apos;2&apos; THEN &apos;女&apos;ELSE &apos;其他&apos; END
+Case搜索函数CASE WHEN sex = &apos;1&apos; THEN &apos;男&apos;         WHEN sex = &apos;2&apos; THEN &apos;女&apos;ELSE &apos;其他&apos;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JSLint Missing Radix Parameter">
-<meta property="og:url" content="http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/index.html">
+<meta property="og:title" content="SQL Server Case When 用法">
+<meta property="og:url" content="http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/index.html">
 <meta property="og:site_name" content="MichaelSun's Blog">
-<meta property="og:description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。
-parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
-<meta property="og:updated_time" content="2017-01-12T10:30:17.771Z">
+<meta property="og:description" content="文正Case When有两种用法。分别是：简单Case函数和Case搜索函数。
+简单Case函数CASE sex         WHEN &apos;1&apos; THEN &apos;男&apos;         WHEN &apos;2&apos; THEN &apos;女&apos;ELSE &apos;其他&apos; END
+Case搜索函数CASE WHEN sex = &apos;1&apos; THEN &apos;男&apos;         WHEN sex = &apos;2&apos; THEN &apos;女&apos;ELSE &apos;其他&apos;">
+<meta property="og:updated_time" content="2017-01-12T10:31:13.940Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSLint Missing Radix Parameter">
-<meta name="twitter:description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。
-parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
+<meta name="twitter:title" content="SQL Server Case When 用法">
+<meta name="twitter:description" content="文正Case When有两种用法。分别是：简单Case函数和Case搜索函数。
+简单Case函数CASE sex         WHEN &apos;1&apos; THEN &apos;男&apos;         WHEN &apos;2&apos; THEN &apos;女&apos;ELSE &apos;其他&apos; END
+Case搜索函数CASE WHEN sex = &apos;1&apos; THEN &apos;男&apos;         WHEN sex = &apos;2&apos; THEN &apos;女&apos;ELSE &apos;其他&apos;">
     
         <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
     
@@ -102,7 +102,7 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://www.linkedin.com/in/michael-sun-13056750" target="_blank" >
+              <a href="https://www.linkedin.com/in/3056750" target="_blank" >
                 <i class="icon icon-lg icon-linkedin"></i>
                 Linkedin
               </a>
@@ -126,7 +126,7 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">JSLint Missing Radix Parameter</div>
+        <div class="flex-col header-title ellipsis">SQL Server Case When 用法</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -148,15 +148,15 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">JSLint Missing Radix Parameter</h1>
+        <h1 class="title">SQL Server Case When 用法</h1>
         <h5 class="subtitle">
             
-                <time datetime="2016-04-21T08:44:37.000Z" itemprop="datePublished" class="page-time">
-  2016-04-21
+                <time datetime="2016-04-19T00:41:52.000Z" itemprop="datePublished" class="page-time">
+  2016-04-19
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据库/">数据库</a></li></ul>
 
             
         </h5>
@@ -172,20 +172,20 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文正"><span class="post-toc-number">1.</span> <span class="post-toc-text">文正</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">2.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文正"><span class="post-toc-number">1.</span> <span class="post-toc-text">文正</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单Case函数"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">简单Case函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Case搜索函数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Case搜索函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">2.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-jslint-missing-radix-parameter"
+<article id="post-database/sql-server-case-when"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">JSLint Missing Radix Parameter</h1>
+        <h1 class="post-card-title">SQL Server Case When 用法</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016年04月21日 16:44" datetime="2016-04-21T08:44:37.000Z"  itemprop="datePublished">2016-04-21</time>
+            <time class="post-time" title="2016年04月19日 8:41" datetime="2016-04-19T00:41:52.000Z"  itemprop="datePublished">2016-04-19</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据库/">数据库</a></li></ul>
 
 
 
@@ -199,10 +199,10 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：<code>Missing radix parameter</code>。</p>
-<p>这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。</p>
-<p>parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；<br>默认是:十进制；<br>在转换时可以忽略第二个参数，这样js照样可以运行，但是在你进行语法校验时，JSLint却会报错，这是因为压缩工具对语法的严谨性要求比较高，建议大家在用parseInt语法进行转换时，最好加个第二个参数。<br><a id="more"></a></p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://my.oschina.net/zhangskills/blog/150203" target="_blank" rel="external">javascript报错：Missing radix parameter</a></p>
+            <h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>Case When有两种用法。分别是：简单Case函数和Case搜索函数。</p>
+<h2 id="简单Case函数"><a href="#简单Case函数" class="headerlink" title="简单Case函数"></a>简单Case函数</h2><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">CASE sex</div><div class="line">         WHEN '1' THEN '男'</div><div class="line">         WHEN '2' THEN '女'</div><div class="line">ELSE '其他' <span class="keyword">END</span></div></pre></td></tr></table></figure>
+<h2 id="Case搜索函数"><a href="#Case搜索函数" class="headerlink" title="Case搜索函数"></a>Case搜索函数</h2><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">CASE WHEN sex = '1' THEN '男'</div><div class="line">         WHEN sex = '2' THEN '女'</div><div class="line">ELSE '其他' <span class="keyword">END</span></div></pre></td></tr></table></figure>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.sina.com.cn/s/blog_61fbf8d10100lian.html" target="_blank" rel="external">SqlServer Case When用法</a></p>
 
         </div>
 
@@ -210,11 +210,11 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-01-12T10:30:17.771Z" itemprop="dateUpdated">2017年1月12日 18:30</time>
+    最后更新时间：<time datetime="2017-01-12T10:31:13.940Z" itemprop="dateUpdated">2017年1月12日 18:31</time>
 </span><br>
 
 
-        这里写留言或版权声明：<a href="/2016/04/21/jslint-missing-radix-parameter/" target="_blank" rel="external">http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/</a>
+        这里写留言或版权声明：<a href="/2016/04/19/database/sql-server-case-when/" target="_blank" rel="external">http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/</a>
     </div>
     <footer>
         <a href="http://zhensherlock.github.io">
@@ -233,7 +233,7 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSLint/">JSLint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Server/">SQL Server</a></li></ul>
 
 
             
@@ -243,7 +243,7 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/&title=《JSLint Missing Radix Parameter》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/&title=《SQL Server Case When 用法》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -253,23 +253,22 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/&title=《JSLint Missing Radix Parameter》 — MichaelSun's Blog&source=文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/&title=《SQL Server Case When 用法》 — MichaelSun's Blog&source=孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JSLint Missing Radix Parameter》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/&via=http://zhensherlock.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SQL Server Case When 用法》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/&via=http://zhensherlock.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -292,18 +291,18 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2016/04/27/sql-server-identity/" id="post-prev" class="post-nav-link">
+      <a href="/2016/04/21/front/jslint-missing-radix-parameter/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">SQL Server 获取插入记录后的自增ID</h4>
+        <h4 class="title">JSLint Missing Radix Parameter</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/04/19/sql-server-case-when/" id="post-next" class="post-nav-link">
+      <a href="/2016/04/14/visual-studio-remote-debugger/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">SQL Server Case When 用法</h4>
+        <h4 class="title">Visual Studio远程调试</h4>
       </a>
     </div>
   
@@ -314,7 +313,7 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="jslint-missing-radix-parameter" data-title="JSLint Missing Radix Parameter" data-url="http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/"></div>
+    <div class="ds-thread" data-thread-key="database/sql-server-case-when" data-title="SQL Server Case When 用法" data-url="http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -396,7 +395,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/&title=《JSLint Missing Radix Parameter》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/&title=《SQL Server Case When 用法》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -406,23 +405,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/&title=《JSLint Missing Radix Parameter》 — MichaelSun's Blog&source=文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/&title=《SQL Server Case When 用法》 — MichaelSun's Blog&source=孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JSLint Missing Radix Parameter》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/&via=http://zhensherlock.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SQL Server Case When 用法》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/&via=http://zhensherlock.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2016/04/21/jslint-missing-radix-parameter/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -433,7 +431,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3aQW7jMBAEwPz/09nrAonk7qHGcIDiyYgsicUAJN3Dr6+4ff/Xrq5efb5q+b0/rz7c8PDw8A66ft+J/GU/ryYD1A7ifZ/x8PDwtnntdJ/cmwzTfXfbwcXDw8P7K7yWcb94JBt6PDw8vL/IK15wHF60CxIeHh7ee3j5o5O4IV8q8gVjPWvBw8PDi3l5FelzPq/U9/Dw8PCOq+rthJsXsZKQ4rzh4eHhbfDa+CBnP7v9nQ0xHh4e3gYvuW0GaEtceVhchLl4eHh4C7x8Is43wW3X2414EvLW6wweHh5ezGuDg7ZUNosn2kNdL2IIPDw8vGVeXnBqI4nZE9qNfj1yeHh4eCNee1AgP4DVDmJyV7E84OHh4S3w7jvXFvifDWfbAPeyD3h4eHgLvPyIQN6JZPpOrs4iEjw8PLz380421m3IW0zrceYQrYF4eHh4I14eK7ST+1OLTRtP4OHh4W3zkvJ8u+3On3keLgwDCDw8PLxj3izMPSlxPQuLwgg8PDy8h3izzev59noWcNQFNjw8PLw13juDho1DV5f9xMPDw1vmzcKCvIg1G6b8N8Evf8fDw8Nb481OeLYDlJ9laAfu8r14eHh4a7w8Ws2DhrZg1mbP0YDi4eHhLfDyR+cvmG3Z8z6038HDw8Pb4OVFpjxIbZH5Nnq4JODh4eEt8OrC/Oh4VhElxG9/cRUPDw9vjZeX7dswoiXNnnaJxMPDw3uU9122pKNPhbDtM395Ph4eHt4CbzbhnmzBZ0FtET3MGh4eHl7JO3nNyRb8fDiifwAeHh7eGm8WFuTl/2SufnYBw8PDw/sc3iy2aJefxw4Q4OHh4X0AL49Z2+1yG3BESwseHh7eGi/v3EkwMQt/T4pteHh4eBu89oBUHjS0NamTbz6QYeDh4eG9bv8AVzKSl5bge3AAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtUlEQVR42u3cS44bMQwFQN//0s42QOLOe6Q0MwFKK8PuX2khsknBr1c83r+NT79++ubT5+TI53OPDTw8PLzFo/852psl339CfprE5+d5PhcPDw/vHq99oP25+Rq+eh48PDy8H8PbJ7vPgScJDHh4eHj/C69duPME+kcEBjw8PLyYl1+6TaxzanvM4VoLHh4eXsybpb/f+/lKfw8PDw9v3VXPg0QSNmattfdi4OHh4d3g5QvuDN8WFGaJ+3PyjYeHh3eWl2xyej5mVpjYgIvkGw8PD+8CL4obI3CeOidF2HYzaxMW8fDw8Ca8PAlum1JtMWJ/zX/sjMDDw8M7xDtV1dgHj1lD7nXjZDw8PLzFFoG2DZbDZndchQc8PDy8Na9ORhfpbFsUzifoY6jAw8PDu8BrNzblra+8hNGWdJNwgoeHh/eVvM2mqzZRHi70bWECDw8P7wJvlihvmmRtkMivVrw94OHh4S14eVMqT3OTssJsy8KxphceHh7eIVieaufBY5ast4q/nIuHh4d3gbdpOM3aWjcCUjSheHh4eEd5s6ZUMh1JWSEvVayKEXh4eHhHeZskuA0PLbgNUdOwiIeHh/ce/Bv8vgWVJ9ztNdttWHh4eHjfy8svt9mMtZ+g4bsCHh4e3uI9PSkxFA2nmD0rRrRJOR4eHt5ZXrv4zpLyWfqet82i0i0eHh7eUV6bFrdL9ixZ3zfS8PDw8G7zZj20HJAHnqhfd6oAgYeHhxfz3uXYp9r7DQT5lfHw8PBu8PLRlhXyrVpJml43utqBh4eHV/JOBYP9HOdTUEwuHh4e3jVeWzhowbOHPhbT8PDw8L6Vl5eAk19nrbKLgQEPDw/vWs45K93mpYfk3Cic4OHh4V3jtRutNo2uFpCHhFWtBQ8PD29yl9fm9vkN8sX9YpECDw8Pb8L7BdaPXpNbJw1QAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
