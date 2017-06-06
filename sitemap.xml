@@ -2,30 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/js/dbhelper.js</loc>
-    
-    <lastmod>2017-05-04T13:59:12.326Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://zhensherlock.github.io/example/indexeddb/index.html</loc>
     
-    <lastmod>2017-05-04T05:27:51.344Z</lastmod>
+    <lastmod>2017-06-06T14:19:08.783Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/css/style.css</loc>
+    <loc>http://zhensherlock.github.io/example/indexeddb/js/vendor.28c69e74.js</loc>
     
-    <lastmod>2017-05-01T08:27:05.031Z</lastmod>
+    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/js/app.js</loc>
+    <loc>http://zhensherlock.github.io/example/indexeddb/css/vendor.28c69e74.css</loc>
     
-    <lastmod>2017-04-28T04:47:46.681Z</lastmod>
+    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/example/indexeddb/js/manifest.74a4eca7.js</loc>
+    
+    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/example/indexeddb/css/app.fc62fa27.css</loc>
+    
+    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhensherlock.github.io/example/indexeddb/bundle.fc62fa27.js</loc>
+    
+    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
     
   </url>
   
