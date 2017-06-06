@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhensherlock.github.io/"/>
-  <updated>2017-04-24T06:41:11.569Z</updated>
+  <updated>2017-06-06T15:07:27.443Z</updated>
   <id>http://zhensherlock.github.io/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <link href="http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/"/>
     <id>http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/</id>
     <published>2017-03-12T04:04:00.000Z</published>
-    <updated>2017-04-24T06:41:11.569Z</updated>
+    <updated>2017-06-06T15:07:27.443Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
-<p>在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。<br>近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。</p>
+<p>在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。<br>近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。<br>下面是使用 React + Webpack + ES6 完成的IndexedDB管理平台<br><a href="https://zhensherlock.github.io/react-indexeddb-system/">https://zhensherlock.github.io/react-indexeddb-system/</a></p>
 </blockquote>
 <a id="more"></a>
 <h2 id="IndexedDB"><a href="#IndexedDB" class="headerlink" title="IndexedDB"></a>IndexedDB</h2><p>IndexedDB是一种可以让开发者将数据保存在客户端中，保存的数据可以被查询，并且可以离线使用。IndexedDB对于那些需要存储大量数据，或者是需要离线使用的程序是非常有效的解决方法。<br>下面是IndexedDB数据库的特点：</p>
@@ -54,7 +54,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。&lt;br&gt;近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。&lt;/p&gt;
+&lt;p&gt;在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。&lt;br&gt;近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。&lt;br&gt;下面是使用 React + Webpack + ES6 完成的IndexedDB管理平台&lt;br&gt;&lt;a href=&quot;https://zhensherlock.github.io/react-indexeddb-system/&quot;&gt;https://zhensherlock.github.io/react-indexeddb-system/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
@@ -187,6 +187,41 @@
   </entry>
   
   <entry>
+    <title>Sierra 10.12 brew update 报错</title>
+    <link href="http://zhensherlock.github.io/2017/01/12/mac/brew-update/"/>
+    <id>http://zhensherlock.github.io/2017/01/12/mac/brew-update/</id>
+    <published>2017-01-12T08:04:00.000Z</published>
+    <updated>2017-01-16T08:03:20.857Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
+<p>当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：</p>
+</blockquote>
+<p><code>Error: /usr/local must be writable!</code></p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>上面提示说没有权限，那我们就给当前用户在 <code>/usr/local</code> 路径的权限。</p>
+<p>在命令行中执行：</p>
+<p><code>sudo chown -R whoami /usr/local</code></p>
+<p>请将<code>whoami</code>替换成当前用户名</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://github.com/Homebrew/brew/issues/385" target="_blank" rel="external">In macOS 10.12 Sierra, /usr/local is readonly</a><br><a href="https://github.com/Homebrew/brew/issues/476" target="_blank" rel="external">“Error: /usr/local must be writable!” (Sierra 10.12 Beta (16A239j) )</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：&lt;/p&gt;
+&lt;/bloc
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
+    
+    
+      <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
     <title>国内NPM使用</title>
     <link href="http://zhensherlock.github.io/2017/01/12/npm-china/"/>
     <id>http://zhensherlock.github.io/2017/01/12/npm-china/</id>
@@ -220,41 +255,6 @@
     
     
       <category term="NPM" scheme="http://zhensherlock.github.io/tags/NPM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sierra 10.12 brew update 报错</title>
-    <link href="http://zhensherlock.github.io/2017/01/12/mac/brew-update/"/>
-    <id>http://zhensherlock.github.io/2017/01/12/mac/brew-update/</id>
-    <published>2017-01-12T08:04:00.000Z</published>
-    <updated>2017-01-16T08:03:20.857Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
-<p>当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：</p>
-</blockquote>
-<p><code>Error: /usr/local must be writable!</code></p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>上面提示说没有权限，那我们就给当前用户在 <code>/usr/local</code> 路径的权限。</p>
-<p>在命令行中执行：</p>
-<p><code>sudo chown -R whoami /usr/local</code></p>
-<p>请将<code>whoami</code>替换成当前用户名</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://github.com/Homebrew/brew/issues/385" target="_blank" rel="external">In macOS 10.12 Sierra, /usr/local is readonly</a><br><a href="https://github.com/Homebrew/brew/issues/476" target="_blank" rel="external">“Error: /usr/local must be writable!” (Sierra 10.12 Beta (16A239j) )</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：&lt;/p&gt;
-&lt;/bloc
-    
-    </summary>
-    
-      <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
-    
-    
-      <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
-    
-      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
     
   </entry>
   

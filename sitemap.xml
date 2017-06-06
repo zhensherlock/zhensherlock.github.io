@@ -2,44 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/index.html</loc>
+    <loc>http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/</loc>
     
-    <lastmod>2017-06-06T14:19:08.783Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/js/vendor.28c69e74.js</loc>
-    
-    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/css/vendor.28c69e74.css</loc>
-    
-    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/js/manifest.74a4eca7.js</loc>
-    
-    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/css/app.fc62fa27.css</loc>
-    
-    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/example/indexeddb/bundle.fc62fa27.js</loc>
-    
-    <lastmod>2017-06-06T14:06:50.624Z</lastmod>
+    <lastmod>2017-06-06T15:07:27.443Z</lastmod>
     
   </url>
   
@@ -61,13 +26,6 @@
     <loc>http://zhensherlock.github.io/example/application_cache/css/app.css</loc>
     
     <lastmod>2017-04-26T00:51:00.213Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/</loc>
-    
-    <lastmod>2017-04-24T06:41:11.569Z</lastmod>
     
   </url>
   
