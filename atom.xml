@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhensherlock.github.io/"/>
-  <updated>2017-06-06T15:07:27.443Z</updated>
+  <updated>2017-07-14T07:27:13.000Z</updated>
   <id>http://zhensherlock.github.io/</id>
   
   <author>
@@ -16,11 +16,133 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑</title>
+    <link href="http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/"/>
+    <id>http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/</id>
+    <published>2017-05-12T04:04:00.000Z</published>
+    <updated>2017-07-14T07:27:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
+<p>在MAC下使用RDC远程Windows系统时，总是会遇到一些问题，下面我们来踩一下那些坑。</p>
+</blockquote>
+<h1 id="证书或相关链无效错误"><a href="#证书或相关链无效错误" class="headerlink" title="证书或相关链无效错误"></a>证书或相关链无效错误</h1><p>在Mac的RDC软件中打开首选项<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/rdc-windows/png/1.png" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure></p>
+<p>在首选项中切换到 <code>安全性</code> 一栏，在远程计算机验证中选择 <code>即使验证失败，也始终连接</code> 选项<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/rdc-windows/png/2.png" alt="图2" title="">
+                </div>
+                <div class="image-caption">图2</div>
+            </figure></p>
+<h1 id="远程桌面连接无法验证您希望连接的计算机的身份"><a href="#远程桌面连接无法验证您希望连接的计算机的身份" class="headerlink" title="远程桌面连接无法验证您希望连接的计算机的身份"></a>远程桌面连接无法验证您希望连接的计算机的身份</h1><p>以下解决操作均在被连接的Windows上操作</p>
+<ol>
+<li>开始-运行-gpedit.msc，进入组策略编辑器</li>
+<li>进入 本地计算机策略》计算机配置》管理模板》windows组件》远程桌面服务》远程桌面会话主机》安全</li>
+<li>将 <code>远程（RDP）连接要求使用指定的安全层</code> 改为启用，并将安全层选择 <code>RDP</code></li>
+<li>将 <code>要求使用网络级别的身份验证对远程连接的用户进行身份验证</code> ，改为禁用</li>
+<li>关闭组策略编辑器，重启计算机</li>
+</ol>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.csdn.net/bianchengninhao/article/details/54288984" target="_blank" rel="external">Remote Desktop Connection for mac 报错：证书或相关链无效。</a><br><a href="http://www.cnblogs.com/taojietx/p/6733305.html" target="_blank" rel="external">Mac远程连接windows报错“证书或相关链无效，是否仍要连接到此计算机”的处理办法。</a><br><a href="http://www.cnblogs.com/Ray898/p/4949616.html" target="_blank" rel="external">MAC 下RDC 连接windows7提示“远程桌面连接无法验证您希望连接的计算机的身份” 解决办法</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓&lt;/
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
+    
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
+    
+      <category term="RDC" scheme="http://zhensherlock.github.io/tags/RDC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>查看IIS中网站所对应的进程信息</title>
+    <link href="http://zhensherlock.github.io/2017/04/13/server/iis-process-pid/"/>
+    <id>http://zhensherlock.github.io/2017/04/13/server/iis-process-pid/</id>
+    <published>2017-04-13T02:42:00.000Z</published>
+    <updated>2017-07-11T07:16:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
+<p>有时我们一台服务器会部署多个项目，这时如果要查看某个项目所对应的进程，就会比较麻烦，下面我们已Windows Server 2008（IIS7）来看一下如何查询网站所对应的进程。</p>
+</blockquote>
+<h2 id="Windows-Server-2008（IIS7）操作步骤："><a href="#Windows-Server-2008（IIS7）操作步骤：" class="headerlink" title="Windows Server 2008（IIS7）操作步骤："></a>Windows Server 2008（IIS7）操作步骤：</h2><ol>
+<li>进入CMD</li>
+<li>输入命令： cd C:\Windows\System32\inetsrv 进入inetsrv 目录</li>
+<li>输入命令： appcmd list wp</li>
+<li>任务管理器中点击查看–选择列–选择PID（进程标识符）</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/iis-process-pid/png/1.png" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/iis-process-pid/png/2.png" alt="图2" title="">
+                </div>
+                <div class="image-caption">图2</div>
+            </figure>
+<a id="more"></a>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.amd5.cn/atang_1900.html" target="_blank" rel="external">如何查看进程中PID所对应的IIS应用程序池</a><br><a href="http://www.jb51.net/article/36024.htm" target="_blank" rel="external">IIS7 全新管理工具AppCmd.exe的命令使用实例分享</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;有时我们一台服务器会部署多个项目，这时如果要查看某个项目所对应的进程，就会比较麻烦，下面我们已Windows Server 2008（IIS7）来看一下如何查询网站所对应的进程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Windows-Server-2008（IIS7）操作步骤：&quot;&gt;&lt;a href=&quot;#Windows-Server-2008（IIS7）操作步骤：&quot; class=&quot;headerlink&quot; title=&quot;Windows Server 2008（IIS7）操作步骤：&quot;&gt;&lt;/a&gt;Windows Server 2008（IIS7）操作步骤：&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;进入CMD&lt;/li&gt;
+&lt;li&gt;输入命令： cd C:\Windows\System32\inetsrv 进入inetsrv 目录&lt;/li&gt;
+&lt;li&gt;输入命令： appcmd list wp&lt;/li&gt;
+&lt;li&gt;任务管理器中点击查看–选择列–选择PID（进程标识符）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;http://7xszf2.com1.z0.glb.clouddn.com/iis-process-pid/png/1.png&quot; alt=&quot;图1&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;图1&lt;/div&gt;
+            &lt;/figure&gt;
+&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;http://7xszf2.com1.z0.glb.clouddn.com/iis-process-pid/png/2.png&quot; alt=&quot;图2&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;图2&lt;/div&gt;
+            &lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="服务器" scheme="http://zhensherlock.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="WinServer" scheme="http://zhensherlock.github.io/tags/WinServer/"/>
+    
+      <category term="IIS" scheme="http://zhensherlock.github.io/tags/IIS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HTML5 IndexedDB 入门</title>
     <link href="http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/"/>
     <id>http://zhensherlock.github.io/2017/03/12/front/html5-indexeddb/</id>
     <published>2017-03-12T04:04:00.000Z</published>
-    <updated>2017-06-06T15:07:27.443Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
 <p>在HTML5强势来袭时，前端存储数据的方案变的很多，有Web Storage（Local Storage、Session Storage）、Cookie、Web SQL Database、IndexedDB。<br>近些年Web Storage、Cookie已经用烂了，Web SQL Database也已经被废弃，唯独IndexedDB提起的很少，今天就探究一下IndexedDB使用的方式。<br>下面是使用 React + Webpack + ES6 完成的IndexedDB管理平台<br><a href="https://zhensherlock.github.io/react-indexeddb-system/">https://zhensherlock.github.io/react-indexeddb-system/</a></p>
@@ -73,7 +195,7 @@
     <link href="http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/"/>
     <id>http://zhensherlock.github.io/2017/02/12/front/photoshop-convert-box-shadow/</id>
     <published>2017-02-12T08:00:00.000Z</published>
-    <updated>2017-04-21T03:23:38.651Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
 <p>随着CSS3的兴起，前端可以自己做出阴影、圆角等效果，但是前端不是专业的设计师，<br>所以还是需要UI来帮我们设计效果，那么问题来了，UI设计出的效果图，我们前端怎么去正确的实现呢？<br>下面来看一下Photoshop投影各个参数如何转换成CSS3中的box-shadow。</p>
@@ -152,7 +274,7 @@
     <link href="http://zhensherlock.github.io/2017/01/15/mac/install-mysql/"/>
     <id>http://zhensherlock.github.io/2017/01/15/mac/install-mysql/</id>
     <published>2017-01-15T02:04:00.000Z</published>
-    <updated>2017-01-16T08:03:20.858Z</updated>
+    <updated>2017-01-15T03:09:05.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
 <p>首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案</p>
@@ -187,46 +309,11 @@
   </entry>
   
   <entry>
-    <title>Sierra 10.12 brew update 报错</title>
-    <link href="http://zhensherlock.github.io/2017/01/12/mac/brew-update/"/>
-    <id>http://zhensherlock.github.io/2017/01/12/mac/brew-update/</id>
-    <published>2017-01-12T08:04:00.000Z</published>
-    <updated>2017-01-16T08:03:20.857Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
-<p>当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：</p>
-</blockquote>
-<p><code>Error: /usr/local must be writable!</code></p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>上面提示说没有权限，那我们就给当前用户在 <code>/usr/local</code> 路径的权限。</p>
-<p>在命令行中执行：</p>
-<p><code>sudo chown -R whoami /usr/local</code></p>
-<p>请将<code>whoami</code>替换成当前用户名</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://github.com/Homebrew/brew/issues/385" target="_blank" rel="external">In macOS 10.12 Sierra, /usr/local is readonly</a><br><a href="https://github.com/Homebrew/brew/issues/476" target="_blank" rel="external">“Error: /usr/local must be writable!” (Sierra 10.12 Beta (16A239j) )</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：&lt;/p&gt;
-&lt;/bloc
-    
-    </summary>
-    
-      <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
-    
-    
-      <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
-    
-      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
     <title>国内NPM使用</title>
     <link href="http://zhensherlock.github.io/2017/01/12/npm-china/"/>
     <id>http://zhensherlock.github.io/2017/01/12/npm-china/</id>
     <published>2017-01-12T08:04:00.000Z</published>
-    <updated>2017-01-16T08:32:18.098Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><blockquote>
 <p>NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安装underscore为例）。</p>
@@ -259,11 +346,75 @@
   </entry>
   
   <entry>
+    <title>Sierra 10.12 brew update 报错</title>
+    <link href="http://zhensherlock.github.io/2017/01/12/mac/brew-update/"/>
+    <id>http://zhensherlock.github.io/2017/01/12/mac/brew-update/</id>
+    <published>2017-01-12T08:04:00.000Z</published>
+    <updated>2017-01-14T08:31:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
+<p>当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：</p>
+</blockquote>
+<p><code>Error: /usr/local must be writable!</code></p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>上面提示说没有权限，那我们就给当前用户在 <code>/usr/local</code> 路径的权限。</p>
+<p>在命令行中执行：</p>
+<p><code>sudo chown -R whoami /usr/local</code></p>
+<p>请将<code>whoami</code>替换成当前用户名</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://github.com/Homebrew/brew/issues/385" target="_blank" rel="external">In macOS 10.12 Sierra, /usr/local is readonly</a><br><a href="https://github.com/Homebrew/brew/issues/476" target="_blank" rel="external">“Error: /usr/local must be writable!” (Sierra 10.12 Beta (16A239j) )</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：&lt;/p&gt;
+&lt;/bloc
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
+    
+    
+      <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://zhensherlock.github.io/2017/01/11/hello-world/"/>
+    <id>http://zhensherlock.github.io/2017/01/11/hello-world/</id>
+    <published>2017-01-11T12:48:01.000Z</published>
+    <updated>2017-01-11T12:48:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+      <category term="Hello World" scheme="http://zhensherlock.github.io/tags/Hello-World/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Microsoft Office MIME Types</title>
-    <link href="http://zhensherlock.github.io/2017/01/10/microsoft-office-mime-types/"/>
-    <id>http://zhensherlock.github.io/2017/01/10/microsoft-office-mime-types/</id>
+    <link href="http://zhensherlock.github.io/2017/01/10/Microsoft-Office-MIME-Types/"/>
+    <id>http://zhensherlock.github.io/2017/01/10/Microsoft-Office-MIME-Types/</id>
     <published>2017-01-10T09:52:02.000Z</published>
-    <updated>2017-01-12T10:30:23.121Z</updated>
+    <updated>2017-01-12T14:34:12.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>我们前端在做上传文件时，会遇到上传时要限制文件类型的需求，代码如下：<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/*"</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>但是在最近高版本的标准浏览器会出现点击响应过慢的情况，后来改成下面的代码后，就没有问题了，代码如下：<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/gif,image/jpeg,image/jpg,image/png,image/svg"</span>&gt;</span></div></pre></td></tr></table></figure></p>
@@ -1447,7 +1598,7 @@
     <link href="http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/"/>
     <id>http://zhensherlock.github.io/2016/04/29/openxml-generate-data-dictionary/</id>
     <published>2016-04-29T08:54:17.000Z</published>
-    <updated>2017-01-12T10:30:32.334Z</updated>
+    <updated>2017-01-12T14:34:12.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
 <p>最近项目在走验收流程，之前没有仔细看SOW文档，发现需要补好多份文档，其中就有数据字典，项目组不愿意花时间太多的时间弄这些文档，也不希望以后还要重复劳动力，最终决定做一个工具，方便自己生成数据字典文档。</p>
@@ -1521,7 +1672,7 @@
     <link href="http://zhensherlock.github.io/2016/04/28/front/photoshop-convert-px/"/>
     <id>http://zhensherlock.github.io/2016/04/28/front/photoshop-convert-px/</id>
     <published>2016-04-28T01:35:31.000Z</published>
-    <updated>2017-01-12T10:30:43.669Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>打开Photoshop首选项——编辑，选择单“位与标尺”，如下界面：<br><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -1558,7 +1709,7 @@
     <link href="http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/"/>
     <id>http://zhensherlock.github.io/2016/04/27/database/sql-server-identity/</id>
     <published>2016-04-27T01:07:40.000Z</published>
-    <updated>2017-01-12T10:31:11.859Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
 <p>有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。</p>
@@ -1599,7 +1750,7 @@
     <link href="http://zhensherlock.github.io/2016/04/21/front/jslint-missing-radix-parameter/"/>
     <id>http://zhensherlock.github.io/2016/04/21/front/jslint-missing-radix-parameter/</id>
     <published>2016-04-21T08:44:37.000Z</published>
-    <updated>2017-01-12T10:30:17.771Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：<code>Missing radix parameter</code>。</p>
 <p>这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。</p>
@@ -1629,7 +1780,7 @@
     <link href="http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/"/>
     <id>http://zhensherlock.github.io/2016/04/19/database/sql-server-case-when/</id>
     <published>2016-04-19T00:41:52.000Z</published>
-    <updated>2017-01-12T10:31:13.940Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>Case When有两种用法。分别是：简单Case函数和Case搜索函数。</p>
 <h2 id="简单Case函数"><a href="#简单Case函数" class="headerlink" title="简单Case函数"></a>简单Case函数</h2><figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">CASE sex</div><div class="line">         WHEN '1' THEN '男'</div><div class="line">         WHEN '2' THEN '女'</div><div class="line">ELSE '其他' <span class="keyword">END</span></div></pre></td></tr></table></figure>
@@ -1656,7 +1807,7 @@
     <link href="http://zhensherlock.github.io/2016/04/14/visual-studio-remote-debugger/"/>
     <id>http://zhensherlock.github.io/2016/04/14/visual-studio-remote-debugger/</id>
     <published>2016-04-14T09:59:22.000Z</published>
-    <updated>2017-01-12T10:31:01.660Z</updated>
+    <updated>2017-01-12T14:34:12.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
 <p>在开发的时候，我们有时会用远程调试工具进行debug，本文就简单的介绍一下如何使用Visual Studio自带的远程调试工具（我们以VS2012为例）。</p>
@@ -1722,7 +1873,7 @@
     <link href="http://zhensherlock.github.io/2016/04/14/database/sql-server-recursion/"/>
     <id>http://zhensherlock.github.io/2016/04/14/database/sql-server-recursion/</id>
     <published>2016-04-14T08:54:19.000Z</published>
-    <updated>2017-01-12T10:31:07.408Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
 <p>有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。</p>
@@ -1753,7 +1904,7 @@
     <link href="http://zhensherlock.github.io/2016/04/08/front/css-priority/"/>
     <id>http://zhensherlock.github.io/2016/04/08/front/css-priority/</id>
     <published>2016-04-08T08:04:00.000Z</published>
-    <updated>2017-01-12T10:30:03.179Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
 <p>前端开发时，经常会遇到当前元素需要覆盖样式的需求，这篇我们来了解一下css是如何来确定当前使用哪种样式的。</p>
@@ -1805,7 +1956,7 @@
     <link href="http://zhensherlock.github.io/2016/04/07/front/html5-head-meta/"/>
     <id>http://zhensherlock.github.io/2016/04/07/front/html5-head-meta/</id>
     <published>2016-04-07T01:04:00.000Z</published>
-    <updated>2017-01-12T10:30:09.784Z</updated>
+    <updated>2017-06-07T06:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><blockquote>
 <p>移动前端开发中添加一些webkit专属的HTML5头部标签，帮助浏览器更好解析html代码，更好地将移动web前端页面表现出来。本文整理一些常用的meta标签。</p>
@@ -1829,35 +1980,6 @@
       <category term="HTML5" scheme="http://zhensherlock.github.io/tags/HTML5/"/>
     
       <category term="META" scheme="http://zhensherlock.github.io/tags/META/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://zhensherlock.github.io/2016/04/04/hello-world/"/>
-    <id>http://zhensherlock.github.io/2016/04/04/hello-world/</id>
-    <published>2016-04-04T08:08:27.660Z</published>
-    <updated>2016-04-08T09:57:14.866Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-    
-      <category term="Hello World" scheme="http://zhensherlock.github.io/tags/Hello-World/"/>
     
   </entry>
   

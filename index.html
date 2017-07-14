@@ -158,6 +158,133 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-mac/rdc-windows"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017年05月12日 12:04" datetime="2017-05-12T04:04:00.000Z"  itemprop="datePublished">2017-05-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/12/mac/rdc-windows/">Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前言Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓
+正文
+在MAC下使用RDC远程Windows系统时，总是会遇到一些问题，下面我们来踩一下那些坑。
+
+证书或相关链无效错误在Mac的RDC软件中打开首选项
+                
+                    
+           ...
+    
+
+        <a href="/2017/05/12/mac/rdc-windows/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RDC/">RDC</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-server/iis-process-pid"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017年04月13日 10:42" datetime="2017-04-13T02:42:00.000Z"  itemprop="datePublished">2017-04-13</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/服务器/">服务器</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/04/13/server/iis-process-pid/">查看IIS中网站所对应的进程信息</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        导语
+有时我们一台服务器会部署多个项目，这时如果要查看某个项目所对应的进程，就会比较麻烦，下面我们已Windows Server 2008（IIS7）来看一下如何查询网站所对应的进程。
+
+Windows Server 2008（IIS7）操作步骤：
+进入CMD
+输入命令： cd C:\Windows\System32\inetsrv 进入inetsrv 目录
+输入命令： appcmd list wp
+任务管理器中点击查看–选择列–选择PID（进程标识符）
+
+
+                
+                    
+                    
+                
+                图1
+            
+
+                
+                    
+                    
+                
+                图2
+            
+    
+
+        <a href="/2017/04/13/server/iis-process-pid/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IIS/">IIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WinServer/">WinServer</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-front/html5-indexeddb"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -314,6 +441,59 @@
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-npm-china"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017年01月12日 16:04" datetime="2017-01-12T08:04:00.000Z"  itemprop="datePublished">2017-01-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/01/12/npm-china/">国内NPM使用</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        导语
+NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安装underscore为例）。
+
+临时修改在命令行中输入：npm install underscore -g --registry=https://registry.npm.taobao.org
+全局修改在命令行中输入：npm config set registry htt...
+    
+
+        <a href="/2017/01/12/npm-china/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/">NPM</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-mac/brew-update"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -371,15 +551,13 @@ sudo chown -R whoami /usr/local
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-npm-china"
+            <article id="post-hello-world"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017年01月12日 16:04" datetime="2017-01-12T08:04:00.000Z"  itemprop="datePublished">2017-01-12</time>
+        <time class="post-time" title="2017年01月11日 20:48" datetime="2017-01-11T12:48:01.000Z"  itemprop="datePublished">2017-01-11</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
-
 
 
         
@@ -391,7 +569,7 @@ sudo chown -R whoami /usr/local
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/01/12/npm-china/">国内NPM使用</a>
+      <a class="post-title-link" href="/2017/01/11/hello-world/">Hello World</a>
     </h3>
   
 
@@ -401,21 +579,18 @@ sudo chown -R whoami /usr/local
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        导语
-NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安装underscore为例）。
-
-临时修改在命令行中输入：npm install underscore -g --registry=https://registry.npm.taobao.org
-全局修改在命令行中输入：npm config set registry htt...
+        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Qu...
     
 
-        <a href="/2017/01/12/npm-china/" class="post-more waves-effect waves-button">
+        <a href="/2017/01/11/hello-world/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/">NPM</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hello-World/">Hello World</a></li></ul>
 
     </div>
     
@@ -424,7 +599,7 @@ NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的�
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-microsoft-office-mime-types"
+            <article id="post-Microsoft-Office-MIME-Types"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -444,7 +619,7 @@ NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的�
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/01/10/microsoft-office-mime-types/">Microsoft Office MIME Types</a>
+      <a class="post-title-link" href="/2017/01/10/Microsoft-Office-MIME-Types/">Microsoft Office MIME Types</a>
     </h3>
   
 
@@ -460,7 +635,7 @@ NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的�
 微软办公软件MIME Type某些软件的文件按类型比较多，特别是微软办公软件的文件类型，下面是微软办公软件的MIME Type列表。
     
 
-        <a href="/2017/01/10/microsoft-office-mime-types/" class="post-more waves-effect waves-button">
+        <a href="/2017/01/10/Microsoft-Office-MIME-Types/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -528,167 +703,6 @@ NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的�
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenXml/">OpenXml</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WinForm/">WinForm</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-front/photoshop-convert-px"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016年04月28日 9:35" datetime="2016-04-28T01:35:31.000Z"  itemprop="datePublished">2016-04-28</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/UI/">UI</a></li></ul>
-
-
-
-        
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/04/28/front/photoshop-convert-px/">Photoshop 将点转换成PX</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        正文打开Photoshop首选项——编辑，选择单“位与标尺”，如下界面：
-                
-                    
-                    
-                
-                图1
-            
-选择后出现如下界面，选择像素即可
-                
-                  ...
-    
-
-        <a href="/2016/04/28/front/photoshop-convert-px/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Photoshop/">Photoshop</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-database/sql-server-identity"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016年04月27日 9:07" datetime="2016-04-27T01:07:40.000Z"  itemprop="datePublished">2016-04-27</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据库/">数据库</a></li></ul>
-
-
-
-        
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/04/27/database/sql-server-identity/">SQL Server 获取插入记录后的自增ID</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        导语
-有时我们在写SQL语句时，会遇到在插入一条记录的后要立即获取所在数据库中的ID，而该ID是自增生成的。
-
-正文如果我们要获取自增的ID，最简单的方法就是在INSERT语句之后select @@indentity，但是如果插入的表有INSERT触发器，那使用select @@indentity就会不对。例如，有两个表 T1 和 T2（T1 和 T2 都有 IDENTITY 列），在 T1 上定义了一个 INSERT 触发器。当 T1 插入数据时，T1 的INSERT触发器被触发，并在 T2 中插入一行，这时 @@IDENTITY 返回插入到当前会话中任何作用域内的最后一个 IDENTITY 列值，所以该值是插入 T2 中的ID。在SQL Server 中还有其他两个函数可以获取插入到 IDENTITY 列中的值，分别是：SCOPE_IDENTITY、IDENT_CURRENT，接一下我们来分别了解一下各自的语法。
-    
-
-        <a href="/2016/04/27/database/sql-server-identity/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Server/">SQL Server</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-front/jslint-missing-radix-parameter"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016年04月21日 16:44" datetime="2016-04-21T08:44:37.000Z"  itemprop="datePublished">2016-04-21</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
-
-
-
-        
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/04/21/front/jslint-missing-radix-parameter/">JSLint Missing Radix Parameter</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。
-parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二个参数，这样js照样可以运行，但是在你进行语法校验时，JSLint却会报错，这是因为压缩工具对语法的严谨性要求比较高，建议大家在用parseInt语法进行转换时，最好加个第二个参数。
-    
-
-        <a href="/2016/04/21/front/jslint-missing-radix-parameter/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSLint/">JSLint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 
     </div>
     

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑 | MichaelSun&#39;s Blog | javascript,.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Mac,RDC">
+    <meta name="description" content="前言Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓
+正文
+在MAC下使用RDC远程Windows系统时，总是会遇到一些问题，下面我们来踩一下那些坑。
+
+证书或相关链无效错误在Mac的RDC软件中打开首选项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑">
+<meta property="og:url" content="http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/index.html">
+<meta property="og:site_name" content="MichaelSun's Blog">
+<meta property="og:description" content="前言Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓
+正文
+在MAC下使用RDC远程Windows系统时，总是会遇到一些问题，下面我们来踩一下那些坑。
+
+证书或相关链无效错误在Mac的RDC软件中打开首选项">
+<meta property="og:image" content="http://7xszf2.com1.z0.glb.clouddn.com/rdc-windows/png/1.png">
+<meta property="og:image" content="http://7xszf2.com1.z0.glb.clouddn.com/rdc-windows/png/2.png">
+<meta property="og:updated_time" content="2017-07-14T07:27:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑">
+<meta name="twitter:description" content="前言Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓
+正文
+在MAC下使用RDC远程Windows系统时，总是会遇到一些问题，下面我们来踩一下那些坑。
+
+证书或相关链无效错误在Mac的RDC软件中打开首选项">
+<meta name="twitter:image" content="http://7xszf2.com1.z0.glb.clouddn.com/rdc-windows/png/1.png">
+    
+        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孙臻轩</h5>
+          <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhensherlock" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.linkedin.com/in/3056750" target="_blank" >
+                <i class="icon icon-lg icon-linkedin"></i>
+                Linkedin
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-12T04:04:00.000Z" itemprop="datePublished" class="page-time">
+  2017-05-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文"><span class="post-toc-number">2.</span> <span class="post-toc-text">正文</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#证书或相关链无效错误"><span class="post-toc-number">3.</span> <span class="post-toc-text">证书或相关链无效错误</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#远程桌面连接无法验证您希望连接的计算机的身份"><span class="post-toc-number">4.</span> <span class="post-toc-text">远程桌面连接无法验证您希望连接的计算机的身份</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-mac/rdc-windows"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年05月12日 12:04" datetime="2017-05-12T04:04:00.000Z"  itemprop="datePublished">2017-05-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
+<p>在MAC下使用RDC远程Windows系统时，总是会遇到一些问题，下面我们来踩一下那些坑。</p>
+</blockquote>
+<h1 id="证书或相关链无效错误"><a href="#证书或相关链无效错误" class="headerlink" title="证书或相关链无效错误"></a>证书或相关链无效错误</h1><p>在Mac的RDC软件中打开首选项<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/rdc-windows/png/1.png" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure></p>
+<p>在首选项中切换到 <code>安全性</code> 一栏，在远程计算机验证中选择 <code>即使验证失败，也始终连接</code> 选项<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/rdc-windows/png/2.png" alt="图2" title="">
+                </div>
+                <div class="image-caption">图2</div>
+            </figure></p>
+<h1 id="远程桌面连接无法验证您希望连接的计算机的身份"><a href="#远程桌面连接无法验证您希望连接的计算机的身份" class="headerlink" title="远程桌面连接无法验证您希望连接的计算机的身份"></a>远程桌面连接无法验证您希望连接的计算机的身份</h1><p>以下解决操作均在被连接的Windows上操作</p>
+<ol>
+<li>开始-运行-gpedit.msc，进入组策略编辑器</li>
+<li>进入 本地计算机策略》计算机配置》管理模板》windows组件》远程桌面服务》远程桌面会话主机》安全</li>
+<li>将 <code>远程（RDP）连接要求使用指定的安全层</code> 改为启用，并将安全层选择 <code>RDP</code></li>
+<li>将 <code>要求使用网络级别的身份验证对远程连接的用户进行身份验证</code> ，改为禁用</li>
+<li>关闭组策略编辑器，重启计算机</li>
+</ol>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.csdn.net/bianchengninhao/article/details/54288984" target="_blank" rel="external">Remote Desktop Connection for mac 报错：证书或相关链无效。</a><br><a href="http://www.cnblogs.com/taojietx/p/6733305.html" target="_blank" rel="external">Mac远程连接windows报错“证书或相关链无效，是否仍要连接到此计算机”的处理办法。</a><br><a href="http://www.cnblogs.com/Ray898/p/4949616.html" target="_blank" rel="external">MAC 下RDC 连接windows7提示“远程桌面连接无法验证您希望连接的计算机的身份” 解决办法</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-07-14T07:27:13.000Z" itemprop="dateUpdated">2017年7月14日 15:27</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2017/05/12/mac/rdc-windows/" target="_blank" rel="external">http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/</a>
+    </div>
+    <footer>
+        <a href="http://zhensherlock.github.io">
+            <img src="/img/avatar.jpg" alt="孙臻轩">
+            孙臻轩
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RDC/">RDC</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/&title=《Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/&title=《Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑》 — MichaelSun's Blog&source=孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/13/server/iis-process-pid/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">查看IIS中网站所对应的进程信息</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="mac/rdc-windows" data-title="Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑" data-url="http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.5');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>MichaelSun's Blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/&title=《Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/&title=《Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑》 — MichaelSun's Blog&source=孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIElEQVR42u3aMXLDMAwEQP//007rGY/kA8AUIleVJ7ZELYsLCfD1iq/3x/X5l6vffF/5M69+v+DCwMB4LCMZvvrt/fO/J+L+czQ1GBgYBzCuEuz+0UkcJwFavRcDAwOj+rh5ZPfGxcDAwKgu19ZumDEwMDB6m9gEn2xcqxvdxXtxDAyMBzImIfjfn/+lv4GBgfEoxrt43cPy8tzit8LAwNiaUS3c59vdKqzXSMDAwDiBkR/tqha/qpve+7t+3IuBgXEMY+1Lzxd8hcjGwMDYmtEr6ycl/vvn5A3UpP2AgYFxJqM6QLXlmU9Q3uzEwMDYlZEMXD0cNgncaihHj8DAwNiIMTl4kU9HbyJ+sDEwMLZmVBuKvTBN2JPRMTAwMHrRWX2JSXBjYGBg5MhJ6S1vNrx6A2NgYDyWUW0uzktp1V8WzoxgYGAcw6gezMrvmiwZf2QsBgbGYYx88bd2uVld6WFgYJzD6C0HJ7Bq26A6BRgYGLsyoghrvdzalkPhsAUGBsZhjHz5GA0WAJLjYhgYGGcyquFbPS6WvFYe8ZdLQwwMjO0Yk7CbtAryrWwU3BgYGFszejHXC+LeIbBeawEDA2M/RhKy1fZAr+iWB27UGMDAwNiOMV/29Upy1f8Al3dhYGBgxMG39vhX4UgHBgYGxmB/3Dt4kZfkMDAwzmEk284kavNCfx6+i8ttGBgYD2TkW8fqwm5xdyIu/GFgYGzE+AMsriLgi3apIQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.5"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.5" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
