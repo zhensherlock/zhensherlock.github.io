@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhensherlock.github.io/"/>
-  <updated>2017-07-14T07:27:13.000Z</updated>
+  <updated>2017-11-20T10:11:19.188Z</updated>
   <id>http://zhensherlock.github.io/</id>
   
   <author>
@@ -16,13 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Mac 使用 Microsoft Remote Desktop Connection Client for Mac 遇到的坑</title>
+    <title>Mac 使用 Remote Desktop Connection Client for Mac 遇到的坑</title>
     <link href="http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/"/>
     <id>http://zhensherlock.github.io/2017/05/12/mac/rdc-windows/</id>
     <published>2017-05-12T04:04:00.000Z</published>
-    <updated>2017-07-14T07:27:13.000Z</updated>
+    <updated>2017-11-20T10:11:19.188Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓</p>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓</p>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
 <p>在MAC下使用RDC远程Windows系统时，总是会遇到一些问题，下面我们来踩一下那些坑。</p>
 </blockquote>
@@ -53,7 +53,8 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;Microsoft Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓&lt;/
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;Remote Desktop Connection Client for Mac 在下文中直接用RDC来代替，请知晓&lt;/p&gt;
+&lt;h1 id=
     
     </summary>
     
