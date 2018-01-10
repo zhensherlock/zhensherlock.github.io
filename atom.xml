@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>MichaelSun&#39;s Blog</title>
-  <subtitle>javascript,.net</subtitle>
+  <subtitle>javascript,node,python,rust,.net</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhensherlock.github.io/"/>
-  <updated>2017-11-20T10:11:19.188Z</updated>
+  <updated>2018-01-10T09:30:30.218Z</updated>
   <id>http://zhensherlock.github.io/</id>
   
   <author>
@@ -14,6 +14,103 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>神器 - Alfred</title>
+    <link href="http://zhensherlock.github.io/2017/07/12/mac/alfred/"/>
+    <id>http://zhensherlock.github.io/2017/07/12/mac/alfred/</id>
+    <published>2017-07-12T08:04:00.000Z</published>
+    <updated>2018-01-10T09:30:30.218Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Alfred-常规操作"><a href="#Alfred-常规操作" class="headerlink" title="Alfred 常规操作"></a>Alfred 常规操作</h1><a id="more"></a>
+<p><a href="https://www.jianshu.com/p/e9f3352c785f" target="_blank" rel="external">5分钟上手Mac效率神器Alfred以及Alfred常用操作</a><br><a href="https://www.waerfa.com/alfred-3-snippets-review" target="_blank" rel="external">Alfred 3 Snippets 初体验</a></p>
+<h1 id="Alfred-workflow"><a href="#Alfred-workflow" class="headerlink" title="Alfred workflow"></a>Alfred workflow</h1><p><a href="https://www.zhihu.com/question/20656680" target="_blank" rel="external">借助 Alfred 的 Workflows 功能可以做哪些好玩的事情？</a><br><a href="http://www.alfredworkflow.com/" target="_blank" rel="external">http://www.alfredworkflow.com/</a><br><a href="https://www.jianshu.com/p/0e78168da7ab" target="_blank" rel="external">Mac效率神器Alfred以及常用Workflow</a><br><a href="https://github.com/zenorocha/alfred-workflows#timezones-v190--download" target="_blank" rel="external">https://github.com/zenorocha/alfred-workflows#timezones-v190–download</a><br><a href="https://github.com/hzlzh/Alfred-Workflows" target="_blank" rel="external">https://github.com/hzlzh/Alfred-Workflows</a><br><a href="https://github.com/stidio/Alfred-Workflow" target="_blank" rel="external">https://github.com/stidio/Alfred-Workflow</a><br><a href="https://zhuanlan.zhihu.com/p/19986749" target="_blank" rel="external">用Alfred大幅提升操作效率 - workflow</a><br><a href="https://sspai.com/post/34344" target="_blank" rel="external">Alfred 3 中的惊喜</a><br><a href="https://github.com/derimagia/awesome-alfred-workflows" target="_blank" rel="external">https://github.com/derimagia/awesome-alfred-workflows</a><br><a href="http://www.packal.org/workflow-search" target="_blank" rel="external">Workflow Search</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Alfred-常规操作&quot;&gt;&lt;a href=&quot;#Alfred-常规操作&quot; class=&quot;headerlink&quot; title=&quot;Alfred 常规操作&quot;&gt;&lt;/a&gt;Alfred 常规操作&lt;/h1&gt;
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
+    
+    
+      <category term="alfred" scheme="http://zhensherlock.github.io/tags/alfred/"/>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac下安装pip</title>
+    <link href="http://zhensherlock.github.io/2017/06/13/python/install-pip/"/>
+    <id>http://zhensherlock.github.io/2017/06/13/python/install-pip/</id>
+    <published>2017-06-13T04:40:00.000Z</published>
+    <updated>2017-12-06T08:44:17.137Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo easy_install pip</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;安装pip&quot;&gt;&lt;a href=&quot;#安装pip&quot; class=&quot;headerlink&quot; title=&quot;安装pip&quot;&gt;&lt;/a&gt;安装pip&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://zhensherlock.github.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://zhensherlock.github.io/tags/python/"/>
+    
+      <category term="pip" scheme="http://zhensherlock.github.io/tags/pip/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac下安装pyenv</title>
+    <link href="http://zhensherlock.github.io/2017/06/12/python/install-pyenv/"/>
+    <id>http://zhensherlock.github.io/2017/06/12/python/install-pyenv/</id>
+    <published>2017-06-12T04:40:00.000Z</published>
+    <updated>2017-12-06T08:44:23.600Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。</p>
+<h1 id="安装pyenv"><a href="#安装pyenv" class="headerlink" title="安装pyenv"></a>安装pyenv</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">brew install pyenv</div></pre></td></tr></table></figure>
+<p>接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># Start pyenv Config</div><div class="line">export PYENV_ROOT=/users/&lt;username&gt;/.pyenv</div><div class="line">export PATH=$PYENV_ROOT/bin:$PATH</div><div class="line">eval &quot;$(pyenv init -)&quot;</div><div class="line"># End pyenv Config</div></pre></td></tr></table></figure></p>
+<h1 id="pyenv命令"><a href="#pyenv命令" class="headerlink" title="pyenv命令"></a>pyenv命令</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Some useful pyenv commands are:</div><div class="line">   commands    列出所有pyenv可用的命令</div><div class="line">   local       设置或显示本地应用程序特定的Python版本</div><div class="line">   global      设置或显示系统全局的Python版本</div><div class="line">   shell       设置或显示shell外壳的Python版本</div><div class="line">   install     使用python-build安装指定Python版本</div><div class="line">   uninstall   卸载已经安装的Python</div><div class="line">   rehash      刷新 pyenv shims (安装之后运行这个)</div><div class="line">   version     查看当前使用的版本</div><div class="line">   versions    列出已经安装的Python版本，当前激活版本用*号标注</div><div class="line">   which       显示的完整路径的可执行文件</div><div class="line">   whence      列出包含给定的可执行所有的Python版本</div><div class="line"></div><div class="line">See `pyenv help &lt;command&gt;&apos; for information on a specific command.</div><div class="line">For full documentation, see: https://github.com/pyenv/pyenv/blob/master/COMMANDS.md</div></pre></td></tr></table></figure>
+<h1 id="安装python版本"><a href="#安装python版本" class="headerlink" title="安装python版本"></a>安装python版本</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pyenv install 3.6.3</div></pre></td></tr></table></figure>
+<p>当我们输入上面的命令，会发现下载安装包的速度非常慢，这时我们就需要用到<code>PYENV_ROOT</code>这个路径变量。<br>我们先自行下载3.6.3的安装包，然后将安装包放入<code>PYENV_ROOT</code>路径下的cache文件夹中（如下图所示），最后再次输入安装，就会自动跳过下载步骤，进入安装环节。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/install-pyenv/png/1.png" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure></p>
+<p>安装完成后，输入如下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 用于刷新 pyenv shims</div><div class="line">pyenv rehash</div></pre></td></tr></table></figure></p>
+<h1 id="切换版本"><a href="#切换版本" class="headerlink" title="切换版本"></a>切换版本</h1><blockquote>
+<p>优先级关系：shell——local——global</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 设置系统全局的Python版本（不建议直接操作，可能会影响Mac环境）</div><div class="line">pyenv global 3.6.3</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 设置本地应用程序的Python版本</div><div class="line">pyenv local 3.6.3</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 设置shell的Python版本</div><div class="line">pyenv shell 3.6.3</div></pre></td></tr></table></figure>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.csdn.net/u010670689/article/details/74906766" target="_blank" rel="external">Mac多Python版本共存，多个独立Python开发环境切换。</a><br><a href="https://chloechen727.wordpress.com/2015/07/26/mac-os-x-plus-python-2-7-and-3-4/" target="_blank" rel="external">Mac OS X 下 Python 2.7 &amp; 3.4 共存</a><br><a href="https://segmentfault.com/a/1190000004020387" target="_blank" rel="external">Python多版本切换工具-Pyenv\virtualenv及Anaconda科学计算环境的配置</a><br><a href="http://www.jianshu.com/p/861f9a474f70" target="_blank" rel="external">python多版本和虚拟环境(pyenv+conda or virtualenv)</a><br><a href="http://liyangliang.me/posts/2017/06/pyenv-notes/" target="_blank" rel="external">Pyenv 使用笔记</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。&lt;/p&gt;
+&lt;h1 id=&quot;安装pyenv&quot;&gt;&lt;a href=&quot;#安装pyenv&quot; class=&quot;headerlink&quot; title=&quot;安装pyenv&quot;&gt;&lt;/a&gt;安装pyenv&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;brew install pyenv&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://zhensherlock.github.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://zhensherlock.github.io/tags/python/"/>
+    
+      <category term="pyenv" scheme="http://zhensherlock.github.io/tags/pyenv/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac 使用 Remote Desktop Connection Client for Mac 遇到的坑</title>
@@ -375,9 +472,9 @@
       <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
     
     
-      <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
-    
       <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
+    
+      <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
     
   </entry>
   

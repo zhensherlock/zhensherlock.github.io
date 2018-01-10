@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>神器 - Alfred | MichaelSun&#39;s Blog | javascript,node,python,rust,.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="alfred,Mac">
+    <meta name="description" content="Alfred 常规操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神器 - Alfred">
+<meta property="og:url" content="http://zhensherlock.github.io/2017/07/12/mac/alfred/index.html">
+<meta property="og:site_name" content="MichaelSun's Blog">
+<meta property="og:description" content="Alfred 常规操作">
+<meta property="og:updated_time" content="2018-01-10T09:30:30.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="神器 - Alfred">
+<meta name="twitter:description" content="Alfred 常规操作">
+    
+        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孙臻轩</h5>
+          <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhensherlock" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.linkedin.com/in/3056750" target="_blank" >
+                <i class="icon icon-lg icon-linkedin"></i>
+                Linkedin
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">神器 - Alfred</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">神器 - Alfred</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-12T08:04:00.000Z" itemprop="datePublished" class="page-time">
+  2017-07-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Alfred-常规操作"><span class="post-toc-number">1.</span> <span class="post-toc-text">Alfred 常规操作</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Alfred-workflow"><span class="post-toc-number">2.</span> <span class="post-toc-text">Alfred workflow</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-mac/alfred"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">神器 - Alfred</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年07月12日 16:04" datetime="2017-07-12T08:04:00.000Z"  itemprop="datePublished">2017-07-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Alfred-常规操作"><a href="#Alfred-常规操作" class="headerlink" title="Alfred 常规操作"></a>Alfred 常规操作</h1><a id="more"></a>
+<p><a href="https://www.jianshu.com/p/e9f3352c785f" target="_blank" rel="external">5分钟上手Mac效率神器Alfred以及Alfred常用操作</a><br><a href="https://www.waerfa.com/alfred-3-snippets-review" target="_blank" rel="external">Alfred 3 Snippets 初体验</a></p>
+<h1 id="Alfred-workflow"><a href="#Alfred-workflow" class="headerlink" title="Alfred workflow"></a>Alfred workflow</h1><p><a href="https://www.zhihu.com/question/20656680" target="_blank" rel="external">借助 Alfred 的 Workflows 功能可以做哪些好玩的事情？</a><br><a href="http://www.alfredworkflow.com/" target="_blank" rel="external">http://www.alfredworkflow.com/</a><br><a href="https://www.jianshu.com/p/0e78168da7ab" target="_blank" rel="external">Mac效率神器Alfred以及常用Workflow</a><br><a href="https://github.com/zenorocha/alfred-workflows#timezones-v190--download" target="_blank" rel="external">https://github.com/zenorocha/alfred-workflows#timezones-v190–download</a><br><a href="https://github.com/hzlzh/Alfred-Workflows" target="_blank" rel="external">https://github.com/hzlzh/Alfred-Workflows</a><br><a href="https://github.com/stidio/Alfred-Workflow" target="_blank" rel="external">https://github.com/stidio/Alfred-Workflow</a><br><a href="https://zhuanlan.zhihu.com/p/19986749" target="_blank" rel="external">用Alfred大幅提升操作效率 - workflow</a><br><a href="https://sspai.com/post/34344" target="_blank" rel="external">Alfred 3 中的惊喜</a><br><a href="https://github.com/derimagia/awesome-alfred-workflows" target="_blank" rel="external">https://github.com/derimagia/awesome-alfred-workflows</a><br><a href="http://www.packal.org/workflow-search" target="_blank" rel="external">Workflow Search</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-10T09:30:30.218Z" itemprop="dateUpdated">2018年1月10日 17:30</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2017/07/12/mac/alfred/" target="_blank" rel="external">http://zhensherlock.github.io/2017/07/12/mac/alfred/</a>
+    </div>
+    <footer>
+        <a href="http://zhensherlock.github.io">
+            <img src="/img/avatar.jpg" alt="孙臻轩">
+            孙臻轩
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/alfred/">alfred</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/07/12/mac/alfred/&title=《神器 - Alfred》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/07/12/mac/alfred/&title=《神器 - Alfred》 — MichaelSun's Blog&source=Alfred 常规操作" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/07/12/mac/alfred/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《神器 - Alfred》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/07/12/mac/alfred/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/07/12/mac/alfred/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/13/python/install-pip/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Mac下安装pip</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="mac/alfred" data-title="神器 - Alfred" data-url="http://zhensherlock.github.io/2017/07/12/mac/alfred/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.5');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>MichaelSun's Blog &copy; 2015 - 2018</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/07/12/mac/alfred/&title=《神器 - Alfred》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/07/12/mac/alfred/&title=《神器 - Alfred》 — MichaelSun's Blog&source=Alfred 常规操作" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/07/12/mac/alfred/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《神器 - Alfred》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/07/12/mac/alfred/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/07/12/mac/alfred/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3ay26DMBAF0P7/T9NtpSrk3nFYxD5eIdSAD5VGnsfPT7yuP+v+/vVv5c9MfrW0MDAwvpZx3a52c+2mk+v7vWFgYJzDePXiV3+TvLhFJu99eR8DAwNj+ToKmhgYGBgfZdwfIu/D9CyUY2BgYLSbyw9/+baS5PkDuTgGBsYXMj6VZD5x/Uh/AwMD46sYV7na49osRNa7wsDA2JqRB7h2hKJtHrQBFwMD4xxGMuyVp6/rSW9Snsv+NRgYGPswZqMVs49yH2o/VvLDwMDYlJG/eKVhORsUy4+hGBgYpzGSIJtsOjl6Jh8u+jQYGBibMvIXtHfaTa98UAwMjL0ZeQOgTVDXV35sxcDA2JuRJJmzQtss0R02QTEwMI5h5E3NtkiXl+2GxTsMDIwDGDNAUhR7IseMBiwwMDA2YuQHwfzR9ZRH3BjIn4aBgbEToy2frQTuGTVqNmBgYGzNaA9kK03KlZbnMCPHwMDYiNEOdc0Ca45vC3kYGBgnMNbT0TZBbQtw0dMwMDAOYCQNgPagNmtM5uNiGBgYGE+U1fJ3taU6DAyMXRmzYDfbbluqy5sEGBgYezPaMJcc19qGQZs85+EeAwNjJ8Zsi23QzDGzX2FgYJzAWCnor/DaY9+bmREMDAyMeKPJWEY7qPGGioGBgREExLzolg9nFOMdGBgYBzDa4YY2TZ0F5aKBioGBsTWjHXGYtS0fnxnBwMDYk/ELp8TbGZadtaUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.5"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.5" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
