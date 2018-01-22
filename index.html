@@ -227,7 +227,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/06/13/python/install-pip/">Mac下安装pip</a>
+      <a class="post-title-link" href="/2017/06/13/python/install-pip/">Mac下使用pip</a>
     </h3>
   
 
@@ -238,6 +238,9 @@
 
     
         安装pipsudo easy_install pip
+pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像
+临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name
+永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内...
     
 
         <a href="/2017/06/13/python/install-pip/" class="post-more waves-effect waves-button">

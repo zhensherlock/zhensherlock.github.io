@@ -13,23 +13,32 @@
     
     
     
-    <title>Mac下安装pip | MichaelSun&#39;s Blog | javascript,node,python,rust,.net</title>
+    <title>Mac下使用pip | MichaelSun&#39;s Blog | javascript,node,python,rust,.net</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="python,pip">
-    <meta name="description" content="安装pipsudo easy_install pip">
+    <meta name="description" content="安装pipsudo easy_install pip
+pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像
+临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name
+永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac下安装pip">
+<meta property="og:title" content="Mac下使用pip">
 <meta property="og:url" content="http://zhensherlock.github.io/2017/06/13/python/install-pip/index.html">
 <meta property="og:site_name" content="MichaelSun's Blog">
-<meta property="og:description" content="安装pipsudo easy_install pip">
-<meta property="og:updated_time" content="2017-12-06T08:44:17.137Z">
+<meta property="og:description" content="安装pipsudo easy_install pip
+pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像
+临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name
+永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
+<meta property="og:updated_time" content="2018-01-12T08:20:31.066Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac下安装pip">
-<meta name="twitter:description" content="安装pipsudo easy_install pip">
+<meta name="twitter:title" content="Mac下使用pip">
+<meta name="twitter:description" content="安装pipsudo easy_install pip
+pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像
+临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name
+永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
     
         <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
     
@@ -120,7 +129,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Mac下安装pip</div>
+        <div class="flex-col header-title ellipsis">Mac下使用pip</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -142,7 +151,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Mac下安装pip</h1>
+        <h1 class="title">Mac下使用pip</h1>
         <h5 class="subtitle">
             
                 <time datetime="2017-06-13T04:40:00.000Z" itemprop="datePublished" class="page-time">
@@ -166,7 +175,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装pip"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装pip</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装pip"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装pip</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#pip镜像"><span class="post-toc-number">2.</span> <span class="post-toc-text">pip镜像</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#临时使用"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">临时使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#永久使用（待验证）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">永久使用（待验证）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他镜像源"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">其他镜像源</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
         </nav>
     </aside>
     
@@ -174,7 +183,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Mac下安装pip</h1>
+        <h1 class="post-card-title">Mac下使用pip</h1>
         <div class="post-meta">
             <time class="post-time" title="2017年06月13日 12:40" datetime="2017-06-13T04:40:00.000Z"  itemprop="datePublished">2017-06-13</time>
 
@@ -194,13 +203,19 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo easy_install pip</div></pre></td></tr></table></figure>
+<h1 id="pip镜像"><a href="#pip镜像" class="headerlink" title="pip镜像"></a>pip镜像</h1><p>直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像</p>
+<h2 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a>临时使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name</div></pre></td></tr></table></figure>
+<h2 id="永久使用（待验证）"><a href="#永久使用（待验证）" class="headerlink" title="永久使用（待验证）"></a>永久使用（待验证）</h2><p>新建 <code>~/.pip/pip.conf</code> 文件，输入下面的内容<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[global]</div><div class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</div></pre></td></tr></table></figure></p>
+<h2 id="其他镜像源"><a href="#其他镜像源" class="headerlink" title="其他镜像源"></a>其他镜像源</h2><p><a href="https://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="external">阿里云</a><br><a href="https://pypi.doubanio.com/simple/" target="_blank" rel="external">豆瓣</a></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/" target="_blank" rel="external">pypi 镜像使用帮助</a></p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-06T08:44:17.137Z" itemprop="dateUpdated">2017年12月6日 16:44</time>
+    最后更新时间：<time datetime="2018-01-12T08:20:31.066Z" itemprop="dateUpdated">2018年1月12日 16:20</time>
 </span><br>
 
 
@@ -233,7 +248,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&title=《Mac下安装pip》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&title=《Mac下使用pip》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -243,7 +258,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&title=《Mac下安装pip》 — MichaelSun's Blog&source=孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&title=《Mac下使用pip》 — MichaelSun's Blog&source=孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -253,7 +268,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mac下安装pip》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&via=http://zhensherlock.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mac下使用pip》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&via=http://zhensherlock.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -303,7 +318,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="python/install-pip" data-title="Mac下安装pip" data-url="http://zhensherlock.github.io/2017/06/13/python/install-pip/"></div>
+    <div class="ds-thread" data-thread-key="python/install-pip" data-title="Mac下使用pip" data-url="http://zhensherlock.github.io/2017/06/13/python/install-pip/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -385,7 +400,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&title=《Mac下安装pip》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&title=《Mac下使用pip》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -395,7 +410,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&title=《Mac下安装pip》 — MichaelSun's Blog&source=孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&title=《Mac下使用pip》 — MichaelSun's Blog&source=孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -405,7 +420,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mac下安装pip》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&via=http://zhensherlock.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mac下使用pip》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/06/13/python/install-pip/&via=http://zhensherlock.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

@@ -43,13 +43,19 @@
   </entry>
   
   <entry>
-    <title>Mac下安装pip</title>
+    <title>Mac下使用pip</title>
     <link href="http://zhensherlock.github.io/2017/06/13/python/install-pip/"/>
     <id>http://zhensherlock.github.io/2017/06/13/python/install-pip/</id>
     <published>2017-06-13T04:40:00.000Z</published>
-    <updated>2017-12-06T08:44:17.137Z</updated>
+    <updated>2018-01-12T08:20:31.066Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo easy_install pip</div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo easy_install pip</div></pre></td></tr></table></figure>
+<h1 id="pip镜像"><a href="#pip镜像" class="headerlink" title="pip镜像"></a>pip镜像</h1><p>直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像</p>
+<h2 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a>临时使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name</div></pre></td></tr></table></figure>
+<h2 id="永久使用（待验证）"><a href="#永久使用（待验证）" class="headerlink" title="永久使用（待验证）"></a>永久使用（待验证）</h2><p>新建 <code>~/.pip/pip.conf</code> 文件，输入下面的内容<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[global]</div><div class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</div></pre></td></tr></table></figure></p>
+<h2 id="其他镜像源"><a href="#其他镜像源" class="headerlink" title="其他镜像源"></a>其他镜像源</h2><p><a href="https://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="external">阿里云</a><br><a href="https://pypi.doubanio.com/simple/" target="_blank" rel="external">豆瓣</a></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/" target="_blank" rel="external">pypi 镜像使用帮助</a></p>
+]]></content>
     
     <summary type="html">
     
@@ -71,7 +77,7 @@
     <link href="http://zhensherlock.github.io/2017/06/12/python/install-pyenv/"/>
     <id>http://zhensherlock.github.io/2017/06/12/python/install-pyenv/</id>
     <published>2017-06-12T04:40:00.000Z</published>
-    <updated>2017-12-06T08:44:23.600Z</updated>
+    <updated>2018-01-17T07:45:50.808Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。</p>
 <h1 id="安装pyenv"><a href="#安装pyenv" class="headerlink" title="安装pyenv"></a>安装pyenv</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">brew install pyenv</div></pre></td></tr></table></figure>
@@ -92,7 +98,24 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 设置系统全局的Python版本（不建议直接操作，可能会影响Mac环境）</div><div class="line">pyenv global 3.6.3</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 设置本地应用程序的Python版本</div><div class="line">pyenv local 3.6.3</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 设置shell的Python版本</div><div class="line">pyenv shell 3.6.3</div></pre></td></tr></table></figure>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.csdn.net/u010670689/article/details/74906766" target="_blank" rel="external">Mac多Python版本共存，多个独立Python开发环境切换。</a><br><a href="https://chloechen727.wordpress.com/2015/07/26/mac-os-x-plus-python-2-7-and-3-4/" target="_blank" rel="external">Mac OS X 下 Python 2.7 &amp; 3.4 共存</a><br><a href="https://segmentfault.com/a/1190000004020387" target="_blank" rel="external">Python多版本切换工具-Pyenv\virtualenv及Anaconda科学计算环境的配置</a><br><a href="http://www.jianshu.com/p/861f9a474f70" target="_blank" rel="external">python多版本和虚拟环境(pyenv+conda or virtualenv)</a><br><a href="http://liyangliang.me/posts/2017/06/pyenv-notes/" target="_blank" rel="external">Pyenv 使用笔记</a></p>
+<h1 id="virtualenv创建纯净虚拟环境"><a href="#virtualenv创建纯净虚拟环境" class="headerlink" title="virtualenv创建纯净虚拟环境"></a>virtualenv创建纯净虚拟环境</h1><p>virtualenv可以创建出一个全新的独立虚拟环境，这样系统python环境就不会受到任何的影响。</p>
+<h2 id="安装pyenv-virtualenv"><a href="#安装pyenv-virtualenv" class="headerlink" title="安装pyenv-virtualenv"></a>安装pyenv-virtualenv</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv</div></pre></td></tr></table></figure>
+<p>接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pyenv virtualenv 3.6.3 virtual_env363</div></pre></td></tr></table></figure>
+<p>上述代码会创建一个名为virtual_env363的python虚拟环境，python的版本是3.6.3<br>在创建虚拟环境时，我们可以加上参数 <code>--no-site-packages</code>，这个参数不会复制系统python环境中的所有第三方包。<br>我们可以通过 <code>pyenv versions</code> 来查看本机所有的python环境</p>
+<h2 id="使用虚拟环境"><a href="#使用虚拟环境" class="headerlink" title="使用虚拟环境"></a>使用虚拟环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pyenv activate virtual_env363</div></pre></td></tr></table></figure>
+<h2 id="停用虚拟环境"><a href="#停用虚拟环境" class="headerlink" title="停用虚拟环境"></a>停用虚拟环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pyenv deactivate</div></pre></td></tr></table></figure>
+<h2 id="卸载虚拟环境"><a href="#卸载虚拟环境" class="headerlink" title="卸载虚拟环境"></a>卸载虚拟环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pyenv uninstall virtual_env363</div></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">rm -rf ~/.pyenv/versions/virtual_env363/</div></pre></td></tr></table></figure></p>
+<h1 id="Anaconda科学计算包"><a href="#Anaconda科学计算包" class="headerlink" title="Anaconda科学计算包"></a>Anaconda科学计算包</h1><p>Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。<br>使用上述步骤安装Anaconda包并切换到Anaconda包环境</p>
+<h2 id="创建虚拟环境-1"><a href="#创建虚拟环境-1" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><p>我们可以使用 conda 命令来创建名为<code>test_env</code>的虚拟环境，python版本为<code>python3.6.3</code><br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">conda create -n test_env python=3.6.3</div></pre></td></tr></table></figure></p>
+<h2 id="使用虚拟环境-1"><a href="#使用虚拟环境-1" class="headerlink" title="使用虚拟环境"></a>使用虚拟环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">source activate test_env</div></pre></td></tr></table></figure>
+<h2 id="停用虚拟环境-1"><a href="#停用虚拟环境-1" class="headerlink" title="停用虚拟环境"></a>停用虚拟环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">source deactivate</div></pre></td></tr></table></figure>
+<h2 id="卸载虚拟环境-1"><a href="#卸载虚拟环境-1" class="headerlink" title="卸载虚拟环境"></a>卸载虚拟环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">conda remove -n test_env --all</div></pre></td></tr></table></figure>
+<h2 id="安装第三方的依赖包"><a href="#安装第三方的依赖包" class="headerlink" title="安装第三方的依赖包"></a>安装第三方的依赖包</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">conda install package_name</div></pre></td></tr></table></figure>
+<p>和pip一样，国内安装依赖包时会很慢，需要设置镜像资源</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</div><div class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</div><div class="line">conda config --set show_channel_urls yes</div></pre></td></tr></table></figure>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.csdn.net/u010670689/article/details/74906766" target="_blank" rel="external">Mac多Python版本共存，多个独立Python开发环境切换。</a><br><a href="https://chloechen727.wordpress.com/2015/07/26/mac-os-x-plus-python-2-7-and-3-4/" target="_blank" rel="external">Mac OS X 下 Python 2.7 &amp; 3.4 共存</a><br><a href="https://segmentfault.com/a/1190000004020387" target="_blank" rel="external">Python多版本切换工具-Pyenv\virtualenv及Anaconda科学计算环境的配置</a><br><a href="http://www.jianshu.com/p/861f9a474f70" target="_blank" rel="external">python多版本和虚拟环境(pyenv+conda or virtualenv)</a><br><a href="http://liyangliang.me/posts/2017/06/pyenv-notes/" target="_blank" rel="external">Pyenv 使用笔记</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">Anaconda 镜像使用帮助</a><br><a href="https://github.com/wangshub/wechat_jump_game/wiki/Android-%E5%92%8C-iOS-%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4" target="_blank" rel="external">跳一跳Android-和-iOS-操作步骤</a><br><a href="https://www.cnblogs.com/technologylife/p/6635631.html" target="_blank" rel="external">python虚拟环境–virtualenv</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="external">virtualenv-廖雪峰的官方网站</a></p>
 ]]></content>
     
     <summary type="html">
