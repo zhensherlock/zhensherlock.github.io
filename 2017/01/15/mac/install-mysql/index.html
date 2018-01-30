@@ -20,37 +20,28 @@
     
     
     <meta name="keywords" content="Mac,MySQL">
-    <meta name="description" content="正文
-首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案
-
-使用brew安装MySQL在命令行中输入 brew install mysql 安装MySQL。
-下载dmg安装MySQL访问MySQL官网http://www.mysql.com/downloads/，点击下载MySQL Community Server，注意平台。
-卸载MySQL使用brew安装MySQ">
+    <meta name="description" content="正文 首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案  使用brew安装MySQL在命令行中输入 brew install mysql 安装MySQL。 下载dmg安装MySQL访问MySQL官网http://www.mysql.com/downloads/，点击下载MySQL Community Server，注意平台。 卸载MySQL使用brew安装MySQ">
+<meta name="keywords" content="Mac,MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="macOS 安装 MySQL">
 <meta property="og:url" content="http://zhensherlock.github.io/2017/01/15/mac/install-mysql/index.html">
-<meta property="og:site_name" content="MichaelSun's Blog">
-<meta property="og:description" content="正文
-首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案
-
-使用brew安装MySQL在命令行中输入 brew install mysql 安装MySQL。
-下载dmg安装MySQL访问MySQL官网http://www.mysql.com/downloads/，点击下载MySQL Community Server，注意平台。
-卸载MySQL使用brew安装MySQ">
+<meta property="og:site_name" content="MichaelSun&#39;s Blog">
+<meta property="og:description" content="正文 首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案  使用brew安装MySQL在命令行中输入 brew install mysql 安装MySQL。 下载dmg安装MySQL访问MySQL官网http://www.mysql.com/downloads/，点击下载MySQL Community Server，注意平台。 卸载MySQL使用brew安装MySQ">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-01-15T03:09:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="macOS 安装 MySQL">
-<meta name="twitter:description" content="正文
-首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案
-
-使用brew安装MySQL在命令行中输入 brew install mysql 安装MySQL。
-下载dmg安装MySQL访问MySQL官网http://www.mysql.com/downloads/，点击下载MySQL Community Server，注意平台。
-卸载MySQL使用brew安装MySQ">
+<meta name="twitter:description" content="正文 首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案  使用brew安装MySQL在命令行中输入 brew install mysql 安装MySQL。 下载dmg安装MySQL访问MySQL官网http://www.mysql.com/downloads/，点击下载MySQL Community Server，注意平台。 卸载MySQL使用brew安装MySQ">
     
-        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="MichaelSun&#39;s Blog" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -61,7 +52,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/avatar.jpg">
@@ -173,25 +164,27 @@
 
     
 
+
 </header>
 
 
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用brew安装MySQL"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">使用brew安装MySQL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#下载dmg安装MySQL"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">下载dmg安装MySQL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卸载MySQL"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">卸载MySQL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MySQL-Workbench（GUI）"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">MySQL Workbench（GUI）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MySQL问题"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">MySQL问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Access-denied-for-user-‘’-’localhost’-to-database’"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">Access denied for user ‘’@’localhost’ to database’</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#You-must-reset-your-password-using-ALTER-USER-statement-before-executing-this-statement"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">You must reset your password using ALTER USER statement before executing this statement.</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">2.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-mac/install-mysql"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">macOS 安装 MySQL</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年01月15日 10:04" datetime="2017-01-15T02:04:00.000Z"  itemprop="datePublished">2017-01-15</time>
+            <time class="post-time" title="2017-01-15 10:04:00" datetime="2017-01-15T02:04:00.000Z"  itemprop="datePublished">2017-01-15</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
@@ -204,36 +197,38 @@
 </span>
 
 
-            
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
 <p>首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案</p>
 </blockquote>
 <h2 id="使用brew安装MySQL"><a href="#使用brew安装MySQL" class="headerlink" title="使用brew安装MySQL"></a>使用brew安装MySQL</h2><p>在命令行中输入 <code>brew install mysql</code> 安装MySQL。</p>
-<h2 id="下载dmg安装MySQL"><a href="#下载dmg安装MySQL" class="headerlink" title="下载dmg安装MySQL"></a>下载dmg安装MySQL</h2><p>访问MySQL官网<a href="http://www.mysql.com/downloads/" target="_blank" rel="external">http://www.mysql.com/downloads/</a>，点击下载MySQL Community Server，注意平台。</p>
+<h2 id="下载dmg安装MySQL"><a href="#下载dmg安装MySQL" class="headerlink" title="下载dmg安装MySQL"></a>下载dmg安装MySQL</h2><p>访问MySQL官网<a href="http://www.mysql.com/downloads/" target="_blank" rel="noopener">http://www.mysql.com/downloads/</a>，点击下载MySQL Community Server，注意平台。</p>
 <h2 id="卸载MySQL"><a href="#卸载MySQL" class="headerlink" title="卸载MySQL"></a>卸载MySQL</h2><p>使用brew安装MySQL的，可以执行 <code>brew uninstall mysql</code> 或者 <code>brew remove mysql</code><br>然后再执行以下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo rm /usr/local/mysql</div><div class="line">sudo rm -rf /usr/local/mysql*</div><div class="line">sudo rm -rf /Library/StartupItems/MySQLCOM</div><div class="line">sudo rm -rf /Library/PreferencePanes/My*</div><div class="line">rm -rf ~/Library/PreferencePanes/My*</div><div class="line">sudo rm -rf /Library/Receipts/mysql*</div><div class="line">sudo rm -rf /Library/Receipts/MySQL*</div></pre></td></tr></table></figure></p>
 <p>再检查以下存储位置，如有文件，直接删除<br>/usr/local/Cellar 里的mysql文件<br>/usr/local/var 里的mysql文件<br>/tmp 里的mysql.sock, mysql.sock.lock, my.cnf文件<br>brew安装的安装包存储在/usr/local/Library/Cache/Homebrew也可以一并删除</p>
 <p>最后执行 <code>brew cleanup</code></p>
-<h2 id="MySQL-Workbench（GUI）"><a href="#MySQL-Workbench（GUI）" class="headerlink" title="MySQL Workbench（GUI）"></a>MySQL Workbench（GUI）</h2><p>MySQL官网上有 MySQL Workbench 的下载链接，访问<a href="https://downloads.mysql.com/archives/workbench/" target="_blank" rel="external">https://downloads.mysql.com/archives/workbench/</a>，<br>点击下载MySQL Workbench(GUI Tool)，如果发现安装之后，进入Workbench后，执行SQL后，一直卡死，请下载6.1.7版本。</p>
+<h2 id="MySQL-Workbench（GUI）"><a href="#MySQL-Workbench（GUI）" class="headerlink" title="MySQL Workbench（GUI）"></a>MySQL Workbench（GUI）</h2><p>MySQL官网上有 MySQL Workbench 的下载链接，访问<a href="https://downloads.mysql.com/archives/workbench/" target="_blank" rel="noopener">https://downloads.mysql.com/archives/workbench/</a>，<br>点击下载MySQL Workbench(GUI Tool)，如果发现安装之后，进入Workbench后，执行SQL后，一直卡死，请下载6.1.7版本。</p>
 <h2 id="MySQL问题"><a href="#MySQL问题" class="headerlink" title="MySQL问题"></a>MySQL问题</h2><p>下面是我在使用MySQL时出现的问题：</p>
 <h3 id="Access-denied-for-user-‘’-’localhost’-to-database’"><a href="#Access-denied-for-user-‘’-’localhost’-to-database’" class="headerlink" title="Access denied for user ‘’@’localhost’ to database’"></a>Access denied for user ‘’@’localhost’ to database’</h3><p>执行 <code>mysql -u root -p</code> 之后输入之前MySQL随机生成出来的密码，一直提示不正确的时候，我们就执行以下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">mysqld stop</div><div class="line">mysqld_safe --skip-grant-tables &amp;</div><div class="line">mysql -u root</div><div class="line">use mysql;</div><div class="line">update user set authentication_string=password(&apos;123456&apos;) where user=&apos;root&apos;;</div><div class="line">flush privileges;</div><div class="line">quit</div><div class="line">mysqld restart</div></pre></td></tr></table></figure></p>
 <h3 id="You-must-reset-your-password-using-ALTER-USER-statement-before-executing-this-statement"><a href="#You-must-reset-your-password-using-ALTER-USER-statement-before-executing-this-statement" class="headerlink" title="You must reset your password using ALTER USER statement before executing this statement."></a>You must reset your password using ALTER USER statement before executing this statement.</h3><p>当我们成功登录MySQL后，执行任何的命令，都提示上面的错误，我们需要执行以下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SET PASSWORD = PASSWORD(&apos;123456&apos;);</div><div class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; PASSWORD EXPIRE NEVER;</div><div class="line">flush privileges;</div></pre></td></tr></table></figure></p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://www.cnblogs.com/macro-cheng/archive/2011/10/25/mysql-001.html" target="_blank" rel="external">MAC下安装与配置MySQL</a><br><a href="http://blog.neten.de/posts/2014/01/27/install-mysql-using-homebrew/" target="_blank" rel="external">在 Mac 下用 Homebrew 安装 MySQL</a><br><a href="https://www.zhihu.com/question/52274376/answer/134273090" target="_blank" rel="external">workbench 无法执行命令？</a><br><a href="http://blog.csdn.net/sarahhuangzht/article/details/51508112" target="_blank" rel="external">Mac Pro下卸载安装Mysql</a><br><a href="http://www.cnblogs.com/tsingschange/p/6260683.html" target="_blank" rel="external">mysql-community-server 5.7.16 设置密码</a><br><a href="http://www.cnblogs.com/debmzhang/p/5013540.html" target="_blank" rel="external">mac mysql error You must reset your password using ALTER USER statement before executing this statement.</a></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://www.cnblogs.com/macro-cheng/archive/2011/10/25/mysql-001.html" target="_blank" rel="noopener">MAC下安装与配置MySQL</a><br><a href="http://blog.neten.de/posts/2014/01/27/install-mysql-using-homebrew/" target="_blank" rel="noopener">在 Mac 下用 Homebrew 安装 MySQL</a><br><a href="https://www.zhihu.com/question/52274376/answer/134273090" target="_blank" rel="noopener">workbench 无法执行命令？</a><br><a href="http://blog.csdn.net/sarahhuangzht/article/details/51508112" target="_blank" rel="noopener">Mac Pro下卸载安装Mysql</a><br><a href="http://www.cnblogs.com/tsingschange/p/6260683.html" target="_blank" rel="noopener">mysql-community-server 5.7.16 设置密码</a><br><a href="http://www.cnblogs.com/debmzhang/p/5013540.html" target="_blank" rel="noopener">mac mysql error You must reset your password using ALTER USER statement before executing this statement.</a></p>
 
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-01-15T03:09:05.000Z" itemprop="dateUpdated">2017年1月15日 11:09</time>
+    最后更新时间：<time datetime="2017-01-15T03:09:05.000Z" itemprop="dateUpdated">2017-01-15 11:09:05</time>
 </span><br>
 
 
-        这里写留言或版权声明：<a href="/2017/01/15/mac/install-mysql/" target="_blank" rel="external">http://zhensherlock.github.io/2017/01/15/mac/install-mysql/</a>
+        
+        原始链接：<a href="/2017/01/15/mac/install-mysql/" target="_blank" rel="external">http://zhensherlock.github.io/2017/01/15/mac/install-mysql/</a>
+        
     </div>
+    
     <footer>
         <a href="http://zhensherlock.github.io">
             <img src="/img/avatar.jpg" alt="孙臻轩">
@@ -318,9 +313,9 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/01/12/npm-china/" id="post-next" class="post-nav-link">
+      <a href="/2017/01/12/mac/brew-update/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">国内NPM使用</h4>
+        <h4 class="title">Sierra 10.12 brew update 报错</h4>
       </a>
     </div>
   
@@ -330,20 +325,28 @@
 
     
 
-<div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="mac/install-mysql" data-title="macOS 安装 MySQL" data-url="http://zhensherlock.github.io/2017/01/15/mac/install-mysql/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
-
-var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.5');
-
-
-</script>
 
 
 
+
+
+
+
+
+
+
+
+
+
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="macOS 安装 MySQL" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'cys0HlxY1';
+        var conf = 'ecbc8abf9b3f6a5646810b42329f9737';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
 
 
 
@@ -357,21 +360,23 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
         请我吃辣条~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -392,14 +397,18 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>MichaelSun's Blog &copy; 2015 - 2018</span>
+        <p><span>孙臻轩 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -460,12 +469,11 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
 
-
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.5"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -485,7 +493,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.5" async></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
@@ -493,6 +501,26 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '少年要秘籍吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '秘籍卖光了！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
 
 
 </body>

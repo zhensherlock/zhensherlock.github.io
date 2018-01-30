@@ -20,30 +20,30 @@
     
     
     <meta name="keywords" content="python,pyenv">
-    <meta name="description" content="前言python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。
-安装pyenvbrew install pyenv
-接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：">
+    <meta name="description" content="前言python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。 安装pyenvbrew install pyenv 接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：">
+<meta name="keywords" content="python,pyenv">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac下安装pyenv">
 <meta property="og:url" content="http://zhensherlock.github.io/2017/06/12/python/install-pyenv/index.html">
-<meta property="og:site_name" content="MichaelSun's Blog">
-<meta property="og:description" content="前言python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。
-安装pyenvbrew install pyenv
-接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：">
+<meta property="og:site_name" content="MichaelSun&#39;s Blog">
+<meta property="og:description" content="前言python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。 安装pyenvbrew install pyenv 接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://7xszf2.com1.z0.glb.clouddn.com/install-pyenv/png/1.png">
 <meta property="og:updated_time" content="2018-01-17T07:45:50.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac下安装pyenv">
-<meta name="twitter:description" content="前言python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。
-安装pyenvbrew install pyenv
-接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：">
+<meta name="twitter:description" content="前言python开发者有时会遇到不同版本的项目，这时就需要有切换python版本的功能。pyenv就是python版本管理器，下面我们就看一下pyenv在Mac上的安装过程。 安装pyenvbrew install pyenv 接下来在 ~/.bashrc 或 ~/.zshrc 中添加如下内容：">
 <meta name="twitter:image" content="http://7xszf2.com1.z0.glb.clouddn.com/install-pyenv/png/1.png">
     
-        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="MichaelSun&#39;s Blog" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -54,7 +54,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/avatar.jpg">
@@ -166,25 +166,27 @@
 
     
 
+
 </header>
 
 
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装pyenv"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装pyenv</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#pyenv命令"><span class="post-toc-number">3.</span> <span class="post-toc-text">pyenv命令</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装python版本"><span class="post-toc-number">4.</span> <span class="post-toc-text">安装python版本</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#切换版本"><span class="post-toc-number">5.</span> <span class="post-toc-text">切换版本</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#virtualenv创建纯净虚拟环境"><span class="post-toc-number">6.</span> <span class="post-toc-text">virtualenv创建纯净虚拟环境</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装pyenv-virtualenv"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">安装pyenv-virtualenv</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建虚拟环境"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">创建虚拟环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用虚拟环境"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">使用虚拟环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#停用虚拟环境"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">停用虚拟环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卸载虚拟环境"><span class="post-toc-number">6.5.</span> <span class="post-toc-text">卸载虚拟环境</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Anaconda科学计算包"><span class="post-toc-number">7.</span> <span class="post-toc-text">Anaconda科学计算包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建虚拟环境-1"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">创建虚拟环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用虚拟环境-1"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">使用虚拟环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#停用虚拟环境-1"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">停用虚拟环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卸载虚拟环境-1"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">卸载虚拟环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装第三方的依赖包"><span class="post-toc-number">7.5.</span> <span class="post-toc-text">安装第三方的依赖包</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">8.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-python/install-pyenv"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">Mac下安装pyenv</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年06月12日 12:40" datetime="2017-06-12T04:40:00.000Z"  itemprop="datePublished">2017-06-12</time>
+            <time class="post-time" title="2017-06-12 12:40:00" datetime="2017-06-12T04:40:00.000Z"  itemprop="datePublished">2017-06-12</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
@@ -196,8 +198,6 @@
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
-
-            
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
@@ -237,20 +237,24 @@
 <h2 id="安装第三方的依赖包"><a href="#安装第三方的依赖包" class="headerlink" title="安装第三方的依赖包"></a>安装第三方的依赖包</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">conda install package_name</div></pre></td></tr></table></figure>
 <p>和pip一样，国内安装依赖包时会很慢，需要设置镜像资源</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</div><div class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</div><div class="line">conda config --set show_channel_urls yes</div></pre></td></tr></table></figure>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.csdn.net/u010670689/article/details/74906766" target="_blank" rel="external">Mac多Python版本共存，多个独立Python开发环境切换。</a><br><a href="https://chloechen727.wordpress.com/2015/07/26/mac-os-x-plus-python-2-7-and-3-4/" target="_blank" rel="external">Mac OS X 下 Python 2.7 &amp; 3.4 共存</a><br><a href="https://segmentfault.com/a/1190000004020387" target="_blank" rel="external">Python多版本切换工具-Pyenv\virtualenv及Anaconda科学计算环境的配置</a><br><a href="http://www.jianshu.com/p/861f9a474f70" target="_blank" rel="external">python多版本和虚拟环境(pyenv+conda or virtualenv)</a><br><a href="http://liyangliang.me/posts/2017/06/pyenv-notes/" target="_blank" rel="external">Pyenv 使用笔记</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">Anaconda 镜像使用帮助</a><br><a href="https://github.com/wangshub/wechat_jump_game/wiki/Android-%E5%92%8C-iOS-%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4" target="_blank" rel="external">跳一跳Android-和-iOS-操作步骤</a><br><a href="https://www.cnblogs.com/technologylife/p/6635631.html" target="_blank" rel="external">python虚拟环境–virtualenv</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="external">virtualenv-廖雪峰的官方网站</a></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.csdn.net/u010670689/article/details/74906766" target="_blank" rel="noopener">Mac多Python版本共存，多个独立Python开发环境切换。</a><br><a href="https://chloechen727.wordpress.com/2015/07/26/mac-os-x-plus-python-2-7-and-3-4/" target="_blank" rel="noopener">Mac OS X 下 Python 2.7 &amp; 3.4 共存</a><br><a href="https://segmentfault.com/a/1190000004020387" target="_blank" rel="noopener">Python多版本切换工具-Pyenv\virtualenv及Anaconda科学计算环境的配置</a><br><a href="http://www.jianshu.com/p/861f9a474f70" target="_blank" rel="noopener">python多版本和虚拟环境(pyenv+conda or virtualenv)</a><br><a href="http://liyangliang.me/posts/2017/06/pyenv-notes/" target="_blank" rel="noopener">Pyenv 使用笔记</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">Anaconda 镜像使用帮助</a><br><a href="https://github.com/wangshub/wechat_jump_game/wiki/Android-%E5%92%8C-iOS-%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4" target="_blank" rel="noopener">跳一跳Android-和-iOS-操作步骤</a><br><a href="https://www.cnblogs.com/technologylife/p/6635631.html" target="_blank" rel="noopener">python虚拟环境–virtualenv</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="noopener">virtualenv-廖雪峰的官方网站</a></p>
 
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-01-17T07:45:50.808Z" itemprop="dateUpdated">2018年1月17日 15:45</time>
+    最后更新时间：<time datetime="2018-01-17T07:45:50.808Z" itemprop="dateUpdated">2018-01-17 15:45:50</time>
 </span><br>
 
 
-        这里写留言或版权声明：<a href="/2017/06/12/python/install-pyenv/" target="_blank" rel="external">http://zhensherlock.github.io/2017/06/12/python/install-pyenv/</a>
+        
+        原始链接：<a href="/2017/06/12/python/install-pyenv/" target="_blank" rel="external">http://zhensherlock.github.io/2017/06/12/python/install-pyenv/</a>
+        
     </div>
+    
     <footer>
         <a href="http://zhensherlock.github.io">
             <img src="/img/avatar.jpg" alt="孙臻轩">
@@ -347,20 +351,28 @@
 
     
 
-<div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="python/install-pyenv" data-title="Mac下安装pyenv" data-url="http://zhensherlock.github.io/2017/06/12/python/install-pyenv/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
-
-var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.5');
-
-
-</script>
 
 
 
+
+
+
+
+
+
+
+
+
+
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Mac下安装pyenv" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'cys0HlxY1';
+        var conf = 'ecbc8abf9b3f6a5646810b42329f9737';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
 
 
 
@@ -374,21 +386,23 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
         请我吃辣条~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -409,14 +423,18 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>MichaelSun's Blog &copy; 2015 - 2018</span>
+        <p><span>孙臻轩 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -477,12 +495,11 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
 
-
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.5"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -502,7 +519,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.5" async></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
@@ -510,6 +527,26 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '少年要秘籍吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '秘籍卖光了！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
 
 
 </body>

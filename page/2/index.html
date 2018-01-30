@@ -22,19 +22,24 @@
     <meta name="keywords" content="undefined">
     <meta name="description" content="孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="MichaelSun's Blog">
+<meta property="og:title" content="MichaelSun&#39;s Blog">
 <meta property="og:url" content="http://zhensherlock.github.io/page/2/index.html">
-<meta property="og:site_name" content="MichaelSun's Blog">
+<meta property="og:site_name" content="MichaelSun&#39;s Blog">
 <meta property="og:description" content="孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MichaelSun's Blog">
+<meta name="twitter:title" content="MichaelSun&#39;s Blog">
 <meta name="twitter:description" content="孙臻轩，前端开发工程师。除前端技能外，也熟悉基于.net的WEB开发。">
     
-        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="MichaelSun&#39;s Blog" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -45,7 +50,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/avatar.jpg">
@@ -151,6 +156,7 @@
 
     
 
+
 </header>
 
 <div class="container body-wrap">
@@ -158,16 +164,120 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-mac/brew-update"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-01-12 16:04:00" datetime="2017-01-12T08:04:00.000Z"  itemprop="datePublished">2017-01-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/01/12/mac/brew-update/">Sierra 10.12 brew update 报错</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        正文
+当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：
+
+Error: /usr/local must be writable!
+解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。
+在命令行中执行：
+sudo chown -R whoami /usr/local
+请将whoami替换成当前用户名
+参考文献In ma...
+    
+
+        <a href="/2017/01/12/mac/brew-update/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/brew/">brew</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-npm-china"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-01-12 16:04:00" datetime="2017-01-12T08:04:00.000Z"  itemprop="datePublished">2017-01-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/01/12/npm-china/">国内NPM使用</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        导语
+NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安装underscore为例）。
+
+临时修改在命令行中输入：npm install underscore -g --registry=https://registry.npm.taobao.org
+全局修改在命令行中输入：npm config set registry htt...
+    
+
+        <a href="/2017/01/12/npm-china/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/">NPM</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-hello-world"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017年01月11日 20:48" datetime="2017-01-11T12:48:01.000Z"  itemprop="datePublished">2017-01-11</time>
+        <time class="post-time" title="2017-01-11 20:48:01" datetime="2017-01-11T12:48:01.000Z"  itemprop="datePublished">2017-01-11</time>
 
         
 
-
-        
 
     </div>
 
@@ -191,7 +301,7 @@ Qu...
     
 
         <a href="/2017/01/11/hello-world/" class="post-more waves-effect waves-button">
-            阅读全文...
+            阅读全文…
         </a>
     </div>
     
@@ -210,14 +320,12 @@ Qu...
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017年01月10日 17:52" datetime="2017-01-10T09:52:02.000Z"  itemprop="datePublished">2017-01-10</time>
+        <time class="post-time" title="2017-01-10 17:52:02" datetime="2017-01-10T09:52:02.000Z"  itemprop="datePublished">2017-01-10</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
 
 
-
-        
 
     </div>
 
@@ -243,7 +351,7 @@ Qu...
     
 
         <a href="/2017/01/10/Microsoft-Office-MIME-Types/" class="post-more waves-effect waves-button">
-            阅读全文...
+            阅读全文…
         </a>
     </div>
     
@@ -262,14 +370,12 @@ Qu...
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2016年04月29日 16:54" datetime="2016-04-29T08:54:17.000Z"  itemprop="datePublished">2016-04-29</time>
+        <time class="post-time" title="2016-04-29 16:54:17" datetime="2016-04-29T08:54:17.000Z"  itemprop="datePublished">2016-04-29</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
 
 
-
-        
 
     </div>
 
@@ -303,7 +409,7 @@ Qu...
     
 
         <a href="/2016/04/29/openxml-generate-data-dictionary/" class="post-more waves-effect waves-button">
-            阅读全文...
+            阅读全文…
         </a>
     </div>
     
@@ -322,14 +428,12 @@ Qu...
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2016年04月28日 9:35" datetime="2016-04-28T01:35:31.000Z"  itemprop="datePublished">2016-04-28</time>
+        <time class="post-time" title="2016-04-28 09:35:31" datetime="2016-04-28T01:35:31.000Z"  itemprop="datePublished">2016-04-28</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/UI/">UI</a></li></ul>
 
 
-
-        
 
     </div>
 
@@ -361,7 +465,7 @@ Qu...
     
 
         <a href="/2016/04/28/front/photoshop-convert-px/" class="post-more waves-effect waves-button">
-            阅读全文...
+            阅读全文…
         </a>
     </div>
     
@@ -380,14 +484,12 @@ Qu...
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2016年04月27日 9:07" datetime="2016-04-27T01:07:40.000Z"  itemprop="datePublished">2016-04-27</time>
+        <time class="post-time" title="2016-04-27 09:07:40" datetime="2016-04-27T01:07:40.000Z"  itemprop="datePublished">2016-04-27</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据库/">数据库</a></li></ul>
 
 
-
-        
 
     </div>
 
@@ -413,7 +515,7 @@ Qu...
     
 
         <a href="/2016/04/27/database/sql-server-identity/" class="post-more waves-effect waves-button">
-            阅读全文...
+            阅读全文…
         </a>
     </div>
     
@@ -432,14 +534,12 @@ Qu...
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2016年04月21日 16:44" datetime="2016-04-21T08:44:37.000Z"  itemprop="datePublished">2016-04-21</time>
+        <time class="post-time" title="2016-04-21 16:44:37" datetime="2016-04-21T08:44:37.000Z"  itemprop="datePublished">2016-04-21</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
 
 
-
-        
 
     </div>
 
@@ -464,7 +564,7 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
     
 
         <a href="/2016/04/21/front/jslint-missing-radix-parameter/" class="post-more waves-effect waves-button">
-            阅读全文...
+            阅读全文…
         </a>
     </div>
     
@@ -483,14 +583,12 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2016年04月19日 8:41" datetime="2016-04-19T00:41:52.000Z"  itemprop="datePublished">2016-04-19</time>
+        <time class="post-time" title="2016-04-19 08:41:52" datetime="2016-04-19T00:41:52.000Z"  itemprop="datePublished">2016-04-19</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据库/">数据库</a></li></ul>
 
 
-
-        
 
     </div>
 
@@ -515,7 +613,7 @@ Case搜索函数CASE WHEN sex = '1' THEN '男'         WHEN sex = '2' THEN '女'
     
 
         <a href="/2016/04/19/database/sql-server-case-when/" class="post-more waves-effect waves-button">
-            阅读全文...
+            阅读全文…
         </a>
     </div>
     
@@ -534,14 +632,12 @@ Case搜索函数CASE WHEN sex = '1' THEN '男'         WHEN sex = '2' THEN '女'
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2016年04月14日 17:59" datetime="2016-04-14T09:59:22.000Z"  itemprop="datePublished">2016-04-14</time>
+        <time class="post-time" title="2016-04-14 17:59:22" datetime="2016-04-14T09:59:22.000Z"  itemprop="datePublished">2016-04-14</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/IDE/">IDE</a></li></ul>
 
 
-
-        
 
     </div>
 
@@ -573,143 +669,13 @@ Case搜索函数CASE WHEN sex = '1' THEN '男'         WHEN sex = '2' THEN '女'
     
 
         <a href="/2016/04/14/visual-studio-remote-debugger/" class="post-more waves-effect waves-button">
-            阅读全文...
+            阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-database/sql-server-recursion"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016年04月14日 16:54" datetime="2016-04-14T08:54:19.000Z"  itemprop="datePublished">2016-04-14</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据库/">数据库</a></li></ul>
-
-
-
-        
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/04/14/database/sql-server-recursion/">SQL Server 递归函数</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        导语
-有时我们在设计表结构时，会遇到主键关联到自身表的parentid，这时我们就会需要传递一个id，将所有的子集都获取出来。
-
-需要补习的语法 WITH AS摘自网上WITH AS短语，也叫做子查询部分（subquery factoring），可以让你做很多事情，定义一个SQL片断，该SQL片断会被整个SQL语句所用到。有的时候，是为了让SQL语句的可读性更高些，也有可能是在UNION ALL的不同部分，作为提供数据的部分。特别对于UNION ALL比较有用。因为UNION ALL的每个部分可能相同，但是如果每个部分都去执行一遍的话，则成本太高，所以可以使用WITH AS短语，则只要执行一遍即可。如果WITH AS短语所定义的表名被调用两次以上，则优化器会自动将WITH AS短语所获取的数据放入一个TEMP表里，如果只是被调用一次，则不会。而提示materialize则是强制将WITH AS短语里的数据放入一个全局临时表里。很多查询通过这种方法都可以提高速度。
-    
-
-        <a href="/2016/04/14/database/sql-server-recursion/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Server/">SQL Server</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-front/css-priority"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016年04月08日 16:04" datetime="2016-04-08T08:04:00.000Z"  itemprop="datePublished">2016-04-08</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
-
-
-
-        
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/04/08/front/css-priority/">CSS优先级计算</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        导语
-前端开发时，经常会遇到当前元素需要覆盖样式的需求，这篇我们来了解一下css是如何来确定当前使用哪种样式的。
-
-正文
-
-
-类型
-权值
-
-
-
-
-内联样式表
-1000
-
-
-ID 选择器
-100
-
-
-Class 类选择器
-10
-
-
-HTML 标签选择器
-1
-
-
-
-
-    
-
-        <a href="/2016/04/08/front/css-priority/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
 
     </div>
     
@@ -743,14 +709,18 @@ HTML 标签选择器
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>MichaelSun's Blog &copy; 2015 - 2018</span>
+        <p><span>孙臻轩 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -811,12 +781,11 @@ HTML 标签选择器
 var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
-
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.5"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -836,7 +805,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.5" async></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
@@ -844,6 +813,26 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '少年要秘籍吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '秘籍卖光了！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
 
 
 </body>

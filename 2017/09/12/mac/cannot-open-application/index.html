@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>解决 MAC 无法打开应用或应用文件已损坏问题 | MichaelSun&#39;s Blog | javascript,node,python,rust,.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Mac">
+    <meta name="description" content="导语Mac安全机制中默认只信任 Mac App Store 下载的软件和拥有开发者 ID 签名的应用程序。就是说 OS X 默认只能安装苹果审核通过的软件，这也是为了用户不会安装流氓软件中招。但是当我们在安装网上的破解软件时就会遇到下面这种情况。">
+<meta name="keywords" content="Mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决 MAC 无法打开应用或应用文件已损坏问题">
+<meta property="og:url" content="http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/index.html">
+<meta property="og:site_name" content="MichaelSun&#39;s Blog">
+<meta property="og:description" content="导语Mac安全机制中默认只信任 Mac App Store 下载的软件和拥有开发者 ID 签名的应用程序。就是说 OS X 默认只能安装苹果审核通过的软件，这也是为了用户不会安装流氓软件中招。但是当我们在安装网上的破解软件时就会遇到下面这种情况。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xszf2.com1.z0.glb.clouddn.com/cannot-open-application/png/1.png">
+<meta property="og:image" content="http://7xszf2.com1.z0.glb.clouddn.com/cannot-open-application/png/2.png">
+<meta property="og:image" content="http://7xszf2.com1.z0.glb.clouddn.com/cannot-open-application/png/3.png">
+<meta property="og:updated_time" content="2018-01-24T02:15:39.016Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决 MAC 无法打开应用或应用文件已损坏问题">
+<meta name="twitter:description" content="导语Mac安全机制中默认只信任 Mac App Store 下载的软件和拥有开发者 ID 签名的应用程序。就是说 OS X 默认只能安装苹果审核通过的软件，这也是为了用户不会安装流氓软件中招。但是当我们在安装网上的破解软件时就会遇到下面这种情况。">
+<meta name="twitter:image" content="http://7xszf2.com1.z0.glb.clouddn.com/cannot-open-application/png/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="MichaelSun&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孙臻轩</h5>
+          <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhensherlock" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.linkedin.com/in/3056750" target="_blank" >
+                <i class="icon icon-lg icon-linkedin"></i>
+                Linkedin
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">解决 MAC 无法打开应用或应用文件已损坏问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">解决 MAC 无法打开应用或应用文件已损坏问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-12T08:04:00.000Z" itemprop="datePublished" class="page-time">
+  2017-09-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#导语"><span class="post-toc-number">1.</span> <span class="post-toc-text">导语</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-mac/cannot-open-application"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">解决 MAC 无法打开应用或应用文件已损坏问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-12 16:04:00" datetime="2017-09-12T08:04:00.000Z"  itemprop="datePublished">2017-09-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>Mac安全机制中默认只信任 <strong>Mac App Store</strong> 下载的软件和拥有开发者 ID 签名的应用程序。<br>就是说 OS X 默认只能安装苹果审核通过的软件，这也是为了用户不会安装流氓软件中招。<br>但是当我们在安装网上的破解软件时就会遇到下面这种情况。<br><a id="more"></a><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/cannot-open-application/png/1.png" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure></p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>打开 系统偏好设置 -&gt; 安全性与隐私<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/cannot-open-application/png/2.png" alt="图2" title="">
+                </div>
+                <div class="image-caption">图2</div>
+            </figure></p>
+<p>选择任何来源选项<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/cannot-open-application/png/3.png" alt="图3" title="">
+                </div>
+                <div class="image-caption">图3</div>
+            </figure></p>
+<blockquote>
+<p>如果你没有这个选项，打开 <strong>终端</strong>，执行 <code>sudo spctl --master-disable</code>，再次重新打开安全性与隐私，就会出现任何来源了。</p>
+</blockquote>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://xclient.info/a/74559ea2-7870-b992-ed53-52a9d988e382.html?_=4e3cdc67aaa43723cc2ef97687b967eb" target="_blank" rel="noopener">MAC应用无法打开或文件损坏的处理方法</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-24T02:15:39.016Z" itemprop="dateUpdated">2018-01-24 10:15:39</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/2017/09/12/mac/cannot-open-application/" target="_blank" rel="external">http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://zhensherlock.github.io">
+            <img src="/img/avatar.jpg" alt="孙臻轩">
+            孙臻轩
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/&title=《解决 MAC 无法打开应用或应用文件已损坏问题》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/&title=《解决 MAC 无法打开应用或应用文件已损坏问题》 — MichaelSun's Blog&source=导语Mac安全机制中默认只信任 Mac App Store 下载的软件和拥有开发者 ID 签名的应用程序。就是说 OS X 默认只能安装苹果审核通过的软件..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解决 MAC 无法打开应用或应用文件已损坏问题》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/12/mac/toggle-dashboard/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Mac 隐藏或显示 Dashboard</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="解决 MAC 无法打开应用或应用文件已损坏问题" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'cys0HlxY1';
+        var conf = 'ecbc8abf9b3f6a5646810b42329f9737';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>孙臻轩 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/&title=《解决 MAC 无法打开应用或应用文件已损坏问题》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/&title=《解决 MAC 无法打开应用或应用文件已损坏问题》 — MichaelSun's Blog&source=导语Mac安全机制中默认只信任 Mac App Store 下载的软件和拥有开发者 ID 签名的应用程序。就是说 OS X 默认只能安装苹果审核通过的软件..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解决 MAC 无法打开应用或应用文件已损坏问题》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/09/12/mac/cannot-open-application/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqElEQVR42u3aQW4jMQwEQP//09nrAhvb3aKYeIGakwHPjFUKIDIkH4/4+vrrau989nn+7bULDw8Pb7D0f6/knmd3tozXm5ivBw8PD+9neMnr8p/MF50gXwebNxY8PDy8D+PlwSBZyuuV4OHh4f2/vOToP0ugk2QdDw8P73N4k1e3pYp8y/Jk/UKtBQ8PDy/m5V2kz/m80t/Dw8PDG3fV86ZUnnDPD/1itXh4eHgLvPzAbQcLWvzeyBceHh7eBm+SkUaF1HHBty1A4OHh4e3x2kM8L1VMUuez7S6WhYeHh3eJdzZudZZw59uaDGnVZQg8PDy8q7z8aM6P+zwUnZ3tj/xhPDw8vDFvkhy34aRNu1dGr/Dw8PAu8ebHfRtUJo2x1yHnm6fw8PDwFnjJY22TfrK4NtWOQhceHh7eJV67B20IOUuUz0LON3fi4eHhLfAmh3i+QWf3J4WGaNABDw8P7wd5eUhoj/U8CLWBof8aDw8P7w6vTXnzwDAp7+ZvwMPDw9vj3R26OnvbqK31eoV4eHh4a7zJgFRyf74pt0obeHh4eNu8trGUt/lbWFs4fhOE8PDw8NZ4xVEblADOAkMbAPDw8PB+l9c2tNoi7KSVdTa+gIeHh7fHm5QV2pLr2RDV2cjXm78hHh4e3gKvLRbk7fw2Nb8woICHh4e3zMsbUWetrHmhth4vwMPDw1vjJQlxspS773nMLzw8PLyrvK/yyg/uOTJPvp9uLh4eHt4Cbx488iJFPoKQp+mPWxceHh5eyTsLBm2zql1JO9xQFCPw8PDwLvFuFSCS8kTRvhqEMTw8PLzP4eUt/LbRlbOLVBsPDw/vA3h5YbcdR8hXUoQTPDw8vDVeUozIy7WHSzkqbbz5FTw8PLwFXv3vfbwp7Vm9snQ8PDy8m7w//eUr8FqCOwYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '少年要秘籍吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '秘籍卖光了！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

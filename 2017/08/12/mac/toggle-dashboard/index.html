@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Mac 隐藏或显示 Dashboard | MichaelSun&#39;s Blog | javascript,node,python,rust,.net</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Mac,Dashboard">
+    <meta name="description" content="导语Mac 的 Dashboard 中有一些widget，例如日历、天气预报等，苹果官网也有一些的widget可供下载。而且如果不用的话也可以关掉。">
+<meta name="keywords" content="Mac,Dashboard">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac 隐藏或显示 Dashboard">
+<meta property="og:url" content="http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/index.html">
+<meta property="og:site_name" content="MichaelSun&#39;s Blog">
+<meta property="og:description" content="导语Mac 的 Dashboard 中有一些widget，例如日历、天气预报等，苹果官网也有一些的widget可供下载。而且如果不用的话也可以关掉。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-23T06:31:43.701Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac 隐藏或显示 Dashboard">
+<meta name="twitter:description" content="导语Mac 的 Dashboard 中有一些widget，例如日历、天气预报等，苹果官网也有一些的widget可供下载。而且如果不用的话也可以关掉。">
+    
+        <link rel="alternate" type="application/atom+xml" title="MichaelSun&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孙臻轩</h5>
+          <a href="mailto:zhensherlock@163.com" title="zhensherlock@163.com" class="mail">zhensherlock@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhensherlock" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/michaelsun1992" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.linkedin.com/in/3056750" target="_blank" >
+                <i class="icon icon-lg icon-linkedin"></i>
+                Linkedin
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Mac 隐藏或显示 Dashboard</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Mac 隐藏或显示 Dashboard</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-12T08:04:00.000Z" itemprop="datePublished" class="page-time">
+  2017-08-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#导语"><span class="post-toc-number">1.</span> <span class="post-toc-text">导语</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关闭Dashboard"><span class="post-toc-number">2.</span> <span class="post-toc-text">关闭Dashboard</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#打开Dashboard"><span class="post-toc-number">3.</span> <span class="post-toc-text">打开Dashboard</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-mac/toggle-dashboard"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Mac 隐藏或显示 Dashboard</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-12 16:04:00" datetime="2017-08-12T08:04:00.000Z"  itemprop="datePublished">2017-08-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>Mac 的 Dashboard 中有一些widget，例如日历、天气预报等，<a href="https://www.apple.com/downloads/dashboard/" target="_blank" rel="noopener">苹果官网</a>也有一些的widget可供下载。<br>而且如果不用的话也可以关掉。<br><a id="more"></a></p>
+<h1 id="关闭Dashboard"><a href="#关闭Dashboard" class="headerlink" title="关闭Dashboard"></a>关闭Dashboard</h1><p>在终端执行以下命令<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">defaults write com.apple.dashboard mcx-disabled -boolean YES</div></pre></td></tr></table></figure></p>
+<p>最后再执行<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">killall Dock</div></pre></td></tr></table></figure></p>
+<h1 id="打开Dashboard"><a href="#打开Dashboard" class="headerlink" title="打开Dashboard"></a>打开Dashboard</h1><p>在终端执行以下命令<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">defaults write com.apple.dashboard mcx-disabled -boolean NO</div></pre></td></tr></table></figure></p>
+<p>最后再执行<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">killall Dock</div></pre></td></tr></table></figure></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://blog.csdn.net/qdujunjie/article/details/38045759" target="_blank" rel="noopener">如何关闭Mac上的Dashboard</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-23T06:31:43.701Z" itemprop="dateUpdated">2018-01-23 14:31:43</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/2017/08/12/mac/toggle-dashboard/" target="_blank" rel="external">http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://zhensherlock.github.io">
+            <img src="/img/avatar.jpg" alt="孙臻轩">
+            孙臻轩
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dashboard/">Dashboard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/&title=《Mac 隐藏或显示 Dashboard》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/&title=《Mac 隐藏或显示 Dashboard》 — MichaelSun's Blog&source=导语Mac 的 Dashboard 中有一些widget，例如日历、天气预报等，苹果官网也有一些的widget可供下载。而且如果不用的话也可以关掉。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mac 隐藏或显示 Dashboard》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/12/mac/cannot-open-application/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">解决 MAC 无法打开应用或应用文件已损坏问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/07/12/mac/alfred/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">神器 - Alfred</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Mac 隐藏或显示 Dashboard" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'cys0HlxY1';
+        var conf = 'ecbc8abf9b3f6a5646810b42329f9737';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>孙臻轩 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/&title=《Mac 隐藏或显示 Dashboard》 — MichaelSun's Blog&pic=http://zhensherlock.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/&title=《Mac 隐藏或显示 Dashboard》 — MichaelSun's Blog&source=导语Mac 的 Dashboard 中有一些widget，例如日历、天气预报等，苹果官网也有一些的widget可供下载。而且如果不用的话也可以关掉。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mac 隐藏或显示 Dashboard》 — MichaelSun's Blog&url=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/&via=http://zhensherlock.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zhensherlock.github.io/2017/08/12/mac/toggle-dashboard/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACF0lEQVR42u3aMXLDMAwEQP//006bmYyVO0IuRC4rjWxTWhYwQOL1isf7z0i+k3//052bBwYGxmMZyeOv77S83/eT6+hZGBgYBzA+Pf566oSUBNCE9M87Y2BgYAxIawEaAwMDY8L4dj2NgYGBMSliE3yCbAvdm2txDAyMBzImQfDb118538DAwHgU412O6+TvrkBZvxUGBsbWjEmSNw/Nk4CLgYFxDqMtX+fBN1+C4rcYGBhbM5KUrj0YyOe/d0ExMDB2ZeTFar02l4uSH6BGC4SBgXEAoz2kXNtWa4vYYmkwMDC2ZrQNXgm1nSdPQOvjTAwMjO0Yay0XLawN1kngxsDA2JvRNkzkG/ptyG7D8ccMFwMDY1NGuynWhtR8827tKRgYGKcx8peez7DWuhH1jGBgYBzDaJst8oI2T/sWU0MMDIztGPc2crUHlm3Ri4GBcSajbZiYlKlJy1f+KQYGxgmMtg2rbbmYt3cUS4CBgXEAo23GSsCTRLMtfTEwME5gJFtva0Vve0jQYjAwMM5h5CF1LcnLi9gkoax70zAwMB7LeJcj32KbHwbkM2BgYOzNaMNcmz62aeJaQwYGBsYJjLVwmZPaY4M80Bf/HhgYGFsw2sDXJnNriWPdbIGBgYEx3mhr27+KBg4MDAyMsmFiEmTbmTEwMM5h5BtqeStY0qiR7wJiYGCczBh1asS/amH5nBgYGFszfgA5UhkGHq6NngAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '少年要秘籍吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '秘籍卖光了！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

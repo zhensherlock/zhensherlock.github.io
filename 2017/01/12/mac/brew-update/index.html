@@ -20,46 +20,28 @@
     
     
     <meta name="keywords" content="Mac,brew">
-    <meta name="description" content="正文
-当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：
-
-Error: /usr/local must be writable!
-解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。
-在命令行中执行：
-sudo chown -R whoami /usr/local
-请将whoami替换成当前用户名
-参考文献In macOS">
+    <meta name="description" content="正文 当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：  Error: /usr/local must be writable! 解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。 在命令行中执行： sudo chown -R whoami /usr/local 请将whoami替换成当前用户名 参考文献In macOS">
+<meta name="keywords" content="Mac,brew">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sierra 10.12 brew update 报错">
 <meta property="og:url" content="http://zhensherlock.github.io/2017/01/12/mac/brew-update/index.html">
-<meta property="og:site_name" content="MichaelSun's Blog">
-<meta property="og:description" content="正文
-当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：
-
-Error: /usr/local must be writable!
-解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。
-在命令行中执行：
-sudo chown -R whoami /usr/local
-请将whoami替换成当前用户名
-参考文献In macOS">
+<meta property="og:site_name" content="MichaelSun&#39;s Blog">
+<meta property="og:description" content="正文 当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：  Error: /usr/local must be writable! 解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。 在命令行中执行： sudo chown -R whoami /usr/local 请将whoami替换成当前用户名 参考文献In macOS">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-01-14T08:31:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sierra 10.12 brew update 报错">
-<meta name="twitter:description" content="正文
-当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：
-
-Error: /usr/local must be writable!
-解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。
-在命令行中执行：
-sudo chown -R whoami /usr/local
-请将whoami替换成当前用户名
-参考文献In macOS">
+<meta name="twitter:description" content="正文 当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：  Error: /usr/local must be writable! 解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。 在命令行中执行： sudo chown -R whoami /usr/local 请将whoami替换成当前用户名 参考文献In macOS">
     
-        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="MichaelSun&#39;s Blog" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -70,7 +52,7 @@ sudo chown -R whoami /usr/local
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/avatar.jpg">
@@ -182,25 +164,27 @@ sudo chown -R whoami /usr/local
 
     
 
+
 </header>
 
 
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-mac/brew-update"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">Sierra 10.12 brew update 报错</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年01月12日 16:04" datetime="2017-01-12T08:04:00.000Z"  itemprop="datePublished">2017-01-12</time>
+            <time class="post-time" title="2017-01-12 16:04:00" datetime="2017-01-12T08:04:00.000Z"  itemprop="datePublished">2017-01-12</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
@@ -213,8 +197,6 @@ sudo chown -R whoami /usr/local
 </span>
 
 
-            
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
@@ -225,20 +207,24 @@ sudo chown -R whoami /usr/local
 <p>在命令行中执行：</p>
 <p><code>sudo chown -R whoami /usr/local</code></p>
 <p>请将<code>whoami</code>替换成当前用户名</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://github.com/Homebrew/brew/issues/385" target="_blank" rel="external">In macOS 10.12 Sierra, /usr/local is readonly</a><br><a href="https://github.com/Homebrew/brew/issues/476" target="_blank" rel="external">“Error: /usr/local must be writable!” (Sierra 10.12 Beta (16A239j) )</a></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://github.com/Homebrew/brew/issues/385" target="_blank" rel="noopener">In macOS 10.12 Sierra, /usr/local is readonly</a><br><a href="https://github.com/Homebrew/brew/issues/476" target="_blank" rel="noopener">“Error: /usr/local must be writable!” (Sierra 10.12 Beta (16A239j) )</a></p>
 
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-01-14T08:31:03.000Z" itemprop="dateUpdated">2017年1月14日 16:31</time>
+    最后更新时间：<time datetime="2017-01-14T08:31:03.000Z" itemprop="dateUpdated">2017-01-14 16:31:03</time>
 </span><br>
 
 
-        这里写留言或版权声明：<a href="/2017/01/12/mac/brew-update/" target="_blank" rel="external">http://zhensherlock.github.io/2017/01/12/mac/brew-update/</a>
+        
+        原始链接：<a href="/2017/01/12/mac/brew-update/" target="_blank" rel="external">http://zhensherlock.github.io/2017/01/12/mac/brew-update/</a>
+        
     </div>
+    
     <footer>
         <a href="http://zhensherlock.github.io">
             <img src="/img/avatar.jpg" alt="孙臻轩">
@@ -314,18 +300,18 @@ sudo chown -R whoami /usr/local
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2017/01/12/npm-china/" id="post-prev" class="post-nav-link">
+      <a href="/2017/01/15/mac/install-mysql/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">国内NPM使用</h4>
+        <h4 class="title">macOS 安装 MySQL</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/01/11/hello-world/" id="post-next" class="post-nav-link">
+      <a href="/2017/01/12/npm-china/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Hello World</h4>
+        <h4 class="title">国内NPM使用</h4>
       </a>
     </div>
   
@@ -335,20 +321,28 @@ sudo chown -R whoami /usr/local
 
     
 
-<div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="mac/brew-update" data-title="Sierra 10.12 brew update 报错" data-url="http://zhensherlock.github.io/2017/01/12/mac/brew-update/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
-
-var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.5');
-
-
-</script>
 
 
 
+
+
+
+
+
+
+
+
+
+
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Sierra 10.12 brew update 报错" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'cys0HlxY1';
+        var conf = 'ecbc8abf9b3f6a5646810b42329f9737';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
 
 
 
@@ -362,21 +356,23 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
         请我吃辣条~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -397,14 +393,18 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>MichaelSun's Blog &copy; 2015 - 2018</span>
+        <p><span>孙臻轩 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -465,12 +465,11 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
 
-
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.5"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -490,7 +489,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.5" async></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
@@ -498,6 +497,26 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '少年要秘籍吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '秘籍卖光了！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
 
 
 </body>

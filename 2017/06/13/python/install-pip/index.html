@@ -20,31 +20,28 @@
     
     
     <meta name="keywords" content="python,pip">
-    <meta name="description" content="安装pipsudo easy_install pip
-pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像
-临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name
-永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
+    <meta name="description" content="安装pipsudo easy_install pip pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像 临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name 永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
+<meta name="keywords" content="python,pip">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac下使用pip">
 <meta property="og:url" content="http://zhensherlock.github.io/2017/06/13/python/install-pip/index.html">
-<meta property="og:site_name" content="MichaelSun's Blog">
-<meta property="og:description" content="安装pipsudo easy_install pip
-pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像
-临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name
-永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
+<meta property="og:site_name" content="MichaelSun&#39;s Blog">
+<meta property="og:description" content="安装pipsudo easy_install pip pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像 临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name 永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-01-12T08:20:31.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac下使用pip">
-<meta name="twitter:description" content="安装pipsudo easy_install pip
-pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像
-临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name
-永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
+<meta name="twitter:description" content="安装pipsudo easy_install pip pip镜像直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像 临时使用pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name 永久使用（待验证）新建 ~/.pip/pip.conf 文件，输入下面的内容[g">
     
-        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="MichaelSun&#39;s Blog" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -55,7 +52,7 @@ pip镜像直接使用pip install package_name 会发现下载速度很慢，我�
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/avatar.jpg">
@@ -167,25 +164,27 @@ pip镜像直接使用pip install package_name 会发现下载速度很慢，我�
 
     
 
+
 </header>
 
 
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装pip"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装pip</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#pip镜像"><span class="post-toc-number">2.</span> <span class="post-toc-text">pip镜像</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#临时使用"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">临时使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#永久使用（待验证）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">永久使用（待验证）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他镜像源"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">其他镜像源</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-python/install-pip"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">Mac下使用pip</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年06月13日 12:40" datetime="2017-06-13T04:40:00.000Z"  itemprop="datePublished">2017-06-13</time>
+            <time class="post-time" title="2017-06-13 12:40:00" datetime="2017-06-13T04:40:00.000Z"  itemprop="datePublished">2017-06-13</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
@@ -198,29 +197,31 @@ pip镜像直接使用pip install package_name 会发现下载速度很慢，我�
 </span>
 
 
-            
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo easy_install pip</div></pre></td></tr></table></figure>
 <h1 id="pip镜像"><a href="#pip镜像" class="headerlink" title="pip镜像"></a>pip镜像</h1><p>直接使用pip install package_name 会发现下载速度很慢，我们可以使用清华的pypi镜像</p>
 <h2 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a>临时使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name</div></pre></td></tr></table></figure>
 <h2 id="永久使用（待验证）"><a href="#永久使用（待验证）" class="headerlink" title="永久使用（待验证）"></a>永久使用（待验证）</h2><p>新建 <code>~/.pip/pip.conf</code> 文件，输入下面的内容<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[global]</div><div class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</div></pre></td></tr></table></figure></p>
-<h2 id="其他镜像源"><a href="#其他镜像源" class="headerlink" title="其他镜像源"></a>其他镜像源</h2><p><a href="https://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="external">阿里云</a><br><a href="https://pypi.doubanio.com/simple/" target="_blank" rel="external">豆瓣</a></p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/" target="_blank" rel="external">pypi 镜像使用帮助</a></p>
+<h2 id="其他镜像源"><a href="#其他镜像源" class="headerlink" title="其他镜像源"></a>其他镜像源</h2><p><a href="https://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">阿里云</a><br><a href="https://pypi.doubanio.com/simple/" target="_blank" rel="noopener">豆瓣</a></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/" target="_blank" rel="noopener">pypi 镜像使用帮助</a></p>
 
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-01-12T08:20:31.066Z" itemprop="dateUpdated">2018年1月12日 16:20</time>
+    最后更新时间：<time datetime="2018-01-12T08:20:31.066Z" itemprop="dateUpdated">2018-01-12 16:20:31</time>
 </span><br>
 
 
-        这里写留言或版权声明：<a href="/2017/06/13/python/install-pip/" target="_blank" rel="external">http://zhensherlock.github.io/2017/06/13/python/install-pip/</a>
+        
+        原始链接：<a href="/2017/06/13/python/install-pip/" target="_blank" rel="external">http://zhensherlock.github.io/2017/06/13/python/install-pip/</a>
+        
     </div>
+    
     <footer>
         <a href="http://zhensherlock.github.io">
             <img src="/img/avatar.jpg" alt="孙臻轩">
@@ -317,20 +318,28 @@ pip镜像直接使用pip install package_name 会发现下载速度很慢，我�
 
     
 
-<div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="python/install-pip" data-title="Mac下使用pip" data-url="http://zhensherlock.github.io/2017/06/13/python/install-pip/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
-
-var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.5');
-
-
-</script>
 
 
 
+
+
+
+
+
+
+
+
+
+
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Mac下使用pip" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'cys0HlxY1';
+        var conf = 'ecbc8abf9b3f6a5646810b42329f9737';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
 
 
 
@@ -344,21 +353,23 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
         请我吃辣条~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -379,14 +390,18 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>MichaelSun's Blog &copy; 2015 - 2018</span>
+        <p><span>孙臻轩 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -447,12 +462,11 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
 
-
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.5"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -472,7 +486,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.5" async></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
@@ -480,6 +494,26 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '少年要秘籍吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '秘籍卖光了！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
 
 
 </body>

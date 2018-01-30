@@ -20,28 +20,28 @@
     
     
     <meta name="keywords" content="JSLint,JavaScript">
-    <meta name="description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。
-parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
+    <meta name="description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。 这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。 parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
+<meta name="keywords" content="JSLint,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSLint Missing Radix Parameter">
 <meta property="og:url" content="http://zhensherlock.github.io/2016/04/21/front/jslint-missing-radix-parameter/index.html">
-<meta property="og:site_name" content="MichaelSun's Blog">
-<meta property="og:description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。
-parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
+<meta property="og:site_name" content="MichaelSun&#39;s Blog">
+<meta property="og:description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。 这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。 parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-06-07T06:37:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSLint Missing Radix Parameter">
-<meta name="twitter:description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。
-这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。
-parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
+<meta name="twitter:description" content="文正使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：Missing radix parameter。 这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。 parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；默认是:十进制；在转换时可以忽略第二">
     
-        <link rel="alternative" href="/atom.xml" title="MichaelSun&#39;s Blog" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="MichaelSun&#39;s Blog" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.5">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -52,7 +52,7 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/avatar.jpg">
@@ -164,25 +164,27 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
 
     
 
+
 </header>
 
 
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文正"><span class="post-toc-number">1.</span> <span class="post-toc-text">文正</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文献"><span class="post-toc-number">2.</span> <span class="post-toc-text">参考文献</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-front/jslint-missing-radix-parameter"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">JSLint Missing Radix Parameter</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016年04月21日 16:44" datetime="2016-04-21T08:44:37.000Z"  itemprop="datePublished">2016-04-21</time>
+            <time class="post-time" title="2016-04-21 16:44:37" datetime="2016-04-21T08:44:37.000Z"  itemprop="datePublished">2016-04-21</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
@@ -195,27 +197,29 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
 </span>
 
 
-            
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="文正"><a href="#文正" class="headerlink" title="文正"></a>文正</h1><p>使用JSLint检查javascript代码语法时，会遇到很多无头绪的报错，比如：<code>Missing radix parameter</code>。</p>
 <p>这个错误信息主要是因为我们没有深刻掌握parseInt语法，意思是缺少一个基数根，也就是指parseInt的第二个参数没有指定。</p>
 <p>parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、八进制、十进制、十六进制；<br>默认是:十进制；<br>在转换时可以忽略第二个参数，这样js照样可以运行，但是在你进行语法校验时，JSLint却会报错，这是因为压缩工具对语法的严谨性要求比较高，建议大家在用parseInt语法进行转换时，最好加个第二个参数。<br><a id="more"></a></p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://my.oschina.net/zhangskills/blog/150203" target="_blank" rel="external">javascript报错：Missing radix parameter</a></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://my.oschina.net/zhangskills/blog/150203" target="_blank" rel="noopener">javascript报错：Missing radix parameter</a></p>
 
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-06-07T06:37:55.000Z" itemprop="dateUpdated">2017年6月7日 14:37</time>
+    最后更新时间：<time datetime="2017-06-07T06:37:55.000Z" itemprop="dateUpdated">2017-06-07 14:37:55</time>
 </span><br>
 
 
-        这里写留言或版权声明：<a href="/2016/04/21/front/jslint-missing-radix-parameter/" target="_blank" rel="external">http://zhensherlock.github.io/2016/04/21/front/jslint-missing-radix-parameter/</a>
+        
+        原始链接：<a href="/2016/04/21/front/jslint-missing-radix-parameter/" target="_blank" rel="external">http://zhensherlock.github.io/2016/04/21/front/jslint-missing-radix-parameter/</a>
+        
     </div>
+    
     <footer>
         <a href="http://zhensherlock.github.io">
             <img src="/img/avatar.jpg" alt="孙臻轩">
@@ -313,20 +317,28 @@ parseInt的第二个参数有四种:2、8、10、16，分别对应二进制、�
 
     
 
-<div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="front/jslint-missing-radix-parameter" data-title="JSLint Missing Radix Parameter" data-url="http://zhensherlock.github.io/2016/04/21/front/jslint-missing-radix-parameter/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
-
-var duoshuoQuery = {short_name:'szxhexo', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.5');
-
-
-</script>
 
 
 
+
+
+
+
+
+
+
+
+
+
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="JSLint Missing Radix Parameter" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'cys0HlxY1';
+        var conf = 'ecbc8abf9b3f6a5646810b42329f9737';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
 
 
 
@@ -340,21 +352,23 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
         请我吃辣条~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -375,14 +389,18 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>MichaelSun's Blog &copy; 2015 - 2018</span>
+        <p><span>孙臻轩 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -444,12 +462,11 @@ lazyScripts.push('/js/embed.min.js?v=1.4.5');
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
 
-
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.5"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -469,7 +486,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.5" async></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
@@ -477,6 +494,26 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1258408054&web_id=1258408054')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '少年要秘籍吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '秘籍卖光了！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
 
 
 </body>
