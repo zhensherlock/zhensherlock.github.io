@@ -164,11 +164,11 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-mac/brew-update"
+            <article id="post-mac/install-mysql"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-01-12 16:04:00" datetime="2017-01-12T08:04:00.000Z"  itemprop="datePublished">2017-01-12</time>
+        <time class="post-time" title="2017-01-15 10:04:00" datetime="2017-01-15T02:04:00.000Z"  itemprop="datePublished">2017-01-15</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
@@ -182,7 +182,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/01/12/mac/brew-update/">Sierra 10.12 brew update 报错</a>
+      <a class="post-title-link" href="/2017/01/15/mac/install-mysql/">macOS 安装 MySQL</a>
     </h3>
   
 
@@ -193,24 +193,21 @@
 
     
         正文
-当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：
+首次在 macOS 上安装MySQL时会遇到很多问题，以下是我遇到的问题和解决方案
 
-Error: /usr/local must be writable!
-解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。
-在命令行中执行：
-sudo chown -R whoami /usr/local
-请将whoami替换成当前用户名
-参考文献In ma...
+使用brew安装MySQL在命令行中输入 brew install mysql 安装MySQL。
+下载dmg安装MySQL访问MySQL官网http://www.mysql.com/downloads/，点击下载MySQL Community Server，注意平台。
+卸载MySQL使用brew安装M...
     
 
-        <a href="/2017/01/12/mac/brew-update/" class="post-more waves-effect waves-button">
+        <a href="/2017/01/15/mac/install-mysql/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/brew/">brew</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
 
     </div>
     
@@ -262,6 +259,61 @@ NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的�
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/">NPM</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-mac/brew-update"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-01-12 16:04:00" datetime="2017-01-12T08:04:00.000Z"  itemprop="datePublished">2017-01-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mac/">Mac</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/01/12/mac/brew-update/">Sierra 10.12 brew update 报错</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        正文
+当 macOS 升级到Sierra 10.12后，执行brew update，出现以下错误：
+
+Error: /usr/local must be writable!
+解决方案上面提示说没有权限，那我们就给当前用户在 /usr/local 路径的权限。
+在命令行中执行：
+sudo chown -R whoami /usr/local
+请将whoami替换成当前用户名
+参考文献In ma...
+    
+
+        <a href="/2017/01/12/mac/brew-update/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/brew/">brew</a></li></ul>
 
     </div>
     
@@ -620,62 +672,6 @@ Case搜索函数CASE WHEN sex = '1' THEN '男'         WHEN sex = '2' THEN '女'
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Server/">SQL Server</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-visual-studio-remote-debugger"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-04-14 17:59:22" datetime="2016-04-14T09:59:22.000Z"  itemprop="datePublished">2016-04-14</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/IDE/">IDE</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/04/14/visual-studio-remote-debugger/">Visual Studio远程调试</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        导语
-在开发的时候，我们有时会用远程调试工具进行debug，本文就简单的介绍一下如何使用Visual Studio自带的远程调试工具（我们以VS2012为例）。
-
-步骤找到Remote Debugger Folder文件夹
-                
-                    
-                    
-                
-                图1
-            
-    
-
-        <a href="/2016/04/14/visual-studio-remote-debugger/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a></li></ul>
 
     </div>
     

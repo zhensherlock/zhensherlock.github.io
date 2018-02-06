@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhensherlock.github.io/"/>
-  <updated>2018-01-24T02:15:39.016Z</updated>
+  <updated>2018-02-06T06:15:58.948Z</updated>
   <id>http://zhensherlock.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello Nginx</title>
+    <link href="http://zhensherlock.github.io/2017/10/12/nginx/hello-nginx/"/>
+    <id>http://zhensherlock.github.io/2017/10/12/nginx/hello-nginx/</id>
+    <published>2017-10-12T08:04:00.000Z</published>
+    <updated>2018-02-06T06:15:58.948Z</updated>
+    
+    <content type="html"><![CDATA[<p>2018.02.06 更新</p><blockquote><p>请暂时不要更新至2017.3.4版本，本地反向代理已失效。</p></blockquote><h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>最近 JetBrains 授权服务器封的比较严重，在 2017.3 之前我们可以使用 <strong>License Server</strong> 设置成 <strong><a href="http://idea.imsxm.com" target="_blank" rel="noopener">http://idea.imsxm.com</a></strong> 一旦更新到2017.3之后的版本，就会发现网上很多授权服务器都被禁用了，<br>但是我们发现使用反向代理到 <strong><a href="http://idea.imsxm.com" target="_blank" rel="noopener">http://idea.imsxm.com</a></strong> 就可以授权，下面我们来看一下如何反向代理。<br><a id="more"></a></p><h1 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h1><p>打开 <strong>终端</strong>，执行 <code>brew install nginx</code> </p><p>安装完之后，执行 <code>nginx</code> </p><p>nginx的默认端口是 <strong>8080</strong> 打开浏览器访问 <strong><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a></strong> 如果看到图1的界面，那我们的nginx安装就完成了</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/hello-nginx/png/1.png" alt="图1" title="">                </div>                <div class="image-caption">图1</div>            </figure><h1 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h1><p>打开 <strong>/usr/local/etc/nginx/nginx.conf</strong> 在 <strong>server</strong> 同级添加以下代码<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen 10000;</div><div class="line">  server_name localhost;</div><div class="line"></div><div class="line">  location ^~ / &#123;</div><div class="line">    proxy_pass http://idea.imsxm.com;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><h1 id="重启Nginx"><a href="#重启Nginx" class="headerlink" title="重启Nginx"></a>重启Nginx</h1><p>如果你已经启动了nginx，然后再修改 <strong>nginx.conf</strong> 文件，这时需要重新启动nginx<br>执行 <code>nginx -s reload</code></p><p>最后我们在 <strong>License Server</strong> 中输入<strong><a href="http://localhost:10000/" target="_blank" rel="noopener">http://localhost:10000/</a></strong>，点击激活，完成。</p><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://www.cnblogs.com/zlcxbb/p/6413036.html" target="_blank" rel="noopener">mac下nginx安装</a><br><a href="https://www.cnblogs.com/jaxu/p/8309702.html" target="_blank" rel="noopener">Webstorm 2017.3激活破解</a><br><a href="http://blog.csdn.net/zqinghai/article/details/71125045" target="_blank" rel="noopener">nginx重启几种方法</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2018.02.06 更新&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;请暂时不要更新至2017.3.4版本，本地反向代理已失效。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h1&gt;&lt;p&gt;最近 JetBrains 授权服务器封的比较严重，在 2017.3 之前我们可以使用 &lt;strong&gt;License Server&lt;/strong&gt; 设置成 &lt;strong&gt;&lt;a href=&quot;http://idea.imsxm.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://idea.imsxm.com&lt;/a&gt;&lt;/strong&gt; 一旦更新到2017.3之后的版本，就会发现网上很多授权服务器都被禁用了，&lt;br&gt;但是我们发现使用反向代理到 &lt;strong&gt;&lt;a href=&quot;http://idea.imsxm.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://idea.imsxm.com&lt;/a&gt;&lt;/strong&gt; 就可以授权，下面我们来看一下如何反向代理。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Nginx" scheme="http://zhensherlock.github.io/categories/Nginx/"/>
+    
+    
+      <category term="Nginx" scheme="http://zhensherlock.github.io/tags/Nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>解决 MAC 无法打开应用或应用文件已损坏问题</title>
@@ -295,6 +321,32 @@
   </entry>
   
   <entry>
+    <title>国内NPM使用</title>
+    <link href="http://zhensherlock.github.io/2017/01/12/npm-china/"/>
+    <id>http://zhensherlock.github.io/2017/01/12/npm-china/</id>
+    <published>2017-01-12T08:04:00.000Z</published>
+    <updated>2017-06-07T06:37:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><blockquote><p>NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安装underscore为例）。</p></blockquote><h2 id="临时修改"><a href="#临时修改" class="headerlink" title="临时修改"></a>临时修改</h2><p>在命令行中输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install underscore -g --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><h2 id="全局修改"><a href="#全局修改" class="headerlink" title="全局修改"></a>全局修改</h2><p>在命令行中输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm config set registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><p>编辑 <code>~/.npmrc</code> 或者 <code>C:\Users\Administrator\.npmrc</code> 加入下面内容<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">registry = https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><h2 id="使用CNPM"><a href="#使用CNPM" class="headerlink" title="使用CNPM"></a>使用CNPM</h2><p>我们可以使用CNPM来代替NPM，CNPM的源和包都在国内，所以速度比NPM快的多，并且CNPM还支持gzip压缩。下面是macOS和Linux的安装方法。</p><h3 id="macOS安装CNPM"><a href="#macOS安装CNPM" class="headerlink" title="macOS安装CNPM"></a>macOS安装CNPM</h3><p>首先安装CNPM<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><p>接一下在<code>~/.bashrc</code>或者<code>~/.zshrc</code>定义别名<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">alias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \</div><div class="line">--cache=$HOME/.npm/.cache/cnpm \</div><div class="line">--disturl=https://npm.taobao.org/mirrors/node \</div><div class="line">--userconfig=$HOME/.cnpmrc&quot;</div></pre></td></tr></table></figure></p><h3 id="Linux安装CNPM"><a href="#Linux安装CNPM" class="headerlink" title="Linux安装CNPM"></a>Linux安装CNPM</h3><p>首先安装CNPM<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><p>接一下在<code>~/.bashrc</code>或者<code>~/.zshrc</code>定义别名</p><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &apos;\n#alias for cnpm\nalias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \</div><div class="line">--cache=$HOME/.npm/.cache/cnpm \</div><div class="line">--disturl=https://npm.taobao.org/dist \</div><div class="line">--userconfig=$HOME/.cnpmrc&quot;&apos; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc</div></pre></td></tr></table></figure><h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>安装完成之后，我们就可以使用<code>cnpm install [packagename]</code>来安装模块了。</p><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://cnodejs.org/topic/4f9904f9407edba21468f31e" target="_blank" rel="noopener">使用npm安装一些包失败了的看过来（npm国内镜像介绍）</a><br><a href="https://npm.taobao.org/" target="_blank" rel="noopener">淘宝 NPM 镜像</a><br><a href="http://www.uedbox.com/npm-install-slow-solution/" target="_blank" rel="noopener">npm install 无响应解决方案</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安
+      
+    
+    </summary>
+    
+      <category term="前端" scheme="http://zhensherlock.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="NPM" scheme="http://zhensherlock.github.io/tags/NPM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Sierra 10.12 brew update 报错</title>
     <link href="http://zhensherlock.github.io/2017/01/12/mac/brew-update/"/>
     <id>http://zhensherlock.github.io/2017/01/12/mac/brew-update/</id>
@@ -320,32 +372,6 @@
       <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
     
       <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>国内NPM使用</title>
-    <link href="http://zhensherlock.github.io/2017/01/12/npm-china/"/>
-    <id>http://zhensherlock.github.io/2017/01/12/npm-china/</id>
-    <published>2017-01-12T08:04:00.000Z</published>
-    <updated>2017-06-07T06:37:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><blockquote><p>NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安装underscore为例）。</p></blockquote><h2 id="临时修改"><a href="#临时修改" class="headerlink" title="临时修改"></a>临时修改</h2><p>在命令行中输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install underscore -g --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><h2 id="全局修改"><a href="#全局修改" class="headerlink" title="全局修改"></a>全局修改</h2><p>在命令行中输入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm config set registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><p>编辑 <code>~/.npmrc</code> 或者 <code>C:\Users\Administrator\.npmrc</code> 加入下面内容<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">registry = https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><h2 id="使用CNPM"><a href="#使用CNPM" class="headerlink" title="使用CNPM"></a>使用CNPM</h2><p>我们可以使用CNPM来代替NPM，CNPM的源和包都在国内，所以速度比NPM快的多，并且CNPM还支持gzip压缩。下面是macOS和Linux的安装方法。</p><h3 id="macOS安装CNPM"><a href="#macOS安装CNPM" class="headerlink" title="macOS安装CNPM"></a>macOS安装CNPM</h3><p>首先安装CNPM<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><p>接一下在<code>~/.bashrc</code>或者<code>~/.zshrc</code>定义别名<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">alias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \</div><div class="line">--cache=$HOME/.npm/.cache/cnpm \</div><div class="line">--disturl=https://npm.taobao.org/mirrors/node \</div><div class="line">--userconfig=$HOME/.cnpmrc&quot;</div></pre></td></tr></table></figure></p><h3 id="Linux安装CNPM"><a href="#Linux安装CNPM" class="headerlink" title="Linux安装CNPM"></a>Linux安装CNPM</h3><p>首先安装CNPM<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure></p><p>接一下在<code>~/.bashrc</code>或者<code>~/.zshrc</code>定义别名</p><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &apos;\n#alias for cnpm\nalias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \</div><div class="line">--cache=$HOME/.npm/.cache/cnpm \</div><div class="line">--disturl=https://npm.taobao.org/dist \</div><div class="line">--userconfig=$HOME/.cnpmrc&quot;&apos; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc</div></pre></td></tr></table></figure><h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>安装完成之后，我们就可以使用<code>cnpm install [packagename]</code>来安装模块了。</p><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://cnodejs.org/topic/4f9904f9407edba21468f31e" target="_blank" rel="noopener">使用npm安装一些包失败了的看过来（npm国内镜像介绍）</a><br><a href="https://npm.taobao.org/" target="_blank" rel="noopener">淘宝 NPM 镜像</a><br><a href="http://www.uedbox.com/npm-install-slow-solution/" target="_blank" rel="noopener">npm install 无响应解决方案</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;NPM在国内使用时，下载速度有时会很慢，甚至有下载不了的情况，为了不影响项目开发进度，我们有以下几种方案（我们以安
-      
-    
-    </summary>
-    
-      <category term="前端" scheme="http://zhensherlock.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="NPM" scheme="http://zhensherlock.github.io/tags/NPM/"/>
     
   </entry>
   
