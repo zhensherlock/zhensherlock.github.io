@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhensherlock.github.io/"/>
-  <updated>2018-02-06T06:15:58.948Z</updated>
+  <updated>2018-04-19T06:56:00.615Z</updated>
   <id>http://zhensherlock.github.io/</id>
   
   <author>
@@ -17,11 +17,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Weex在android上的坑</title>
+    <link href="http://zhensherlock.github.io/2017/12/12/weex/android-problem/"/>
+    <id>http://zhensherlock.github.io/2017/12/12/weex/android-problem/</id>
+    <published>2017-12-12T03:12:00.000Z</published>
+    <updated>2018-04-19T06:56:00.615Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>最近试了一下Weex，ios还好基本没有什么坑，比较轻松的跑起来了，但是android不行，有些时候需要改代码才能运行起来。下面来看一下我遇到的一些坑</p><h2 id="Configuration-‘compile’-is-obsolete-and-has-been-replaced-with-‘implementation’-It-will-be-removed-at-the-end-of-2018"><a href="#Configuration-‘compile’-is-obsolete-and-has-been-replaced-with-‘implementation’-It-will-be-removed-at-the-end-of-2018" class="headerlink" title="Configuration ‘compile’ is obsolete and has been replaced with ‘implementation’ It will be removed at the end of 2018"></a>Configuration ‘compile’ is obsolete and has been replaced with ‘implementation’ It will be removed at the end of 2018</h2><p><code>compile</code>会被在2018年底取消，将使用<code>implementation</code>来替代，解决方案就是将<code>Gradle</code>中的<code>compile</code>换成<code>implementation</code>即可。</p><h2 id="Annotation-processors-must-be-explicitly-declared-now"><a href="#Annotation-processors-must-be-explicitly-declared-now" class="headerlink" title="Annotation processors must be explicitly declared now."></a>Annotation processors must be explicitly declared now.</h2><p>这个主要是在AndroidStudio3.0版本上才会出现的问题，在<code>build.gradle(Module:app)</code>中添加如下配置即可。<br>android {<br>    …<br>    defaultConfig {<br>        …<br>        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }<br>    }<br>    …<br>}</p><h2 id="Cannot-set-the-value-of-read-only-property-‘outputFile’"><a href="#Cannot-set-the-value-of-read-only-property-‘outputFile’" class="headerlink" title="Cannot set the value of read-only property ‘outputFile’"></a>Cannot set the value of read-only property ‘outputFile’</h2><p>这个也是在升级到AndroidStudio3.0版本才会出现的问题，修改<code>build.gradle(Module:app)</code>中内容，如下所示<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 注释原来的代码</div><div class="line">//    applicationVariants.all &#123; variant -&gt;</div><div class="line">//        variant.outputs.each &#123; output -&gt;</div><div class="line">//            def outputFile = output.outputFile</div><div class="line">//            if (outputFile != null &amp;&amp; outputFile.name.equals(&apos;app-debug.apk&apos;)) &#123;</div><div class="line">//                def fileName = outputFile.name.replace(&quot;app-debug.apk&quot;, &quot;weex-app.apk&quot;)</div><div class="line">//                output.outputFile = new File(outputFile.parent, fileName)</div><div class="line">//            &#125;</div><div class="line">//        &#125;</div><div class="line">//    &#125;</div><div class="line"># 添加以下代码</div><div class="line">    android.applicationVariants.all &#123; variant -&gt;</div><div class="line">        variant.outputs.all &#123;</div><div class="line">            outputFileName = &quot;weex-app.apk&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://tianshimanbu.com/more/compile-has-been-replaced-with-implementation.html" target="_blank" rel="noopener">Configuration ‘compile’ is obsolete and has been replaced with ‘implementation’. It will be removed at the end of 2018</a><br><a href="https://blog.csdn.net/keep_holding_on/article/details/76188657" target="_blank" rel="noopener">Mr.Smile填坑记——AndroidStudio3.0 Canary 8注解报错Annotation processors must be explicitly declared now.</a><br><a href="https://blog.csdn.net/daoxiaomianzi/article/details/78364821" target="_blank" rel="noopener">android studio3.0升级问题记录</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h1&gt;&lt;p&gt;最近试了一下Weex，ios还好基本没有什么坑，比较轻松的跑起来了，但是android不行，有些时候需要改代码才能运行起来。下面来看一下我遇
+      
+    
+    </summary>
+    
+      <category term="Weex" scheme="http://zhensherlock.github.io/categories/Weex/"/>
+    
+    
+      <category term="Weex" scheme="http://zhensherlock.github.io/tags/Weex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CocoaPods安装</title>
+    <link href="http://zhensherlock.github.io/2017/11/12/other/ios-cocoa-pods/"/>
+    <id>http://zhensherlock.github.io/2017/11/12/other/ios-cocoa-pods/</id>
+    <published>2017-11-12T03:31:00.000Z</published>
+    <updated>2018-04-18T08:54:55.935Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Ruby环境"><a href="#Ruby环境" class="headerlink" title="Ruby环境"></a>Ruby环境</h1><h2 id="升级Ruby环境"><a href="#升级Ruby环境" class="headerlink" title="升级Ruby环境"></a>升级Ruby环境</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo gem update --system</div></pre></td></tr></table></figure><h2 id="更换Ruby镜像"><a href="#更换Ruby镜像" class="headerlink" title="更换Ruby镜像"></a>更换Ruby镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 移除现有的Ruby镜像</span></div><div class="line">gem sources --remove https://rubygems.org/</div><div class="line"><span class="comment"># 添加国内最新镜像源</span></div><div class="line">gem sources <span class="_">-a</span> https://gems.ruby-china.org/</div><div class="line"><span class="comment"># 查看当前镜像是否已替换</span></div><div class="line">gem sources <span class="_">-l</span></div></pre></td></tr></table></figure><h1 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h1><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo gem install cocoa pods</div></pre></td></tr></table></figure><p>苹果系统升级 OSX EL Capitan 后改为</p><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo gem install -n /usr/<span class="built_in">local</span>/bin cocoa pods</div></pre></td></tr></table></figure><p>最后执行</p><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">pod setup</div></pre></td></tr></table></figure><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://www.cnblogs.com/nemolmt/p/6047947.html" target="_blank" rel="noopener">ruby gem源更换国内源gems.ruby-china.org数据源</a><br><a href="https://ruby.taobao.org/" target="_blank" rel="noopener">ruby RubyGems 镜像</a><br><a href="https://www.jianshu.com/p/9e4e36ba8574" target="_blank" rel="noopener">iOS安装CocoaPods详细过程</a><br><a href="https://www.jianshu.com/p/7d1fd3afc5fc" target="_blank" rel="noopener">Cocoapods安装的各种坑</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Ruby环境&quot;&gt;&lt;a href=&quot;#Ruby环境&quot; class=&quot;headerlink&quot; title=&quot;Ruby环境&quot;&gt;&lt;/a&gt;Ruby环境&lt;/h1&gt;&lt;h2 id=&quot;升级Ruby环境&quot;&gt;&lt;a href=&quot;#升级Ruby环境&quot; class=&quot;headerlink&quot; 
+      
+    
+    </summary>
+    
+      <category term="其他" scheme="http://zhensherlock.github.io/categories/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="Weex" scheme="http://zhensherlock.github.io/tags/Weex/"/>
+    
+      <category term="CocoaPods" scheme="http://zhensherlock.github.io/tags/CocoaPods/"/>
+    
+      <category term="Ruby" scheme="http://zhensherlock.github.io/tags/Ruby/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello Nginx</title>
     <link href="http://zhensherlock.github.io/2017/10/12/nginx/hello-nginx/"/>
     <id>http://zhensherlock.github.io/2017/10/12/nginx/hello-nginx/</id>
     <published>2017-10-12T08:04:00.000Z</published>
-    <updated>2018-02-06T06:15:58.948Z</updated>
+    <updated>2018-02-06T06:17:46.774Z</updated>
     
     <content type="html"><![CDATA[<p>2018.02.06 更新</p><blockquote><p>请暂时不要更新至2017.3.4版本，本地反向代理已失效。</p></blockquote><h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>最近 JetBrains 授权服务器封的比较严重，在 2017.3 之前我们可以使用 <strong>License Server</strong> 设置成 <strong><a href="http://idea.imsxm.com" target="_blank" rel="noopener">http://idea.imsxm.com</a></strong> 一旦更新到2017.3之后的版本，就会发现网上很多授权服务器都被禁用了，<br>但是我们发现使用反向代理到 <strong><a href="http://idea.imsxm.com" target="_blank" rel="noopener">http://idea.imsxm.com</a></strong> 就可以授权，下面我们来看一下如何反向代理。<br><a id="more"></a></p><h1 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h1><p>打开 <strong>终端</strong>，执行 <code>brew install nginx</code> </p><p>安装完之后，执行 <code>nginx</code> </p><p>nginx的默认端口是 <strong>8080</strong> 打开浏览器访问 <strong><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a></strong> 如果看到图1的界面，那我们的nginx安装就完成了</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://7xszf2.com1.z0.glb.clouddn.com/hello-nginx/png/1.png" alt="图1" title="">                </div>                <div class="image-caption">图1</div>            </figure><h1 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h1><p>打开 <strong>/usr/local/etc/nginx/nginx.conf</strong> 在 <strong>server</strong> 同级添加以下代码<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen 10000;</div><div class="line">  server_name localhost;</div><div class="line"></div><div class="line">  location ^~ / &#123;</div><div class="line">    proxy_pass http://idea.imsxm.com;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><h1 id="重启Nginx"><a href="#重启Nginx" class="headerlink" title="重启Nginx"></a>重启Nginx</h1><p>如果你已经启动了nginx，然后再修改 <strong>nginx.conf</strong> 文件，这时需要重新启动nginx<br>执行 <code>nginx -s reload</code></p><p>最后我们在 <strong>License Server</strong> 中输入<strong><a href="http://localhost:10000/" target="_blank" rel="noopener">http://localhost:10000/</a></strong>，点击激活，完成。</p><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="https://www.cnblogs.com/zlcxbb/p/6413036.html" target="_blank" rel="noopener">mac下nginx安装</a><br><a href="https://www.cnblogs.com/jaxu/p/8309702.html" target="_blank" rel="noopener">Webstorm 2017.3激活破解</a><br><a href="http://blog.csdn.net/zqinghai/article/details/71125045" target="_blank" rel="noopener">nginx重启几种方法</a></p>]]></content>
     
@@ -106,9 +160,9 @@
       <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
     
     
-      <category term="alfred" scheme="http://zhensherlock.github.io/tags/alfred/"/>
-    
       <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
+    
+      <category term="alfred" scheme="http://zhensherlock.github.io/tags/alfred/"/>
     
   </entry>
   
@@ -369,9 +423,9 @@
       <category term="Mac" scheme="http://zhensherlock.github.io/categories/Mac/"/>
     
     
-      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
-    
       <category term="brew" scheme="http://zhensherlock.github.io/tags/brew/"/>
+    
+      <category term="Mac" scheme="http://zhensherlock.github.io/tags/Mac/"/>
     
   </entry>
   
